@@ -16,14 +16,14 @@ public class HttpUtil {
     private static final String GET = "GET";
 
     public static String get(String urlPath, JSONObject params) {
-        return HttpRequest(urlPath, GET, params);
+        return HttpRequestInternal(urlPath, GET, params);
     }
 
     public static String post(String urlPath, JSONObject params) {
-        return HttpRequest(urlPath, POST, params);
+        return HttpRequestInternal(urlPath, POST, params);
     }
 
-    public static String HttpRequest(String urlPath, String method, JSONObject params) {
+    private static String HttpRequestInternal(String urlPath, String method, JSONObject params) {
         HttpURLConnection connection = null;
         try {
             connection = getHttpURLConnection(urlPath, method);
@@ -47,13 +47,12 @@ public class HttpUtil {
         } finally {
             if (connection != null) {
                 connection.disconnect();
-                connection = null;
             }
         }
         return null;
     }
 
-    public static HttpURLConnection getHttpURLConnection(String urlPath, String method) throws IOException {
+    private static HttpURLConnection getHttpURLConnection(String urlPath, String method) throws IOException {
         URL url = new URL(urlPath);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setConnectTimeout(8000);
