@@ -19,12 +19,12 @@
             </intent-filter>
         </activity>
         <!-- ArticleActivity采用singleTask启动模式-->
-        <activity android:name=".ArticleActivity"
+        <activity android:name=".feature.article.ArticleActivity"
                   android:launchMode="singleTask">
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".feature.user.LoginActivity">
         </activity>
-        <activity android:name=".LogoutActivity" />
+        <activity android:name=".feature.user.LogoutActivity" />
     </application>
 
 </manifest>

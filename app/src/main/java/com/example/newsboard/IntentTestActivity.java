@@ -6,6 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.newsboard.feature.article.ArticleActivity;
+
 public class IntentTestActivity extends AppCompatActivity {
 
 
@@ -16,10 +18,10 @@ public class IntentTestActivity extends AppCompatActivity {
         Button button = findViewById(R.id.send_intent_button);
         button.setOnClickListener(view -> {
             Intent intent = new Intent(IntentTestActivity.this, ArticleActivity.class);
-            intent.putExtra(ArticleActivity.ID, "bytetalk_01");
-            intent.putExtra(ArticleActivity.AUTHOR, "原名梁志彬");
-            intent.putExtra(ArticleActivity.TITLE, "BZZB");
-            intent.putExtra(ArticleActivity.PUBlISH_TIME, "2020/11/17");
+            intent.putExtra(ArticleActivity.EXTRA_ID, "bytetalk_01");
+            intent.putExtra(ArticleActivity.EXTRA_AUTHOR, "原名梁志彬");
+            intent.putExtra(ArticleActivity.EXTRA_TITLE, "BZZB");
+            intent.putExtra(ArticleActivity.EXTRA_PUBlISH_TIME, "2020/11/17");
             startActivity(intent);
         });
     }

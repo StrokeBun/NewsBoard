@@ -11,11 +11,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-public class HttpUtil {
+public class HttpUtils {
 
     private static final String POST = "POST";
     private static final String GET = "GET";
 
+    /**
+     *
+     * @param urlPath
+     * @return
+     */
     public static String get(String urlPath) {
         return get(urlPath, null, null);
     }
@@ -94,9 +99,7 @@ public class HttpUtil {
         connection.setRequestProperty("Accept-Charset", "UTF-8");
         connection.setRequestProperty("Content-Type", "application/json");
         if (header != null) {
-            header.forEach((k, v) -> {
-                connection.setRequestProperty(k, v);
-            });
+            header.forEach(connection::setRequestProperty);
         }
         return connection;
     }

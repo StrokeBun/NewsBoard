@@ -3,14 +3,12 @@
     <string name="username">用户名</string>
     <string name="username_hint">请输入用户名</string>
     <string name="password">密码</string>
-    <string name="password_hint">请输入不超过12位的密码</string>
+    <string name="password_hint">请输入密码</string>
     <string name="remember_pwd">记住密码</string>
     <string name="login">登录</string>
     <string name="logout">退出</string>
-    <string name="title_activity_intent_test">IntentTestActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
 </resources>
