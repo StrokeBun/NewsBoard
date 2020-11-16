@@ -1,7 +1,5 @@
 package com.example.newsboard.util;
 
-import android.util.Log;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
