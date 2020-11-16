@@ -52,7 +52,6 @@ public class LoginActivity extends BaseActivity {
                     editor.clear();
                 }
                 editor.apply();
-                startActivity(new Intent(LoginActivity.this, LogoutActivity.class));
                 new Thread(() -> {
                     JSONObject params = new JSONObject();
                     try {
@@ -64,6 +63,7 @@ public class LoginActivity extends BaseActivity {
                     }
                     String result = HttpUtil.post(LOGIN_URL, params);
                     TokenUtil.setTokenFromResponse(result);
+                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(LoginActivity.this, ArticleActivity.class)));
                 }).start();
             } else {
                 Toast.makeText(LoginActivity.this, WRONG_PASSWORD, Toast.LENGTH_SHORT).show();

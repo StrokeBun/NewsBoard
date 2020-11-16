@@ -9,6 +9,11 @@ public class TokenUtil {
     private static final String TOKEN = "token";
     private static String EMPTY_TOKEN = "";
     private static String token = EMPTY_TOKEN;
+    private static final String TOKEN_PREFIX = "Bearer ";
+
+    public static String getAuthorization() {
+        return TOKEN_PREFIX + token;
+    }
 
     public static String getToken() {
         return token;
@@ -18,9 +23,9 @@ public class TokenUtil {
         token = newToken;
     }
 
-    public static void setTokenFromResponse (String str) {
+    public static void setTokenFromResponse (String response) {
         try {
-            JSONObject jsonObject = new JSONObject(str);
+            JSONObject jsonObject = new JSONObject(response);
             token = (String) jsonObject.get(TOKEN);
         } catch (JSONException e) {
             e.printStackTrace();

@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoBoard">
         <activity android:name=".ArticleActivity">
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".LoginActivity">
         </activity>
         <activity android:name=".LogoutActivity"></activity>
     </application>
