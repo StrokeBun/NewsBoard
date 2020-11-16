@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.newsboard.util.HttpUtil;
@@ -38,13 +39,17 @@ public class ArticleActivity extends AppCompatActivity {
         init();
     }
 
-
-    private void init() {
-        initControl();
-        initArticle();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (TokenUtil.hasToken()) {
+            initArticle();
+        } else {
+            startActivity(new Intent(ArticleActivity.this, LoginActivity.class));
+        }
     }
 
-    private void initControl()  {
+    private void init()  {
         setContentView(R.layout.activity_article);
         titleTextView = findViewById(R.id.article_title);
         authorTextView = findViewById(R.id.article_author);

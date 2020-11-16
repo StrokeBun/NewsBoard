@@ -8,7 +8,7 @@ public class TokenUtil {
 
     private static final String TOKEN = "token";
     private static String EMPTY_TOKEN = "";
-    private static String token = EMPTY_TOKEN;
+    private static volatile String token = EMPTY_TOKEN;
     private static final String TOKEN_PREFIX = "Bearer ";
 
     public static String getAuthorization() {
@@ -19,8 +19,8 @@ public class TokenUtil {
         return token;
     }
 
-    public static void setToken(String newToken) {
-        token = newToken;
+    public static boolean hasToken() {
+        return token != EMPTY_TOKEN;
     }
 
     public static void setTokenFromResponse (String response) {
