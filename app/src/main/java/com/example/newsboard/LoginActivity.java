@@ -55,15 +55,15 @@ public class LoginActivity extends BaseActivity {
                 new Thread(() -> {
                     JSONObject params = new JSONObject();
                     try {
-                        params.put("username", "123");
-                        params.put("password", "123");
+                        params.put("username", username);
+                        params.put("password", password);
                     } catch (JSONException e) {
                         e.printStackTrace();
                         return;
                     }
                     String result = HttpUtil.post(LOGIN_URL, params);
                     TokenUtil.setTokenFromResponse(result);
-                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(LoginActivity.this, ArticleActivity.class)));
+                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(LoginActivity.this, IntentTestActivity.class)));
                 }).start();
             } else {
                 Toast.makeText(LoginActivity.this, WRONG_PASSWORD, Toast.LENGTH_SHORT).show();

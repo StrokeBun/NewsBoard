@@ -2,8 +2,8 @@ package com.example.newsboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.newsboard.util.HttpUtil;
@@ -12,10 +12,6 @@ import com.example.newsboard.util.TokenUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +20,11 @@ public class ArticleActivity extends AppCompatActivity {
 
     private static final String ARTICLE_URL = "https://vcapi.lvdaqian.cn/article/";
     private static final String MARKDOWN_ARTICLE_URL_SUFFIX = "?markdown=true";
+
+    public static final String ID = "id";
+    public static final String TITLE = "title";
+    public static final String AUTHOR = "author";
+    public static final String PUblISH_TIME = "publishTime";
 
     private TextView titleTextView = null;
     private TextView authorTextView = null;
@@ -35,7 +36,29 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        getArticle("bytetalk_01", true);
+    }
+
+
+    private void init() {
+        initControl();
+        initArticle();
+    }
+
+    private void initControl()  {
+        setContentView(R.layout.activity_article);
+        titleTextView = findViewById(R.id.article_title);
+        authorTextView = findViewById(R.id.article_author);
+        punishedTimeTextView = findViewById(R.id.punished_time);
+        contentTextView = findViewById(R.id.article_content);
+    }
+
+    private void initArticle() {
+        Intent intent = getIntent();
+        setTitle(intent.getStringExtra(TITLE));
+        setAuthor(intent.getStringExtra(AUTHOR));
+        setPunishedTime(intent.getStringExtra(PUblISH_TIME));
+        String id = intent.getStringExtra(ID);
+        getArticle(id, false);
     }
 
     private void getArticle(String id, boolean isMarkdownFormat) {
@@ -61,19 +84,6 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             }
         }).start();
-    }
-
-
-    private void init() {
-        setContentView(R.layout.activity_article);
-        titleTextView = findViewById(R.id.article_title);
-        authorTextView = findViewById(R.id.article_author);
-        punishedTimeTextView = findViewById(R.id.punished_time);
-        contentTextView = findViewById(R.id.article_content);
-        setTitle("aaa");
-        setAuthor("bzzb");
-        setPunishedTime("2020/11/15");
-        setContent("阿巴阿巴");
     }
 
     private void setTitle(String title) {
