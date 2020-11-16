@@ -39,7 +39,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/punished_time"
+            android:id="@+id/publish_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/article_title"

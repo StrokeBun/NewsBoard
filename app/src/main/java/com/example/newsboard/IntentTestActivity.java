@@ -19,7 +19,7 @@ public class IntentTestActivity extends AppCompatActivity {
             intent.putExtra(ArticleActivity.ID, "bytetalk_01");
             intent.putExtra(ArticleActivity.AUTHOR, "原名梁志彬");
             intent.putExtra(ArticleActivity.TITLE, "BZZB");
-            intent.putExtra(ArticleActivity.PUblISH_TIME, "2020/11/17");
+            intent.putExtra(ArticleActivity.PUBlISH_TIME, "2020/11/17");
             startActivity(intent);
         });
     }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.newsboard.util.HttpUtil;
@@ -25,7 +24,7 @@ public class ArticleActivity extends AppCompatActivity {
     public static final String ID = "id";
     public static final String TITLE = "title";
     public static final String AUTHOR = "author";
-    public static final String PUblISH_TIME = "publishTime";
+    public static final String PUBlISH_TIME = "publishTime";
 
     private TextView titleTextView = null;
     private TextView authorTextView = null;
@@ -53,7 +52,7 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article);
         titleTextView = findViewById(R.id.article_title);
         authorTextView = findViewById(R.id.article_author);
-        punishedTimeTextView = findViewById(R.id.punished_time);
+        punishedTimeTextView = findViewById(R.id.publish_time);
         contentTextView = findViewById(R.id.article_content);
     }
 
@@ -61,7 +60,7 @@ public class ArticleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         setTitle(intent.getStringExtra(TITLE));
         setAuthor(intent.getStringExtra(AUTHOR));
-        setPunishedTime(intent.getStringExtra(PUblISH_TIME));
+        setPunishedTime(intent.getStringExtra(PUBlISH_TIME));
         String id = intent.getStringExtra(ID);
         getArticle(id, false);
     }
