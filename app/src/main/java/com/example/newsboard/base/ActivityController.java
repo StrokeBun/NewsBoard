@@ -3,12 +3,11 @@ package com.example.newsboard.base;
 import android.app.Activity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ActivityController {
 
-    private static final List<Activity> activityList = Collections.synchronizedList(new ArrayList<>());
+    private static final List<Activity> activityList = new ArrayList<>();
 
     public static void addActivity(Activity activity) {
         activityList.add(activity);
@@ -19,9 +18,8 @@ public class ActivityController {
     }
 
     public static void finishAll() {
-        activityList.stream()
+        activityList.parallelStream()
                 .filter(activity -> !activity.isFinishing())
                 .forEach(Activity::finish);
-
     }
 }
