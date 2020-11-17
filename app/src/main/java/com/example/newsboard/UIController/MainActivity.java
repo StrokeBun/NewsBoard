@@ -1,6 +1,7 @@
 package com.example.newsboard.UIController;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.newsboard.R;
 
@@ -25,17 +28,25 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private List<News> newsList = new ArrayList<>();
     private String content;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initNews();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);
         NewsAdapter adapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void myItemClick(View view){  //点击事件
+        int position = recyclerView.getChildAdapterPosition(view);  // 获取当前点击的item 在链表中的位置
+        Log.d("position","Pos is " + position);  // 当前展示顺序是json文件中的顺序
+        Toast.makeText(MainActivity.this,"You Touch is "+newsList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
     }
 
     private void initNews(){

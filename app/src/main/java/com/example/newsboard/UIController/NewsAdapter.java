@@ -33,7 +33,7 @@ class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mNewsList = newsList;
     }
 
-    static class Type_Zero extends RecyclerView.ViewHolder {
+    static class Type_Zero extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView newsText;
         TextView publishText;
 
@@ -42,6 +42,13 @@ class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             newsText = (TextView) itemView.findViewById(R.id.news_text);
             publishText = (TextView) itemView.findViewById(R.id.publish_message);
         }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+
     }
 
     static class Type_Com extends RecyclerView.ViewHolder {  // type 1 & 2 & 3
@@ -86,106 +93,22 @@ class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_ZERO:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_zero, null, false);
                 final Type_Zero holder = new Type_Zero(view);
-                holder.newsText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Zero",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder.publishText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Zero",Toast.LENGTH_SHORT).show();
-                    }
-                });
                 return holder;
             case TYPE_ONE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_one, null, false);
                 final Type_Com holder1 = new Type_Com(view);
-                holder1.newsText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type One",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder1.newImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type One",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder1.publishText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type One",Toast.LENGTH_SHORT).show();
-                    }
-                });
                 return holder1;
             case TYPE_TWO:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_two, null, false);
                 final Type_Com holder2 = new Type_Com(view);
-                holder2.newsText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Two",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder2.newImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Two",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder2.publishText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Two",Toast.LENGTH_SHORT).show();
-                    }
-                });
                 return holder2;
             case TYPE_THREE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_three, null, false);
                 final Type_Com holder3 = new Type_Com(view);
-                holder3.newsText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Three",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder3.newImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Three",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder3.publishText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Three",Toast.LENGTH_SHORT).show();
-                    }
-                });
                 return holder3;
             case TYPE_FOUR:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_four, null, false);
                 final Type_Four holder4 = new Type_Four(view);
-                holder4.newsText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Three",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder4.newsImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Three",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder4.publishText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"You Chose Type Three",Toast.LENGTH_SHORT).show();
-                    }
-                });
                 return holder4;
             default:
         }
