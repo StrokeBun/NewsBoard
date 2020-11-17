@@ -38,4 +38,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     compileOnly 'com.google.android.wearable:wearable:2.6.0'
+    // 引入RichText实现Markdown解析
+    implementation 'com.zzhoujay.richtext:richtext:3.0.8'
 }

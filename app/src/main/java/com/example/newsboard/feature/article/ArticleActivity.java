@@ -2,6 +2,7 @@ package com.example.newsboard.feature.article;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import com.example.newsboard.R;
@@ -9,6 +10,7 @@ import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.feature.user.LoginActivity;
 import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.TokenUtils;
+import com.zzhoujay.richtext.RichText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,9 +63,8 @@ public class ArticleActivity extends BaseActivity {
         setAuthor(intent.getStringExtra(EXTRA_AUTHOR));
         setPunishedTime(intent.getStringExtra(EXTRA_PUBlISH_TIME));
         String id = intent.getStringExtra(EXTRA_ID);
-        setContent(id, false);
+        setContent(id, true);
     }
-
 
     private void setTitle(String title) {
         titleTextView.setText(title);
@@ -93,13 +94,22 @@ public class ArticleActivity extends BaseActivity {
                 }
                 JSONObject jsonObject = new JSONObject(response);
                 String content = (String) jsonObject.get("data");
-                // 通过runOnUiThread显示文章
-                ArticleActivity.this.runOnUiThread(() -> setContent(content));
+                loadArticle(content, isMarkdownFormat);
             } catch (JSONException e) {
                 e.printStackTrace();
                 return;
             }
         }).start();
+    }
+
+    private void loadArticle(String content, boolean isMarkdownFormat) {
+        // 只有主线程能渲染TextView
+        if (isMarkdownFormat) {
+            ArticleActivity.this.runOnUiThread(() -> RichText.fromMarkdown(content).into(contentTextView));
+        }
+        else {
+            ArticleActivity.this.runOnUiThread(() -> setContent(content));
+        }
     }
 
 }
