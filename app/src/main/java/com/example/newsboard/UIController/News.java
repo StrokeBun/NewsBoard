@@ -1,5 +1,13 @@
 package com.example.newsboard.UIController;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.newsboard.R;
+
+import java.util.List;
+
 /**
  * @Title: News
  * @Package: UIController
@@ -25,6 +33,7 @@ class News {
         this.publishMessage = this.author + "       " + this.publishTime;
     }
 
+
     public News(String title, int type, String author, String publishTime) {  // type 0
         this.title = title;
         this.type = type;
@@ -49,4 +58,5 @@ class News {
     public String getPublishMessage() {
         return publishMessage;
     }
+
 }

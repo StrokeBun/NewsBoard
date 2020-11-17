@@ -109,10 +109,10 @@ class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof Type_Four) {
             ((Type_Four) holder).newsText.setText(news.getTitle());
             ((Type_Four) holder).publishText.setText(news.getPublishMessage());
-            ((Type_Four) holder).newsImage.setImageResource(R.drawable.tb09_1);
-            ((Type_Four) holder).newsImage1.setImageResource(R.drawable.tb09_2);
-            ((Type_Four) holder).newsImage2.setImageResource(R.drawable.tb09_3);
-            ((Type_Four) holder).newsImage3.setImageResource(R.drawable.tb09_4);
+            ((Type_Four) holder).newsImage.setImageResource(R.drawable.event_02);
+            ((Type_Four) holder).newsImage1.setImageResource(R.drawable.event_02);
+            ((Type_Four) holder).newsImage2.setImageResource(R.drawable.event_02);
+            ((Type_Four) holder).newsImage3.setImageResource(R.drawable.event_02);
         } else if (holder instanceof Type_Com) {
             ((Type_Com) holder).newsText.setText(news.getTitle());
             ((Type_Com) holder).publishText.setText(news.getPublishMessage());

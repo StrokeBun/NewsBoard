@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
@@ -22,6 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private List<News> newsList = new ArrayList<>();
     private String content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         doReadJson();
         doNews();
         News news = new News("9月18日淀山湖户外团建",4,"vc mobile team","2020年9月7日");
-        newsList.add(news);
+       newsList.add(news);
     }
 
     public void doReadJson(){
@@ -109,4 +113,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
 }
