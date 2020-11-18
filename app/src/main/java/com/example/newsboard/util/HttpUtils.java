@@ -51,7 +51,7 @@ public class HttpUtils {
     /**
      *
      * @param urlPath http请求的url
-     * @param header 自定义http header，Map<String, String> 格式
+     * @param header 自定义http header，Map<String, String>格式
      * @param params http请求所携带的参数，JSON格式
      * @return http response body字符串
      */

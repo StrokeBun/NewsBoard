@@ -45,7 +45,7 @@ public class ArticleActivity extends BaseActivity {
         if (TokenUtils.hasToken()) {
             initArticle();
         } else {
-            startActivity(new Intent(ArticleActivity.this, LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
     }
 

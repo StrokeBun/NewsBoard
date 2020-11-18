@@ -1,10 +1,12 @@
 package com.example.newsboard.UIController;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.NestedScrollingChild;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.newsboard.R;
+import com.example.newsboard.feature.article.ArticleActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,14 +48,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void myItemClick(View view){  //点击事件
         int position = recyclerView.getChildAdapterPosition(view);  // 获取当前点击的item 在链表中的位置
-        Log.d("position","Pos is " + position);  // 当前展示顺序是json文件中的顺序
-        Toast.makeText(MainActivity.this,"You Touch is "+newsList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+        News news = newsList.get(position);
+        Intent intent = new Intent(this, ArticleActivity.class);
+        intent.putExtra(ArticleActivity.EXTRA_ID, news.getId());
+        intent.putExtra(ArticleActivity.EXTRA_TITLE, news.getTitle());
+        intent.putExtra(ArticleActivity.EXTRA_AUTHOR, news.getAuthor());
+        intent.putExtra(ArticleActivity.EXTRA_PUBlISH_TIME, news.getPublishTime());
+        startActivity(intent);
     }
 
     private void initNews(){
         doReadJson();
         doNews();
-        News news = new News("9月18日淀山湖户外团建",4,"vc mobile team","2020年9月7日");
+        News news = new News("test","9月18日淀山湖户外团建",4,"vc mobile team","2020年9月7日");
        newsList.add(news);
     }
 
@@ -89,12 +97,13 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Json",""+jsonArray.length());
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String id = jsonObject.getString("id");
                 String title = jsonObject.getString("title");
                 int type = jsonObject.getInt("type");
                 String author = jsonObject.getString("author");
                 String publishTime = jsonObject.getString("publishTime");
                 if(type == 0) {
-                    News news = new News(title,type,author,publishTime);
+                    News news = new News(id, title,type,author,publishTime);
                     newsList.add(news);
                     continue;
                 }else if(type == 4){
@@ -104,15 +113,15 @@ public class MainActivity extends AppCompatActivity {
                     String cover = jsonObject.getString("cover");
                     switch (cover){
                         case "tancheng":
-                            News news = new News(title,type,R.drawable.tancheng,author,publishTime);
+                            News news = new News(id, title,type,R.drawable.tancheng,author,publishTime);
                             newsList.add(news);
                             break;
                         case "event_02":
-                            News news1 = new News(title,type,R.drawable.event_02,author,publishTime);
+                            News news1 = new News(id, title,type,R.drawable.event_02,author,publishTime);
                             newsList.add(news1);
                             break;
                         case "teambuilding_04":
-                            News news2 = new News(title,type,R.drawable.teambuilding,author,publishTime);
+                            News news2 = new News(id, title,type,R.drawable.teambuilding,author,publishTime);
                             newsList.add(news2);
                             break;
                         default:

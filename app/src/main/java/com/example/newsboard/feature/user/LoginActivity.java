@@ -66,10 +66,10 @@ public class LoginActivity extends BaseActivity {
                     }
                     String result = HttpUtils.post(LOGIN_URL, params);
                     TokenUtils.setTokenFromResponse(result);
-                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(LoginActivity.this, ArticleActivity.class)));
+                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, ArticleActivity.class)));
                 }).start();
             } else {
-                Toast.makeText(LoginActivity.this, WARN_WRONG_PASSWORD, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, WARN_WRONG_PASSWORD, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -16,6 +16,7 @@ import java.util.List;
  * @date: 2020/11/16 18:51
  */
 class News {
+    private String id;
     private String title;
     private String author;
     private String publishTime;
@@ -24,7 +25,8 @@ class News {
     private int cover;
 
 
-    public News(String title, int type, int cover, String author, String publishTime) {
+    public News(String id, String title, int type, int cover, String author, String publishTime) {
+        this.id = id;
         this.title = title;
         this.type = type;
         this.cover = cover;
@@ -34,13 +36,8 @@ class News {
     }
 
 
-    public News(String title, int type, String author, String publishTime) {  // type 0
-        this.title = title;
-        this.type = type;
-        this.cover = 0;
-        this.author = author;
-        this.publishTime = publishTime;
-        this.publishMessage = this.author + "       " + this.publishTime;
+    public News(String id, String title, int type, String author, String publishTime) {  // type 0
+        this(id, title, type, 0, author, publishTime);
     }
 
     public int getType() {
@@ -59,4 +56,15 @@ class News {
         return publishMessage;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getPublishTime() {
+        return publishTime;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

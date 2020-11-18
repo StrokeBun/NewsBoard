@@ -12,12 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoBoard">
-        <activity android:name=".UIController.MainActivity"></activity>
-        <activity android:name=".IntentTestActivity">
+        <activity android:name=".UIController.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".IntentTestActivity">
         </activity>
         <!-- ArticleActivity采用singleTask启动模式-->
         <activity android:name=".feature.article.ArticleActivity"
