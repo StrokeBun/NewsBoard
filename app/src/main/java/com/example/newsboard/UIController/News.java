@@ -15,7 +15,7 @@ import java.util.List;
  * @author: Susongfeng
  * @date: 2020/11/16 18:51
  */
-class News {
+public class News {
     private String id;
     private String title;
     private String author;

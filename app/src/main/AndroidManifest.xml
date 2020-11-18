@@ -12,20 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoBoard">
-        <activity android:name=".UIController.MainActivity">
+        <activity
+            android:name=".base.TestActivity"
+            android:label="@string/title_activity_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- ArticleActivity采用singleTask启动模式-->
-        <activity android:name=".feature.article.ArticleActivity"
-                  android:launchMode="singleTask">
+        <activity android:name=".UIController.MainActivity">
         </activity>
-        <activity android:name=".feature.user.LoginActivity">
-        </activity>
-        <activity android:name=".feature.user.HomeActivity" >
-        </activity>
+        <!-- ArticleActivity采用singleTask启动模式 -->
+        <activity
+            android:name=".feature.article.ArticleActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".feature.user.LoginActivity"></activity>
+        <activity android:name=".feature.user.HomeActivity"></activity>
     </application>
 
-    </manifest>
+</manifest>

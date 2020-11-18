@@ -21,7 +21,7 @@ import java.util.List;
  * @author: Susongfeng
  * @date: 2020/11/16 19:36
  */
-class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int TYPE_ZERO = 0;
     private final int TYPE_ONE = 1;
     private final int TYPE_TWO = 2;
