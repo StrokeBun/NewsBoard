@@ -1,4 +1,4 @@
-package com.example.newsboard.feature.user;
+package com.example.newsboard.ui.activity;
 
 
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.newsboard.feature.article.ArticleActivity;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.R;
 import com.example.newsboard.util.HttpUtils;
@@ -66,7 +65,7 @@ public class LoginActivity extends BaseActivity {
                     }
                     String result = HttpUtils.post(LOGIN_URL, params);
                     TokenUtils.setTokenFromResponse(result);
-                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, ArticleActivity.class)));
+                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, RealMainActivity.class)));
                 }).start();
             } else {
                 Toast.makeText(this, WARN_WRONG_PASSWORD, Toast.LENGTH_SHORT).show();

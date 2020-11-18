@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.newsboard.base.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="com.example.newsboard.ui.fragment.HomeFragment"
+        android:label="主页"
         tools:layout="@layout/fragment_home" />
 
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.newsboard.base.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.newsboard.ui.fragment.MineFragment"
+        android:label="个人信息"
+        tools:layout="@layout/fragment_mine" />
 </navigation>

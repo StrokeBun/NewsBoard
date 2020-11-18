@@ -1,25 +1,20 @@
-package com.example.newsboard.base.ui.home;
+package com.example.newsboard.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsboard.R;
-import com.example.newsboard.UIController.News;
-import com.example.newsboard.UIController.NewsAdapter;
+import com.example.newsboard.model.News;
+import com.example.newsboard.ui.adapter.NewsAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +27,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private static List<News> newsList = new ArrayList<>();
     private String content;
     private static RecyclerView recyclerView;
@@ -40,8 +34,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         initNews();
         recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
@@ -53,6 +45,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    // TODO: 目前只能使用静态方法传递参数，待解决
     public static List<News> getNewsList() {
         return newsList;
     }

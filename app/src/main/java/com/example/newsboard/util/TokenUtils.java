@@ -7,6 +7,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @Title: TokenUtils
+ * @Package: util
+ * @Description: token工具类，存储和读取token
+ * @author: Zhong Defeng
+ * @date: 2020/11/17 20:57
+ */
 public class TokenUtils {
 
     private static final String NO_TOKEN = "";
@@ -33,7 +40,7 @@ public class TokenUtils {
     }
 
     /**
-     * 返回是否已经缓存token
+     * 返回是否已经缓存了token
      */
     public static boolean hasToken() {
         return token != NO_TOKEN;

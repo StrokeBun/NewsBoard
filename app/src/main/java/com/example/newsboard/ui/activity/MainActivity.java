@@ -1,23 +1,18 @@
-package com.example.newsboard.UIController;
+package com.example.newsboard.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.NestedScrollingChild;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Xml;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.newsboard.R;
-import com.example.newsboard.feature.article.ArticleActivity;
+import com.example.newsboard.model.News;
+import com.example.newsboard.ui.adapter.NewsAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +23,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: 后续不再使用，待确定删除
 public class MainActivity extends AppCompatActivity {
     private List<News> newsList = new ArrayList<>();
     private String content;

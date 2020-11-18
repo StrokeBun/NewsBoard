@@ -1,13 +1,11 @@
-package com.example.newsboard.feature.article;
+package com.example.newsboard.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
-import com.example.newsboard.feature.user.LoginActivity;
 import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.TokenUtils;
 import com.zzhoujay.richtext.RichText;

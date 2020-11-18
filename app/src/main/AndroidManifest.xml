@@ -13,21 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoBoard">
         <activity
-            android:name=".base.TestActivity"
+            android:name=".ui.activity.RealMainActivity"
             android:label="@string/title_activity_test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UIController.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
         </activity>
         <!-- ArticleActivity采用singleTask启动模式 -->
         <activity
-            android:name=".feature.article.ArticleActivity"
+            android:name=".ui.activity.ArticleActivity"
             android:launchMode="singleTask"></activity>
-        <activity android:name=".feature.user.LoginActivity"></activity>
-        <activity android:name=".feature.user.HomeActivity"></activity>
+        <activity android:name=".ui.activity.LoginActivity"></activity>
     </application>
 
 </manifest>

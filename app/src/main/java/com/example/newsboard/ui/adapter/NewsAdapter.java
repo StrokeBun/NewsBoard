@@ -1,16 +1,16 @@
-package com.example.newsboard.UIController;
+package com.example.newsboard.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsboard.R;
+import com.example.newsboard.model.News;
 
 import java.util.List;
 

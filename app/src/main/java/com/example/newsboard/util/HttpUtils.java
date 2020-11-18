@@ -13,6 +13,13 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @Title: HttpUtils
+ * @Package: util
+ * @Description: http工具类，发送get、post请求并获取http响应
+ * @author: Zhong Defeng
+ * @date: 2020/11/17 20:57
+ */
 public class HttpUtils {
 
     private static final String POST = "POST";

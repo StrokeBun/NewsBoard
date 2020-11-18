@@ -9,10 +9,17 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.newsboard.feature.user.LoginActivity;
-import com.example.newsboard.feature.user.HomeActivity;
+import com.example.newsboard.ui.fragment.MineFragment;
+import com.example.newsboard.ui.activity.LoginActivity;
 import com.example.newsboard.util.TokenUtils;
 
+/**
+ * @Title: BaseActivity
+ * @Package: base
+ * @Description: base activity, provide LogoutReceiver to handle logout action
+ * @author: Zhong Defeng
+ * @date: 2020/11/16 14:21
+ */
 public class BaseActivity extends AppCompatActivity {
 
     private LogoutReceiver receiver;
@@ -28,7 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(HomeActivity.ACTION_LOG_OUT);
+        intentFilter.addAction(MineFragment.ACTION_LOG_OUT);
         receiver = new LogoutReceiver();
         registerReceiver(receiver, intentFilter);
     }

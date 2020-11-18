@@ -1,16 +1,8 @@
-package com.example.newsboard.UIController;
-
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.newsboard.R;
-
-import java.util.List;
+package com.example.newsboard.model;
 
 /**
  * @Title: News
- * @Package: UIController
+ * @Package: model
  * @Description: News Model
  * @author: Susongfeng
  * @date: 2020/11/16 18:51
