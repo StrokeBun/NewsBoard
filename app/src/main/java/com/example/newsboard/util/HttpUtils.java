@@ -9,28 +9,61 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
-public class HttpUtil {
+public class HttpUtils {
 
     private static final String POST = "POST";
     private static final String GET = "GET";
 
+    /**
+     *
+     * @param urlPath
+     * @return
+     */
+    public static String get(String urlPath) {
+        return get(urlPath, null, null);
+    }
+
     public static String get(String urlPath, JSONObject params) {
-        return HttpRequest(urlPath, GET, params);
+        return get(urlPath, null, params);
+    }
+
+    public static String get(String urlPath, Map<String, String> header) {
+        return get(urlPath, header, null);
+    }
+
+    public static String get(String urlPath, Map<String,String> header, JSONObject params) {
+        return HttpRequestInternal(urlPath, GET, header, params);
+    }
+
+    public static String post(String urlPath) {
+        return post(urlPath, null, null);
+    }
+
+    public static String post(String urlPath, Map<String, String> header) {
+        return post(urlPath, header, null);
     }
 
     public static String post(String urlPath, JSONObject params) {
-        return HttpRequest(urlPath, POST, params);
+        return post(urlPath, null, params);
     }
 
-    public static String HttpRequest(String urlPath, String method, JSONObject params) {
+    public static String post(String urlPath, Map<String,String> header, JSONObject params) {
+        return HttpRequestInternal(urlPath, POST, header, params);
+    }
+
+    private static String HttpRequestInternal(String urlPath, String method, Map<String, String> header,JSONObject params) {
         HttpURLConnection connection = null;
         try {
-            connection = getHttpURLConnection(urlPath, method);
+            connection = getHttpURLConnection(urlPath, method, header);
             if (POST.equals(method)) {
-                writeRequestBody(connection, params);
+                try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
+                    String requestBody = String.valueOf(params);
+                    os.writeBytes(requestBody);
+                    os.flush();
+                }
             }
-
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 try (InputStream is = connection.getInputStream();
                      BufferedReader bf = new BufferedReader(new InputStreamReader(is))) {
@@ -47,13 +80,12 @@ public class HttpUtil {
         } finally {
             if (connection != null) {
                 connection.disconnect();
-                connection = null;
             }
         }
         return null;
     }
 
-    public static HttpURLConnection getHttpURLConnection(String urlPath, String method) throws IOException {
+    private static HttpURLConnection getHttpURLConnection(String urlPath, String method, Map<String, String> header) throws IOException {
         URL url = new URL(urlPath);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setConnectTimeout(8000);
@@ -66,16 +98,9 @@ public class HttpUtil {
         connection.setRequestMethod(method);
         connection.setRequestProperty("Accept-Charset", "UTF-8");
         connection.setRequestProperty("Content-Type", "application/json");
-        connection.connect();
+        if (header != null) {
+            header.forEach(connection::setRequestProperty);
+        }
         return connection;
     }
-
-    private static void writeRequestBody(HttpURLConnection connection,  JSONObject params) throws IOException {
-        try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
-            String requestBody = String.valueOf(params);
-            os.writeBytes(requestBody);
-            os.flush();
-        }
-    }
-
 }

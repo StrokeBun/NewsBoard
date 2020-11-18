@@ -1,13 +1,16 @@
-package com.example.newsboard;
+package com.example.newsboard.feature.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.newsboard.util.TokenUtil;
+import com.example.newsboard.base.BaseActivity;
+import com.example.newsboard.R;
 
 
 public class LogoutActivity extends BaseActivity {
+
+    public static final String ACTION_LOG_OUT = "com.example.newsboard.LOG_OUT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,9 +18,8 @@ public class LogoutActivity extends BaseActivity {
         setContentView(R.layout.activity_logout);
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(view -> {
-//            Intent intent = new Intent("com.example.infoboard.LOG_OUT");
-//            sendBroadcast(intent);
-            Toast.makeText(LogoutActivity.this, TokenUtil.getToken(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ACTION_LOG_OUT);
+            sendBroadcast(intent);
         });
     }
 

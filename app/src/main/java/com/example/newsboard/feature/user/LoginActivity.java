@@ -1,4 +1,4 @@
-package com.example.newsboard;
+package com.example.newsboard.feature.user;
 
 
 import android.content.Intent;
@@ -10,8 +10,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.newsboard.util.HttpUtil;
-import com.example.newsboard.util.TokenUtil;
+import com.example.newsboard.feature.article.ArticleActivity;
+import com.example.newsboard.base.BaseActivity;
+import com.example.newsboard.R;
+import com.example.newsboard.util.HttpUtils;
+import com.example.newsboard.util.TokenUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,54 +22,54 @@ import org.json.JSONObject;
 public class LoginActivity extends BaseActivity {
 
     private static final String RIGHT_PASSWORD = "123456";
-    private static final String WRONG_PASSWORD = "密码错误";
+    private static final String WARN_WRONG_PASSWORD = "密码错误";
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
 
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
-    private static final String REMEMBER_PWD = "rememberPwd";
+    private static final String PREF_USERNAME = "username";
+    private static final String PREF_PASSWORD= "password";
+    private static final String PREF_REMEMBER_PASSWORD = "rememberPwd";
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private EditText usernameEdit;
     private EditText passwordEdit;
-    private CheckBox remeberPwd;
+    private CheckBox rememberPassword;
     private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        boolean isRemember = pref.getBoolean(REMEMBER_PWD, false);
+        boolean isRemember = pref.getBoolean(PREF_REMEMBER_PASSWORD, false);
         if (isRemember) {
-            action();
+            autoFillForm();
         }
 
         loginButton.setOnClickListener(view -> {
             String username = usernameEdit.getText().toString();
             String password = passwordEdit.getText().toString();
             if (!username.isEmpty() && RIGHT_PASSWORD.equals(password)) {
-                if (remeberPwd.isChecked()) {
+                if (rememberPassword.isChecked()) {
                     saveInfo(username, password);
                 } else {
                     editor.clear();
                 }
                 editor.apply();
-                startActivity(new Intent(LoginActivity.this, LogoutActivity.class));
                 new Thread(() -> {
                     JSONObject params = new JSONObject();
                     try {
-                        params.put("username", "123");
-                        params.put("password", "123");
+                        params.put(PREF_USERNAME, username);
+                        params.put(PREF_PASSWORD, password);
                     } catch (JSONException e) {
                         e.printStackTrace();
                         return;
                     }
-                    String result = HttpUtil.post(LOGIN_URL, params);
-                    TokenUtil.setTokenFromResponse(result);
+                    String result = HttpUtils.post(LOGIN_URL, params);
+                    TokenUtils.setTokenFromResponse(result);
+                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(LoginActivity.this, ArticleActivity.class)));
                 }).start();
             } else {
-                Toast.makeText(LoginActivity.this, WRONG_PASSWORD, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, WARN_WRONG_PASSWORD, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -77,22 +80,22 @@ public class LoginActivity extends BaseActivity {
         editor = pref.edit();
         usernameEdit = findViewById(R.id.username);
         passwordEdit = findViewById(R.id.password);
-        remeberPwd = findViewById(R.id.remember_pwd);
+        rememberPassword = findViewById(R.id.remember_pwd);
         loginButton = findViewById(R.id.login_button);
     }
 
-    private void action() {
-        String username = pref.getString(USERNAME, "");
-        String password = pref.getString(PASSWORD, "");
+    private void autoFillForm() {
+        String username = pref.getString(PREF_USERNAME, "");
+        String password = pref.getString(PREF_PASSWORD, "");
         usernameEdit.setText(username);
         passwordEdit.setText(password);
-        remeberPwd.setChecked(true);
+        rememberPassword.setChecked(true);
     }
 
     private void saveInfo(String username, String password) {
-        editor.putString(USERNAME, username);
-        editor.putString(PASSWORD, password);
-        editor.putBoolean(REMEMBER_PWD, true);
+        editor.putString(PREF_USERNAME, username);
+        editor.putString(PREF_PASSWORD, password);
+        editor.putBoolean(PREF_REMEMBER_PASSWORD, true);
     }
 
 }

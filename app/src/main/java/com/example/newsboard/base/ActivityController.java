@@ -1,4 +1,4 @@
-package com.example.newsboard;
+package com.example.newsboard.base;
 
 import android.app.Activity;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ActivityController {
 
-    public static List<Activity> activityList = Collections.synchronizedList(new ArrayList<>());
+    private static final List<Activity> activityList = Collections.synchronizedList(new ArrayList<>());
 
     public static void addActivity(Activity activity) {
         activityList.add(activity);
