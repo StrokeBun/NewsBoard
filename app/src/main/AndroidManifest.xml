@@ -12,12 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoBoard">
+        <activity android:name=".UIController.MainActivity">
         <activity android:name=".IntentTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity">
+            <!-- <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>-->
+            </activity>
+            <activity android:name=".LogoutActivity"></activity>
+        </application>
         <!-- ArticleActivity采用singleTask启动模式-->
         <activity android:name=".feature.article.ArticleActivity"
                   android:launchMode="singleTask">
@@ -27,4 +37,4 @@
         <activity android:name=".feature.user.LogoutActivity" />
     </application>
 
-</manifest>
+    </manifest>
