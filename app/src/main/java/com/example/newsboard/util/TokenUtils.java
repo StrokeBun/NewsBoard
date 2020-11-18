@@ -12,8 +12,11 @@ public class TokenUtils {
     private static final String NO_TOKEN = "";
     private static volatile String token = NO_TOKEN;
 
-    private static final String REQUEST_HEADER_AUTHORIZATION_KEY = "Authorization";
+    // http响应JSON中token对应的key
     private static final String RESPONSE_TOKEN_KEY = "token";
+    // http请求头中权限对应的key
+    private static final String REQUEST_HEADER_AUTHORIZATION_KEY = "Authorization";
+    // http请求头中token前缀
     private static final String AUTHORIZATION_TOKEN_PREFIX = "Bearer ";
 
 
@@ -27,10 +30,6 @@ public class TokenUtils {
                 put(REQUEST_HEADER_AUTHORIZATION_KEY, auth);
             }
         };
-    }
-
-    public static String getToken() {
-        return token;
     }
 
     /**

@@ -18,15 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IntentTestActivity">
-        </activity>
         <!-- ArticleActivity采用singleTask启动模式-->
         <activity android:name=".feature.article.ArticleActivity"
                   android:launchMode="singleTask">
         </activity>
         <activity android:name=".feature.user.LoginActivity">
         </activity>
-        <activity android:name=".feature.user.LogoutActivity" />
+        <activity android:name=".feature.user.HomeActivity" >
+        </activity>
     </application>
 
     </manifest>

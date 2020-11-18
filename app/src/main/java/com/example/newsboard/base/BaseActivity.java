@@ -10,7 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newsboard.feature.user.LoginActivity;
-import com.example.newsboard.feature.user.LogoutActivity;
+import com.example.newsboard.feature.user.HomeActivity;
 import com.example.newsboard.util.TokenUtils;
 
 public class BaseActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(LogoutActivity.ACTION_LOG_OUT);
+        intentFilter.addAction(HomeActivity.ACTION_LOG_OUT);
         receiver = new LogoutReceiver();
         registerReceiver(receiver, intentFilter);
     }

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntentTestActivity">
+    tools:context=".feature.user.HomeActivity">
 
     <Button
-        android:id="@+id/send_intent_button"
+        android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="intent测试"
+        android:text="@string/logout"
         android:textSize="18sp"
         tools:ignore="MissingConstraints" />
 
