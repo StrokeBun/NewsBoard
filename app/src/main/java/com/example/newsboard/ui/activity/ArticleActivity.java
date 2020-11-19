@@ -40,11 +40,10 @@ public class ArticleActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (TokenUtils.hasToken()) {
-            initArticle();
-        } else {
+        if (TokenUtils.isEmptyToken()) {
             startActivity(new Intent(this, LoginActivity.class));
         }
+        initArticle();
     }
 
     private void init()  {

@@ -16,9 +16,6 @@ import java.util.Map;
  */
 public class TokenUtils {
 
-    private static final String NO_TOKEN = "";
-    private static volatile String token = NO_TOKEN;
-
     // http响应JSON中token对应的key
     private static final String RESPONSE_TOKEN_KEY = "token";
     // http请求头中权限对应的key
@@ -26,6 +23,8 @@ public class TokenUtils {
     // http请求头中token前缀
     private static final String AUTHORIZATION_TOKEN_PREFIX = "Bearer ";
 
+    private static final String NO_TOKEN = "";
+    private static String token = NO_TOKEN;
 
     /**
      * 返回使用token进行权限识别的http header，返回类型为Map<String, String>
@@ -42,8 +41,8 @@ public class TokenUtils {
     /**
      * 返回是否已经缓存了token
      */
-    public static boolean hasToken() {
-        return token != NO_TOKEN;
+    public static boolean isEmptyToken() {
+        return token == NO_TOKEN;
     }
 
     /**

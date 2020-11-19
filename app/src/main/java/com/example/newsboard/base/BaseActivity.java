@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.newsboard.ui.fragment.MineFragment;
 import com.example.newsboard.ui.activity.LoginActivity;
+import com.example.newsboard.ui.fragment.MineFragment;
 import com.example.newsboard.util.TokenUtils;
 
 /**
@@ -35,7 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(MineFragment.ACTION_LOG_OUT);
+        intentFilter.addAction(MineFragment.ACTION_LOGOUT);
         receiver = new LogoutReceiver();
         registerReceiver(receiver, intentFilter);
     }
