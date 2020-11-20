@@ -22,15 +22,15 @@ public class MineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
-
-        if (TokenUtils.isEmptyToken()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
         Button button = root.findViewById(R.id.logout_button);
         button.setOnClickListener(view -> {
             TokenUtils.clearToken();
-            startActivity(new Intent(getContext(), LoginActivity.class));
+            Intent intent = new Intent(ACTION_LOGOUT);
+            getActivity().sendBroadcast(intent);
         });
+        if (TokenUtils.isEmptyToken()) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        }
         return root;
     }
 

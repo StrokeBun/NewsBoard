@@ -24,6 +24,7 @@ public class LoginActivity extends BaseActivity {
     private static final String WARN_WRONG_PASSWORD = "密码错误";
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
 
+    public static final String PREF_PRE_ACTIVITY = "preActivity";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD= "password";
     private static final String PREF_REMEMBER_PASSWORD = "rememberPwd";
@@ -65,7 +66,7 @@ public class LoginActivity extends BaseActivity {
                     }
                     String result = HttpUtils.post(LOGIN_URL, params);
                     TokenUtils.setTokenFromResponse(result);
-                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, RealMainActivity.class)));
+                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, MainActivity.class)));
                 }).start();
             } else {
                 Toast.makeText(this, WARN_WRONG_PASSWORD, Toast.LENGTH_SHORT).show();

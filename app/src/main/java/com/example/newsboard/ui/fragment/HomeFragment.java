@@ -1,12 +1,12 @@
 package com.example.newsboard.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private static RecyclerView recyclerView;
 
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -43,6 +44,13 @@ public class HomeFragment extends Fragment {
         NewsAdapter adapter = new NewsAdapter(newsList);
         recyclerView.setAdapter(adapter);
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // 此处需要清除newList，否则将导致重复页面
+        newsList.clear();
     }
 
     // TODO: 目前只能使用静态方法传递参数，待解决
@@ -75,7 +83,6 @@ public class HomeFragment extends Fragment {
             byte[] buffer = new byte[length];
             inputStream.read(buffer);
             content = new String(buffer, "UTF-8");
-            Log.d("Json",content);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +98,6 @@ public class HomeFragment extends Fragment {
          */
         try {
             JSONArray jsonArray = new JSONArray(content);
-            Log.d("Json",""+jsonArray.length());
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String id = jsonObject.getString("id");
@@ -105,7 +111,6 @@ public class HomeFragment extends Fragment {
                     continue;
                 }else if(type == 4){
                     String covers = jsonObject.getString("covers");
-                    Log.d("Json",title+type+covers);
                 }else{
                     String cover = jsonObject.getString("cover");
                     switch (cover){
@@ -123,7 +128,6 @@ public class HomeFragment extends Fragment {
                             break;
                         default:
                     }
-                    Log.d("Json",title+type+cover);
                 }
             }
         } catch (JSONException e) {

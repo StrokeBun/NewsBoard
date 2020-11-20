@@ -1,50 +1,40 @@
 package com.example.newsboard.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.newsboard.R;
 import com.example.newsboard.model.News;
-import com.example.newsboard.ui.adapter.NewsAdapter;
+import com.example.newsboard.base.BaseActivity;
+import com.example.newsboard.ui.fragment.HomeFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-// TODO: 后续不再使用，待确定删除
-public class MainActivity extends AppCompatActivity {
-    private List<News> newsList = new ArrayList<>();
-    private String content;
-    private RecyclerView recyclerView;
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initNews();
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
-        recyclerView.setLayoutManager(layoutManager);
-        NewsAdapter adapter = new NewsAdapter(newsList);
-        recyclerView.setAdapter(adapter);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_mine)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
-    public void myItemClick(View view){  //点击事件
-        int position = recyclerView.getChildAdapterPosition(view);  // 获取当前点击的item 在链表中的位置
-        News news = newsList.get(position);
+
+    public void myItemClick(View view){
+        int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
+        News news = HomeFragment.getNewsList().get(position);
         Intent intent = new Intent(this, ArticleActivity.class);
         intent.putExtra(ArticleActivity.EXTRA_ID, news.getId());
         intent.putExtra(ArticleActivity.EXTRA_TITLE, news.getTitle());
@@ -52,84 +42,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(ArticleActivity.EXTRA_PUBlISH_TIME, news.getPublishTime());
         startActivity(intent);
     }
-
-    private void initNews(){
-        doReadJson();
-        doNews();
-        News news = new News("test","9月18日淀山湖户外团建",4,"vc mobile team","2020年9月7日");
-       newsList.add(news);
-    }
-
-    public void doReadJson(){
-        /**
-         * @Description:Read Json File
-         * @author： Susongfeng
-         * @Param: []
-         * @return: void
-         * @Date: 2020/11/15
-         */
-        try {
-            InputStream inputStream = getResources().getAssets().open("metadata.json");
-            int length = inputStream.available();
-            byte[] buffer = new byte[length];
-            inputStream.read(buffer);
-            content = new String(buffer, "UTF-8");
-            Log.d("Json",content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void doNews(){
-        /**
-         * @Description: Json to News
-         * @author： Susongfeng
-         * @Param: []
-         * @return: void
-         * @Date: 2020/11/15
-         */
-        try {
-            JSONArray jsonArray = new JSONArray(content);
-            Log.d("Json",""+jsonArray.length());
-            for(int i = 0; i < jsonArray.length(); i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String id = jsonObject.getString("id");
-                String title = jsonObject.getString("title");
-                int type = jsonObject.getInt("type");
-                String author = jsonObject.getString("author");
-                String publishTime = jsonObject.getString("publishTime");
-                if(type == 0) {
-                    News news = new News(id, title,type,author,publishTime);
-                    newsList.add(news);
-                    continue;
-                }else if(type == 4){
-                    String covers = jsonObject.getString("covers");
-                    Log.d("Json",title+type+covers);
-                }else{
-                    String cover = jsonObject.getString("cover");
-                    switch (cover){
-                        case "tancheng":
-                            News news = new News(id, title,type,R.drawable.tancheng,author,publishTime);
-                            newsList.add(news);
-                            break;
-                        case "event_02":
-                            News news1 = new News(id, title,type,R.drawable.event_02,author,publishTime);
-                            newsList.add(news1);
-                            break;
-                        case "teambuilding_04":
-                            News news2 = new News(id, title,type,R.drawable.teambuilding,author,publishTime);
-                            newsList.add(news2);
-                            break;
-                        default:
-                    }
-                    Log.d("Json",title+type+cover);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
 }

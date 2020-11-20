@@ -13,7 +13,7 @@
 
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_mine"
         android:name="com.example.newsboard.ui.fragment.MineFragment"
         android:label="个人信息"
         tools:layout="@layout/fragment_mine" />
