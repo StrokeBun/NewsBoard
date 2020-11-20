@@ -37,7 +37,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:layout_alignParentLeft="true"
-        android:background="#000" />
+        android:background="#E8E8E8" />
 </RelativeLayout>
