@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.newsboard.R;
 import com.example.newsboard.model.News;
+import com.example.newsboard.model.NewsView;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.ui.fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,12 +35,10 @@ public class MainActivity extends BaseActivity {
 
     public void myItemClick(View view){
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
-        News news = HomeFragment.getNewsList().get(position);
+        NewsView newsView = HomeFragment.getNewsViewList().get(position);
+        News news = newsView.getNews();
         Intent intent = new Intent(this, ArticleActivity.class);
-        intent.putExtra(ArticleActivity.EXTRA_ID, news.getId());
-        intent.putExtra(ArticleActivity.EXTRA_TITLE, news.getTitle());
-        intent.putExtra(ArticleActivity.EXTRA_AUTHOR, news.getAuthor());
-        intent.putExtra(ArticleActivity.EXTRA_PUBlISH_TIME, news.getPublishTime());
+        intent.putExtra(News.EXTRA_NEWS, news);
         startActivity(intent);
     }
 

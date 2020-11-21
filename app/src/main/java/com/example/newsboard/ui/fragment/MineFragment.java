@@ -28,6 +28,7 @@ public class MineFragment extends Fragment {
             Intent intent = new Intent(ACTION_LOGOUT);
             getActivity().sendBroadcast(intent);
         });
+        // 未登录则跳转到登录页面
         if (TokenUtils.isEmptyToken()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
         }

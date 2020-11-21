@@ -191,4 +191,9 @@ public class HttpUtils {
         }
         return connection;
     }
+
+
+    private HttpUtils() {
+        throw new UnsupportedOperationException("HttpUtils cant be constructed");
+    }
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsboard.R;
 import com.example.newsboard.model.News;
+import com.example.newsboard.model.NewsView;
 import com.example.newsboard.ui.adapter.NewsAdapter;
+import com.example.newsboard.ui.adapter.NewsAdapterNew;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private static List<News> newsList = new ArrayList<>();
+    private static List<NewsView> newsViewList = new ArrayList<>();
     private String content;
     private static RecyclerView recyclerView;
 
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);
-        NewsAdapter adapter = new NewsAdapter(newsList);
+        NewsAdapterNew adapter = new NewsAdapterNew(newsViewList);
         recyclerView.setAdapter(adapter);
         return root;
     }
@@ -50,12 +51,12 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         // 此处需要清除newList，否则将导致重复页面
-        newsList.clear();
+        newsViewList.clear();
     }
 
     // TODO: 目前只能使用静态方法传递参数，待解决
-    public static List<News> getNewsList() {
-        return newsList;
+    public static List<NewsView> getNewsViewList() {
+        return newsViewList;
     }
 
     public static RecyclerView getRecyclerView() {
@@ -65,8 +66,9 @@ public class HomeFragment extends Fragment {
     private void initNews(){
         doReadJson();
         doNews();
-        News news = new News("test","9月18日淀山湖户外团建",4,"vc mobile team","2020年9月7日");
-        newsList.add(news);
+        News news = new News("test", "9月18日淀山湖户外团建", "vc mobile team", "2020年9月7日");
+        NewsView newsView = new NewsView(news, 4);
+        newsViewList.add(newsView);
     }
 
     public void doReadJson(){
@@ -102,12 +104,13 @@ public class HomeFragment extends Fragment {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String id = jsonObject.getString("id");
                 String title = jsonObject.getString("title");
-                int type = jsonObject.getInt("type");
                 String author = jsonObject.getString("author");
                 String publishTime = jsonObject.getString("publishTime");
+                News news = new News(id, title, author, publishTime);
+                int type = jsonObject.getInt("type");
                 if(type == 0) {
-                    News news = new News(id, title,type,author,publishTime);
-                    newsList.add(news);
+                    NewsView newsView = new NewsView(news, type);
+                    newsViewList.add(newsView);
                     continue;
                 }else if(type == 4){
                     String covers = jsonObject.getString("covers");
@@ -115,16 +118,16 @@ public class HomeFragment extends Fragment {
                     String cover = jsonObject.getString("cover");
                     switch (cover){
                         case "tancheng":
-                            News news = new News(id, title,type,R.drawable.tancheng,author,publishTime);
-                            newsList.add(news);
+                            NewsView newsView = new NewsView(news, type, R.drawable.tancheng);
+                            newsViewList.add(newsView);
                             break;
                         case "event_02":
-                            News news1 = new News(id, title,type,R.drawable.event_02,author,publishTime);
-                            newsList.add(news1);
+                            NewsView newsView1 = new NewsView(news, type, R.drawable.event_02);
+                            newsViewList.add(newsView1);
                             break;
                         case "teambuilding_04":
-                            News news2 = new News(id, title,type,R.drawable.teambuilding,author,publishTime);
-                            newsList.add(news2);
+                            NewsView newsView2 = new NewsView(news, type, R.drawable.teambuilding);
+                            newsViewList.add(newsView2);
                             break;
                         default:
                     }

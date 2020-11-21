@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
+import com.example.newsboard.model.News;
 import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.TokenUtils;
 import com.zzhoujay.richtext.RichText;
@@ -16,11 +17,6 @@ import org.json.JSONObject;
 import java.util.Map;
 
 public class ArticleActivity extends BaseActivity {
-
-    public static final String EXTRA_ID = "id";
-    public static final String EXTRA_TITLE = "title";
-    public static final String EXTRA_AUTHOR = "author";
-    public static final String EXTRA_PUBlISH_TIME = "publishTime";
 
     private static final String ARTICLE_URL = "https://vcapi.lvdaqian.cn/article/";
     private static final String MARKDOWN_ARTICLE_URL_SUFFIX = "?markdown=true";
@@ -56,23 +52,11 @@ public class ArticleActivity extends BaseActivity {
 
     private void initArticle() {
         Intent intent = getIntent();
-        setTitle(intent.getStringExtra(EXTRA_TITLE));
-        setAuthor(intent.getStringExtra(EXTRA_AUTHOR));
-        setPunishedTime(intent.getStringExtra(EXTRA_PUBlISH_TIME));
-        String id = intent.getStringExtra(EXTRA_ID);
-        setContent(id, true);
-    }
-
-    private void setTitle(String title) {
-        titleTextView.setText(title);
-    }
-
-    private void setAuthor(String author) {
-        authorTextView.setText(author);
-    }
-
-    private void setPunishedTime(String punishedTime) {
-        punishedTimeTextView.setText(punishedTime);
+        News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
+        setTitle(news.getTitle());
+        setAuthor(news.getAuthor());
+        setPunishedTime(news.getPublishTime());
+        setContent(news.getId(), true);
     }
 
     private void setContent(String content) {
@@ -107,6 +91,18 @@ public class ArticleActivity extends BaseActivity {
         else {
             ArticleActivity.this.runOnUiThread(() -> setContent(content));
         }
+    }
+
+    private void setTitle(String title) {
+        titleTextView.setText(title);
+    }
+
+    private void setAuthor(String author) {
+        authorTextView.setText(author);
+    }
+
+    private void setPunishedTime(String punishedTime) {
+        punishedTimeTextView.setText(punishedTime);
     }
 
 }

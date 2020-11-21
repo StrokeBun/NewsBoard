@@ -49,14 +49,9 @@ public class TokenUtils {
      * 从http response从解析token并缓存
      * @param response http response字符串
      */
-    public static void setTokenFromResponse (String response) {
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            token = (String) jsonObject.get(RESPONSE_TOKEN_KEY);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            token = NO_TOKEN;
-        }
+    public static void setTokenFromResponse(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        token = (String) jsonObject.get(RESPONSE_TOKEN_KEY);
     }
 
     /**
@@ -66,4 +61,8 @@ public class TokenUtils {
         token = NO_TOKEN;
     }
 
+
+    private TokenUtils() {
+        throw new UnsupportedOperationException("TokenUtils cant be constructed");
+    }
 }

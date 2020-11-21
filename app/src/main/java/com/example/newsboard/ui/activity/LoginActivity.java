@@ -20,11 +20,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends BaseActivity {
 
-    private static final String RIGHT_PASSWORD = "123456";
-    private static final String WARN_WRONG_PASSWORD = "密码错误";
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
-
-    public static final String PREF_PRE_ACTIVITY = "preActivity";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD= "password";
     private static final String PREF_REMEMBER_PASSWORD = "rememberPwd";
@@ -48,29 +44,32 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(view -> {
             String username = usernameEdit.getText().toString();
             String password = passwordEdit.getText().toString();
-            if (!username.isEmpty() && RIGHT_PASSWORD.equals(password)) {
-                if (rememberPassword.isChecked()) {
-                    saveInfo(username, password);
-                } else {
-                    editor.clear();
-                }
-                editor.apply();
-                new Thread(() -> {
-                    JSONObject params = new JSONObject();
-                    try {
-                        params.put(PREF_USERNAME, username);
-                        params.put(PREF_PASSWORD, password);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    String result = HttpUtils.post(LOGIN_URL, params);
-                    TokenUtils.setTokenFromResponse(result);
-                    LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, MainActivity.class)));
-                }).start();
+
+            if (rememberPassword.isChecked()) {
+                saveInfo(username, password);
             } else {
-                Toast.makeText(this, WARN_WRONG_PASSWORD, Toast.LENGTH_SHORT).show();
+                editor.clear();
             }
+            editor.apply();
+
+            new Thread(() -> {
+                JSONObject params = new JSONObject();
+                try {
+                    params.put(PREF_USERNAME, username);
+                    params.put(PREF_PASSWORD, password);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                String result = HttpUtils.post(LOGIN_URL, params);
+                try {
+                    TokenUtils.setTokenFromResponse(result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, MainActivity.class)));
+            }).start();
         });
     }
 

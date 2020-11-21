@@ -1,51 +1,41 @@
 package com.example.newsboard.model;
 
+import java.io.Serializable;
+
 /**
- * @Title: News
- * @Package: model
- * @Description: News Model
- * @author: Susongfeng
- * @date: 2020/11/16 18:51
+ * <pre>
+ *     author : zdf
+ *     time   : 2020/11/21
+ * </pre>
  */
-public class News {
+public class News implements Serializable {
+
+    public static final String EXTRA_NEWS = "news";
+
     private String id;
     private String title;
     private String author;
     private String publishTime;
-    private String publishMessage;
-    private int type;
-    private int cover;
 
-
-    public News(String id, String title, int type, int cover, String author, String publishTime) {
+    public News(String id, String title, String author, String publishTime) {
         this.id = id;
         this.title = title;
-        this.type = type;
-        this.cover = cover;
         this.author = author;
         this.publishTime = publishTime;
-        this.publishMessage = this.author + "       " + this.publishTime;
     }
 
-
-    public News(String id, String title, int type, String author, String publishTime) {  // type 0
-        this(id, title, type, 0, author, publishTime);
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public int getCover() {
-        return cover;
+    @Override
+    public String toString() {
+        return "News{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publishTime='" + publishTime + '\'' +
+                '}';
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public String getPublishMessage() {
-        return publishMessage;
     }
 
     public String getAuthor() {
