@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
     private void initNews(){
         doReadJson();
         doNews();
-        News news = new News("test", "9月18日淀山湖户外团建", "vc mobile team", "2020年9月7日");
+        News news = new News("teamBuilding_09", "9月18日淀山湖户外团建", "vc mobile team", "2020年9月7日");
         NewsView newsView = new NewsView(news, 4);
         newsViewList.add(newsView);
     }

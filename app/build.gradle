@@ -46,4 +46,5 @@ dependencies {
     compileOnly 'com.google.android.wearable:wearable:2.6.0'
     // 引入RichText实现Markdown解析
     implementation 'com.zzhoujay.richtext:richtext:3.0.8'
+    implementation 'com.zzhoujay.markdown:markdown:1.0.5'
 }

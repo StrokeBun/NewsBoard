@@ -114,6 +114,10 @@ public class NewsAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
             return holder;
         }
+
+        private ViewHolderFactory() {
+
+        }
     }
 
     @Override

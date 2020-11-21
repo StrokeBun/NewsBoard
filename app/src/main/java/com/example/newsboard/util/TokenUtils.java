@@ -14,7 +14,7 @@ import java.util.Map;
  * @author: Zhong Defeng
  * @date: 2020/11/17 20:57
  */
-public class TokenUtils {
+public final class TokenUtils {
 
     // http响应JSON中token对应的key
     private static final String RESPONSE_TOKEN_KEY = "token";

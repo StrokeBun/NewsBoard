@@ -20,7 +20,7 @@ import java.util.Map;
  * @author: Zhong Defeng
  * @date: 2020/11/17 20:57
  */
-public class HttpUtils {
+public final class HttpUtils {
 
     private static final String POST = "POST";
     private static final String GET = "GET";
