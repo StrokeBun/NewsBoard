@@ -47,4 +47,7 @@ dependencies {
     // 引入RichText实现Markdown解析
     implementation 'com.zzhoujay.richtext:richtext:3.0.8'
     implementation 'com.zzhoujay.markdown:markdown:1.0.5'
+    // https://mvnrepository.com/artifact/com.github.bumptech.glide/glide  加载图片
+    implementation group: 'com.github.bumptech.glide', name: 'glide', version: '3.7.0'
+
 }

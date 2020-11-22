@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.newsboard.R;
 import com.example.newsboard.model.NewsView;
+import com.example.newsboard.ui.fragment.HomeFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -130,10 +132,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof Type_Four) {
             ((Type_Four) holder).newsText.setText(title);
             ((Type_Four) holder).publishText.setText(newsView.getPublishMessage());
-            ((Type_Four) holder).newsImage.setImageResource(R.drawable.event_02);
-            ((Type_Four) holder).newsImage1.setImageResource(R.drawable.event_02);
-            ((Type_Four) holder).newsImage2.setImageResource(R.drawable.event_02);
-            ((Type_Four) holder).newsImage3.setImageResource(R.drawable.event_02);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122205843681.jpeg").into(((Type_Four) holder).newsImage);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213841886.jpeg").into(((Type_Four) holder).newsImage1);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/2020112221392235.jpeg").into(((Type_Four) holder).newsImage2);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213943681.jpeg").into(((Type_Four) holder).newsImage3);
         } else if (holder instanceof Type_Com) {
             ((Type_Com) holder).newsText.setText(title);
             ((Type_Com) holder).publishText.setText(newsView.getPublishMessage());
