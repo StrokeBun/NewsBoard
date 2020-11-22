@@ -1,15 +1,38 @@
 <resources>
     <string name="app_name">NewsBoard</string>
+    <string name="title_home">主页</string>
+    <string name="title_mine">我的</string>
+
+    <!--登录页面-->
     <string name="username">用户名</string>
     <string name="username_hint">请输入用户名</string>
     <string name="password">密码</string>
     <string name="password_hint">请输入密码</string>
-    <string name="remember_pwd">记住密码</string>
+    <string name="remember_info">记住密码</string>
     <string name="login">登录</string>
-    <string name="logout">退出</string>
-    <string name="title_activity_test">NewsBoard</string>
-    <string name="title_home">主页</string>
-    <string name="title_notifications">我的</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--个人主页-->
+    <!--数据统计-->
+    <string name="news">头条</string>
+    <string name="receive_likes">获赞</string>
+    <string name="fans">粉丝</string>
+    <string name="follow">关注</string>
+    <!--消息通知、收藏、历史、下载一栏-->
+    <string name="my_message">消息通知</string>
+    <string name="my_collect">收藏</string>
+    <string name="my_history">浏览历史</string>
+    <string name="my_download">下载管理</string>
+    <!--更多服务-->
+    <string name="more_service">更多服务</string>
+    <string name="user_feedback">用户反馈</string>
+    <string name="purse">钱包</string>
+    <string name="advertisement">广告推广</string>
+    <string name="no_data_service">免流量服务</string>
+    <string name="comment">评论</string>
+    <string name="like">点赞</string>
+    <string name="night_mode">夜间模式</string>
+    <string name="creation_center">创作中心</string>
+    <string name="order">订单</string>
+    <string name="shopping_cart">购物车</string>
+    <string name="charity">圆梦公益</string>
 </resources>

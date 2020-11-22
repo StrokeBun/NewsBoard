@@ -16,13 +16,17 @@ public final class StringUtils {
     public static String handleMarkdown(String str) {
         Matcher matcherImage = Pattern.compile(IMG_PATTERN).matcher(str);
         StringBuilder result = new StringBuilder(str);
-        if (matcherImage.find()) {
+        int offset = 0;
+        while (matcherImage.find()) {
             String imgUrl = matcherImage.group(3);
             imgUrl = removeUnderline(imgUrl);
             StringBuilder sb = new StringBuilder(LOCAL_IMG_URL_PREFIX);
             sb.append(imgUrl);
             sb.append(")");
-            result.replace(matcherImage.start(), matcherImage.end(), sb.toString());
+            result.replace(matcherImage.start()+offset, matcherImage.end()+offset, sb.toString());
+            // 计算replace后两字符串的长度偏差
+            String origin = matcherImage.group(0);
+            offset = offset + sb.length() - origin.length();
         }
         return result.toString();
     }

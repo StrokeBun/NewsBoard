@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.R;
@@ -20,10 +19,11 @@ import org.json.JSONObject;
 
 public class LoginActivity extends BaseActivity {
 
+    public static final String EXTRA_USERNAME = "username";
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD= "password";
-    private static final String PREF_REMEMBER_PASSWORD = "rememberPwd";
+    private static final String PREF_REMEMBER_INFO = "rememberInfo";
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        boolean isRemember = pref.getBoolean(PREF_REMEMBER_PASSWORD, false);
+        boolean isRemember = pref.getBoolean(PREF_REMEMBER_INFO, false);
         if (isRemember) {
             autoFillForm();
         }
@@ -45,12 +45,7 @@ public class LoginActivity extends BaseActivity {
             String username = usernameEdit.getText().toString();
             String password = passwordEdit.getText().toString();
 
-            if (rememberPassword.isChecked()) {
-                saveInfo(username, password);
-            } else {
-                editor.clear();
-            }
-            editor.apply();
+            handleRememberInfo(username, password);
 
             new Thread(() -> {
                 JSONObject params = new JSONObject();
@@ -68,7 +63,11 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                     return;
                 }
-                LoginActivity.this.runOnUiThread(() -> startActivity(new Intent(this, MainActivity.class)));
+                LoginActivity.this.runOnUiThread(() -> {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra(EXTRA_USERNAME, username);
+                    startActivity(intent);
+                });
             }).start();
         });
     }
@@ -79,7 +78,7 @@ public class LoginActivity extends BaseActivity {
         editor = pref.edit();
         usernameEdit = findViewById(R.id.username);
         passwordEdit = findViewById(R.id.password);
-        rememberPassword = findViewById(R.id.remember_pwd);
+        rememberPassword = findViewById(R.id.remember_info);
         loginButton = findViewById(R.id.login_button);
     }
 
@@ -91,10 +90,15 @@ public class LoginActivity extends BaseActivity {
         rememberPassword.setChecked(true);
     }
 
-    private void saveInfo(String username, String password) {
-        editor.putString(PREF_USERNAME, username);
-        editor.putString(PREF_PASSWORD, password);
-        editor.putBoolean(PREF_REMEMBER_PASSWORD, true);
+    private void handleRememberInfo(String username, String password) {
+        if (rememberPassword.isChecked()) {
+            editor.putString(PREF_USERNAME, username);
+            editor.putString(PREF_PASSWORD, password);
+            editor.putBoolean(PREF_REMEMBER_INFO, true);
+        } else {
+            editor.clear();
+        }
+        editor.apply();
     }
 
 }

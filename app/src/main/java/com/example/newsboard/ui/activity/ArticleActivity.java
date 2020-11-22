@@ -2,7 +2,6 @@ package com.example.newsboard.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.newsboard.R;
@@ -80,12 +79,10 @@ public class ArticleActivity extends BaseActivity {
                 }
                 JSONObject jsonObject = new JSONObject(response);
                 String content = (String) jsonObject.get("data");
-                // TODO: 存在BUG，如果将图片存放于assets目录下，由于安卓assets路径为file:///android_asset/，如果图片名包含_ , 将会先被解析为斜体，图片加载失败
                 content = StringUtils.handleMarkdown(content);
                 loadArticle(content, isMarkdownFormat);
             } catch (JSONException e) {
                 e.printStackTrace();
-                return;
             }
         }).start();
     }
@@ -93,8 +90,7 @@ public class ArticleActivity extends BaseActivity {
     private void loadArticle(String content, boolean isMarkdownFormat) {
         // 只有主线程能渲染TextView
         if (isMarkdownFormat) {
-            ArticleActivity.this.runOnUiThread(() ->
-                    RichText.fromMarkdown(content).into(contentTextView));
+            ArticleActivity.this.runOnUiThread(() -> RichText.fromMarkdown(content).into(contentTextView));
         }
         else {
             ArticleActivity.this.runOnUiThread(() -> setContent(content));

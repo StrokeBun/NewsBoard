@@ -32,7 +32,6 @@ public class MainActivity extends BaseActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-
     public void myItemClick(View view){
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
         NewsView newsView = HomeFragment.getNewsViewList().get(position);

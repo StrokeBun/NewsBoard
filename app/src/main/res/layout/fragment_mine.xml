@@ -29,20 +29,21 @@
             >
 
             <TextView
+                android:id="@+id/username_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Stroke"
                 android:textColor="@color/black"
-                android:textSize="16.0sp"/>
+                android:textSize="16.0sp" />
 
         </LinearLayout>
 
-        <!-- 用户统计数据 -->
+        <!-- 头条、获赞、粉丝、关注 -->
         <LinearLayout
             android:id="@+id/ll_count"
             android:layout_width="fill_parent"
@@ -63,8 +64,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.9"
-                    android:text="999"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="16.0sp"/>
 
@@ -72,8 +72,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:alpha="0.5"
-                    android:text="头条"
+                    android:alpha="0.6"
+                    android:text="@string/news"
                     android:textColor="@color/black"
                     android:textSize="12.0sp"/>
 
@@ -92,42 +92,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.9"
-                    android:text="999"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="16.0sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:alpha="0.5"
-                    android:text="获赞"
-                    android:textColor="@color/black"
-                    android:textSize="12.0sp"/>
-            </LinearLayout>
-            <View
-                android:layout_width="0.5dip"
-                android:layout_height="38.0dip" />
-
-            <LinearLayout
-                android:layout_width="0.0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.9"
-                    android:text="999"
-                    android:textColor="@color/black"
-                    android:textSize="16.0sp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:alpha="0.5"
-                    android:text="粉丝"
+                    android:alpha="0.6"
+                    android:text="@string/receive_likes"
                     android:textColor="@color/black"
                     android:textSize="12.0sp"/>
             </LinearLayout>
@@ -142,12 +115,37 @@
                 android:layout_weight="1.0"
                 android:gravity="center"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="16.0sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:alpha="0.6"
+                    android:text="@string/fans"
+                    android:textColor="@color/black"
+                    android:textSize="12.0sp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5dip"
+                android:layout_height="38.0dip" />
+
+            <LinearLayout
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.9"
-                    android:text="999"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="16.0sp"/>
 
@@ -155,22 +153,342 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:alpha="0.5"
-                    android:text="关注"
+                    android:alpha="0.6"
+                    android:text="@string/follow"
                     android:textColor="@color/black"
                     android:textSize="12.0sp"/>
             </LinearLayout>
+
         </LinearLayout>
 
-        <Button
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/ll_count"
+            android:background="@color/color_F3F5F4"
+            android:id="@+id/margin_0"
+            />
+
+        <!--消息通知、收藏、浏览历史、下载管理-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/margin_0"
+            android:orientation="vertical"
+            android:id="@+id/ll_info"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/my_message"
+                    android:gravity="center"
+                    android:text="@string/my_message"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/my_collect"
+                    android:gravity="center"
+                    android:text="@string/my_collect"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/my_history"
+                    android:gravity="center"
+                    android:text="@string/my_history"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/my_download"
+                    android:gravity="center"
+                    android:text="@string/my_download"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/ll_info"
+            android:background="@color/color_F3F5F4"
+            android:id="@+id/margin_1"
+            />
+
+        <!-- 更多服务-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/margin_1"
+            android:id="@+id/more_service">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="7dp"
+                android:text="@string/more_service"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+        <!--用户反馈、钱包、广告推广、免流量服务-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/more_service"
+            android:orientation="vertical"
+            android:id="@+id/more_service_line_1"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/user_feedback"
+                    android:gravity="center"
+                    android:text="@string/user_feedback"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/purse"
+                    android:gravity="center"
+                    android:text="@string/purse"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/advertisement"
+                    android:gravity="center"
+                    android:text="我的下载"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/no_data_service"
+                    android:gravity="center"
+                    android:text="@string/no_data_service"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--评论、点赞、夜间模式、创作中心-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/more_service_line_1"
+            android:orientation="vertical"
+            android:id="@+id/more_service_line_2"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/comment"
+                    android:gravity="center"
+                    android:text="@string/comment"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/like"
+                    android:gravity="center"
+                    android:text="@string/like"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/night_mode"
+                    android:gravity="center"
+                    android:text="@string/night_mode"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/creation_center"
+                    android:gravity="center"
+                    android:text="@string/creation_center"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--订单、购物车、公益-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/more_service_line_2"
+            android:orientation="vertical"
+            android:id="@+id/more_service_line_3"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/order"
+                    android:gravity="center"
+                    android:text="@string/order"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/shopping_cart"
+                    android:gravity="center"
+                    android:text="@string/shopping_cart"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@mipmap/charity"
+                    android:gravity="center"
+                    android:text="@string/charity"
+                    android:textColor="@color/margin_color"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/more_service_line_3"
+            android:background="@color/color_F3F5F4"
+            android:id="@+id/margin_2"
+            />
+
+        <ImageButton
             android:id="@+id/logout_button"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/iv_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/margin_2"
+            android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
-            android:text="退出"
-            android:textSize="18sp" />
+            android:src="@mipmap/exit"
+            android:background="#00FF0000" />
     </RelativeLayout>
 
 </LinearLayout>

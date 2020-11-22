@@ -59,13 +59,17 @@ public class BaseActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Warning");
-            builder.setMessage("try to login again");
-            builder.setCancelable(false);
-            builder.setPositiveButton("OK", (dialog, which) -> {
+            builder.setTitle("退出确认");
+            builder.setMessage("退出当前账号，将无法进行评论和收藏");
+            builder.setCancelable(true);
+            builder.setPositiveButton("确认退出", (dialog, which) -> {
                 ActivityController.finishAll();
                 TokenUtils.clearToken();
                 context.startActivity(new Intent(context, LoginActivity.class));
+            });
+
+            builder.setNegativeButton("取消", (dialog, which) -> {
+
             });
             builder.show();
         }

@@ -15,7 +15,6 @@ import com.example.newsboard.R;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
 import com.example.newsboard.ui.adapter.NewsAdapter;
-import com.example.newsboard.ui.adapter.NewsAdapterNew;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +41,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);
-        NewsAdapterNew adapter = new NewsAdapterNew(newsViewList);
+        NewsAdapter adapter = new NewsAdapter(newsViewList);
         recyclerView.setAdapter(adapter);
         return root;
     }
@@ -50,11 +49,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // 此处需要清除newList，否则将导致重复页面
-        newsViewList.clear();
     }
 
-    // TODO: 目前只能使用静态方法传递参数，待解决
     public static List<NewsView> getNewsViewList() {
         return newsViewList;
     }
@@ -98,6 +94,7 @@ public class HomeFragment extends Fragment {
          * @return: void
          * @Date: 2020/11/15
          */
+        newsViewList.clear();
         try {
             JSONArray jsonArray = new JSONArray(content);
             for(int i = 0; i < jsonArray.length(); i++){
@@ -112,9 +109,9 @@ public class HomeFragment extends Fragment {
                     NewsView newsView = new NewsView(news, type);
                     newsViewList.add(newsView);
                     continue;
-                }else if(type == 4){
+                } else if(type == 4){
                     String covers = jsonObject.getString("covers");
-                }else{
+                } else{
                     String cover = jsonObject.getString("cover");
                     switch (cover){
                         case "tancheng":
@@ -133,6 +130,7 @@ public class HomeFragment extends Fragment {
                     }
                 }
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

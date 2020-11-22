@@ -1,5 +1,7 @@
 package com.example.newsboard.model;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @Title: NewsView
  * @Package: model

@@ -42,7 +42,7 @@ public final class TokenUtils {
      * 返回是否已经缓存了token
      */
     public static boolean isEmptyToken() {
-        return token == NO_TOKEN;
+        return token.equals(NO_TOKEN);
     }
 
     /**
