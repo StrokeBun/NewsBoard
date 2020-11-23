@@ -17,6 +17,8 @@ import com.example.newsboard.util.TokenUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
+
 public class LoginActivity extends BaseActivity {
 
     public static final String EXTRA_USERNAME = "username";
@@ -24,6 +26,8 @@ public class LoginActivity extends BaseActivity {
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD= "password";
     private static final String PREF_REMEMBER_INFO = "rememberInfo";
+    // volatile保证多线程内存可见性
+    private static volatile boolean receiveData = false;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -45,8 +49,6 @@ public class LoginActivity extends BaseActivity {
             String username = usernameEdit.getText().toString();
             String password = passwordEdit.getText().toString();
 
-            handleRememberInfo(username, password);
-
             new Thread(() -> {
                 JSONObject params = new JSONObject();
                 try {
@@ -59,16 +61,19 @@ public class LoginActivity extends BaseActivity {
                 String result = HttpUtils.post(LOGIN_URL, params);
                 try {
                     TokenUtils.setTokenFromResponse(result);
+                    receiveData = true;
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    return;
                 }
-                LoginActivity.this.runOnUiThread(() -> {
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.putExtra(EXTRA_USERNAME, username);
-                    startActivity(intent);
-                });
             }).start();
+            // 采用乐观锁防止启动多次MainActivity
+            while (!receiveData) {
+
+            }
+            handleRememberInfo(username, password);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra(EXTRA_USERNAME, username);
+            startActivity(intent);
         });
     }
 
@@ -80,6 +85,7 @@ public class LoginActivity extends BaseActivity {
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
         loginButton = findViewById(R.id.login_button);
+        receiveData = false;
     }
 
     private void autoFillForm() {
