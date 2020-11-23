@@ -210,18 +210,29 @@
                     android:textSize="12sp"
                     />
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:drawablePadding="5dp"
-                    android:drawableTop="@mipmap/my_history"
-                    android:gravity="center"
-                    android:text="@string/my_history"
-                    android:textColor="@color/margin_color"
-                    android:textSize="12sp"
-                    />
+                    android:layout_weight="1">
+                    <ImageButton
+                        android:id="@+id/history_news_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/my_history"
+                        android:background="#00FF0000">
+                    </ImageButton>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_below="@+id/history_news_button"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/my_history"
+                        android:textColor="@color/margin_color"
+                        android:textSize="12sp">
+                    </TextView>
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="0dp"

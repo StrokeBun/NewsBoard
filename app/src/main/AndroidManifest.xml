@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/board"
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoBoard">
+        <activity android:name=".ui.activity.HistoryActivity"></activity>
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

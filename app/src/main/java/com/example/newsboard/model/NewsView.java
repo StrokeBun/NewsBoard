@@ -27,6 +27,10 @@ public class NewsView {
         this(news, type, 0);
     }
 
+    public NewsView(News news) {
+        this(news, 0, 0);
+    }
+
     @Override
     public String toString() {
         return "News{" +

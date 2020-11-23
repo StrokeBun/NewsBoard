@@ -42,8 +42,9 @@ public class ArticleActivity extends BaseActivity {
         super.onStart();
         if (TokenUtils.isEmptyToken()) {
             startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            initArticle();
         }
-        initArticle();
     }
 
     private void init()  {
@@ -61,6 +62,7 @@ public class ArticleActivity extends BaseActivity {
         setAuthor(news.getAuthor());
         setPunishedTime(news.getPublishTime());
         setContent(news.getId(), true);
+        HistoryActivity.addHistoryNews(news);
     }
 
     private void setContent(String content) {

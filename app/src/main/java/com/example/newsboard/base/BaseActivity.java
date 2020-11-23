@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.newsboard.ui.activity.HistoryActivity;
 import com.example.newsboard.ui.activity.LoginActivity;
 import com.example.newsboard.ui.fragment.MineFragment;
 import com.example.newsboard.util.TokenUtils;
@@ -63,8 +64,7 @@ public class BaseActivity extends AppCompatActivity {
             builder.setMessage("退出当前账号，将无法进行评论和收藏");
             builder.setCancelable(true);
             builder.setPositiveButton("确认退出", (dialog, which) -> {
-                ActivityController.finishAll();
-                TokenUtils.clearToken();
+                clear();
                 context.startActivity(new Intent(context, LoginActivity.class));
             });
 
@@ -73,5 +73,11 @@ public class BaseActivity extends AppCompatActivity {
             });
             builder.show();
         }
+    }
+
+    private static void clear() {
+        ActivityController.finishAll();
+        TokenUtils.clearToken();
+        HistoryActivity.clearHistoryNews();
     }
 }

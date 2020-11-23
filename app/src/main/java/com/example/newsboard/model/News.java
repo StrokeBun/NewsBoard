@@ -1,5 +1,7 @@
 package com.example.newsboard.model;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 /**
@@ -32,6 +34,29 @@ public class News implements Serializable {
                 ", author='" + author + '\'' +
                 ", publishTime='" + publishTime + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof News) {
+            boolean result = false;
+            result = this.id.equals( ((News) obj).getId())
+                    && this.author.equals(((News) obj).getAuthor())
+                    && this.title.equals(((News) obj).getTitle())
+                    && this.publishTime.equals(((News) obj).publishTime);
+            return result;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = id.hashCode();
+        hash = hash*31  + author.hashCode();
+        hash = hash*31 + title.hashCode();
+        hash = hash*31 + publishTime.hashCode();
+        return hash;
     }
 
     public String getTitle() {

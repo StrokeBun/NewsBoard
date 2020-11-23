@@ -17,8 +17,6 @@ import com.example.newsboard.util.TokenUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import scut.carson_ho.kawaii_loadingview.Kawaii_LoadingView;
-
 public class LoginActivity extends BaseActivity {
 
     public static final String EXTRA_USERNAME = "username";
