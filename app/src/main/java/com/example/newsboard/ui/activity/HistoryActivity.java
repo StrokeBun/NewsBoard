@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class HistoryActivity extends BaseActivity {
 
-    private static final int HISTORY_NEWS_MAX_NUM = 3;
+    private static final int HISTORY_NEWS_MAX_NUM = 5;
     // 使用LinkedHashMap实现历史记录(类似LRU)
     private static LinkedHashMap<News, Integer> historyNews;
     private List<NewsView> newsViewList;
@@ -64,7 +64,7 @@ public class HistoryActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void fuckClick(View view){
+    public void historyNewsClick(View view){
         int position = recyclerView.getChildAdapterPosition(view);
         NewsView newsView = newsViewList.get(position);
         News news = newsView.getNews();

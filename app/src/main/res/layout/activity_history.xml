@@ -6,9 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.HistoryActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/history_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints" >
+        <TextView
+            android:id="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/my_history"
+            android:textSize="26sp">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/history_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/history"/>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
