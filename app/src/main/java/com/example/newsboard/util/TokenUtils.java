@@ -22,7 +22,7 @@ public final class TokenUtils {
     private static final String REQUEST_HEADER_AUTHORIZATION_KEY = "Authorization";
     // http请求头中token前缀
     private static final String AUTHORIZATION_TOKEN_PREFIX = "Bearer ";
-
+    // 本地未存储token的默认值
     private static final String NO_TOKEN = "";
     private static String token = NO_TOKEN;
 

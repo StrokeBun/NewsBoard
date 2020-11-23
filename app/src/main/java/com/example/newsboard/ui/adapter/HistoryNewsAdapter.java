@@ -34,21 +34,11 @@ public class HistoryNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private static class ViewHolderFactory {
-        private static RecyclerView.ViewHolder getInstance(View view) {
-            return new TypeHistory(view);
-        }
-
-        private ViewHolderFactory() {
-
-        }
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.type_history, null, false);
-        return ViewHolderFactory.getInstance(view);
+        return new TypeHistory(view);
     }
 
     @Override

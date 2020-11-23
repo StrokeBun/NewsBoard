@@ -17,7 +17,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/publish_message"
@@ -25,14 +25,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:textSize="12sp"/>
+
+        <View
+            android:id = "@+id/margin"
+            android:layout_below="@+id/publish_message"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentLeft="true"
+            android:background="#E8E8E8" />
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_alignParentLeft="true"
-        android:background="#E8E8E8" />
 </RelativeLayout>

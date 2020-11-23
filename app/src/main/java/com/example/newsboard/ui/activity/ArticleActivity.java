@@ -2,6 +2,7 @@ package com.example.newsboard.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.newsboard.R;
@@ -11,6 +12,7 @@ import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.StringUtils;
 import com.example.newsboard.util.TokenUtils;
 
+import com.zzhoujay.glideimagegetter.GlideImageGetter;
 import com.zzhoujay.richtext.RichText;
 
 
@@ -22,7 +24,9 @@ import java.util.Map;
 
 public class ArticleActivity extends BaseActivity {
 
+    // 请求文章的http url
     private static final String ARTICLE_URL = "https://vcapi.lvdaqian.cn/article/";
+    // 请求markdown格式文章的http url后缀
     private static final String MARKDOWN_ARTICLE_URL_SUFFIX = "?markdown=true";
 
     private TextView titleTextView = null;
@@ -43,7 +47,11 @@ public class ArticleActivity extends BaseActivity {
         if (TokenUtils.isEmptyToken()) {
             startActivity(new Intent(this, LoginActivity.class));
         } else {
-            initArticle();
+            Intent intent = getIntent();
+            News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
+            initArticle(news);
+            // 在浏览历史中添加此文章
+            HistoryActivity.addHistoryNews(news);
         }
     }
 
@@ -55,14 +63,11 @@ public class ArticleActivity extends BaseActivity {
         contentTextView = findViewById(R.id.article_content);
     }
 
-    private void initArticle() {
-        Intent intent = getIntent();
-        News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
+    private void initArticle(News news) {
         setTitle(news.getTitle());
         setAuthor(news.getAuthor());
         setPunishedTime(news.getPublishTime());
         setContent(news.getId(), true);
-        HistoryActivity.addHistoryNews(news);
     }
 
     private void setContent(String content) {
@@ -73,12 +78,12 @@ public class ArticleActivity extends BaseActivity {
         new Thread(() -> {
             String url = ARTICLE_URL + id;
             url = isMarkdownFormat? url+MARKDOWN_ARTICLE_URL_SUFFIX:url;
+            Map<String, String> header = TokenUtils.getAuthorizationHeader();
+            String response = HttpUtils.get(url, header);
+            if (response == null) {
+                return;
+            }
             try {
-                Map<String, String> header = TokenUtils.getAuthorizationHeader();
-                String response = HttpUtils.get(url, header);
-                if (response == null) {
-                    return;
-                }
                 JSONObject jsonObject = new JSONObject(response);
                 String content = (String) jsonObject.get("data");
                 content = StringUtils.handleMarkdown(content);
@@ -90,11 +95,11 @@ public class ArticleActivity extends BaseActivity {
     }
 
     private void loadArticle(String content, boolean isMarkdownFormat) {
-        // 只有主线程能渲染TextView
+        // 在UI线程渲染文本
         if (isMarkdownFormat) {
             ArticleActivity.this.runOnUiThread(() -> RichText.fromMarkdown(content).into(contentTextView));
-        }
-        else {
+            Log.e("ok", "ok");
+        } else {
             ArticleActivity.this.runOnUiThread(() -> setContent(content));
         }
     }
@@ -107,8 +112,6 @@ public class ArticleActivity extends BaseActivity {
         authorTextView.setText(author);
     }
 
-    private void setPunishedTime(String punishedTime) {
-        punishedTimeTextView.setText(punishedTime);
-    }
+    private void setPunishedTime(String punishedTime) { punishedTimeTextView.setText(punishedTime); }
 
 }

@@ -18,15 +18,25 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/my_history"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="26sp">
         </TextView>
+
+        <View
+            android:id = "@+id/margin"
+            android:layout_below="@+id/history"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentLeft="true"
+            android:background="#E8E8E8" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
-            android:layout_below="@+id/history"/>
+            android:layout_below="@+id/margin"/>
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,11 @@
 package com.example.newsboard.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.newsboard.R;
@@ -15,14 +13,9 @@ import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
 import com.example.newsboard.ui.adapter.HistoryNewsAdapter;
-import com.example.newsboard.ui.adapter.NewsAdapter;
-import com.example.newsboard.ui.fragment.HomeFragment;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 

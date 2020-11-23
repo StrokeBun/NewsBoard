@@ -4,15 +4,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * <pre>
- *     author : zdf
- *     time   : 2020/11/21
- * </pre>
+ * @Title: StringUtils
+ * @Package: util
+ * @Description: String工具类，用于处理markdown文本
+ * @author: Zhong Defeng
+ * @date: 2020/11/19 15:32
  */
 public final class StringUtils {
+    // 本地图片存储路径
     private static final String LOCAL_IMG_URL_PREFIX = "\n![](file:///android_asset/img/";
+    // 匹配markdown图片的正则表达式
     private static final String IMG_PATTERN = "\n.*?(!\\[\\s*(.*?)\\s*]\\(\\s*(\\S*?)(\\s+(['\"])(.*?)\\5)?\\s*?\\))";
 
+    /** 将markdown文本中的图片路径映射到本地
+     * @param str markdown文本
+     * @return 处理后的markdown文本
+     */
     public static String handleMarkdown(String str) {
         Matcher matcherImage = Pattern.compile(IMG_PATTERN).matcher(str);
         StringBuilder result = new StringBuilder(str);
@@ -31,6 +38,11 @@ public final class StringUtils {
         return result.toString();
     }
 
+    /**
+     * 去除字符串中的下划线
+     * @param str 待处理字符串
+     * @return 处理后的字符串
+     */
     private static String removeUnderline(String str) {
         String[] arr = str.split("_");
         StringBuilder sb = new StringBuilder();

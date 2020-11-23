@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment {
     private static RecyclerView recyclerView;
     public static Context context;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

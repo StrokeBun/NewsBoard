@@ -19,11 +19,16 @@ import org.json.JSONObject;
 
 public class LoginActivity extends BaseActivity {
 
+    // 传递给MainActivity的Intent中用户名对应的key
     public static final String EXTRA_USERNAME = "username";
+
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
+
+    // SharedPreferences存储用户名、密码、记住密码对应的key
     private static final String PREF_USERNAME = "username";
     private static final String PREF_PASSWORD= "password";
     private static final String PREF_REMEMBER_INFO = "rememberInfo";
+
     // volatile保证多线程内存可见性
     private static volatile boolean receiveData = false;
 
@@ -64,7 +69,8 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }).start();
-            // 采用乐观锁防止启动多次MainActivity
+
+            // 采用自旋防止用户多次点击登录启动多个 MainActivity
             while (!receiveData) {
 
             }
@@ -94,6 +100,7 @@ public class LoginActivity extends BaseActivity {
         rememberPassword.setChecked(true);
     }
 
+    // 存储账号、密码
     private void handleRememberInfo(String username, String password) {
         if (rememberPassword.isChecked()) {
             editor.putString(PREF_USERNAME, username);

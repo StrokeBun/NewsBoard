@@ -26,17 +26,7 @@ public class MineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
-
-        ImageButton logoutButton = root.findViewById(R.id.logout_button);
-        logoutButton.setOnClickListener(view -> {
-            Intent intent = new Intent(ACTION_LOGOUT);
-            getActivity().sendBroadcast(intent);
-        });
-
-        ImageButton historyButton = root.findViewById(R.id.history_news_button);
-        historyButton.setOnClickListener(view -> {
-            startActivity(new Intent(getActivity(), HistoryActivity.class));
-        });
+        init(root);
 
         // 未登录则跳转到登录页面
         if (TokenUtils.isEmptyToken()) {
@@ -50,6 +40,19 @@ public class MineFragment extends Fragment {
             }
         }
         return root;
+    }
+
+    private void init(View root) {
+        ImageButton logoutButton = root.findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(view -> {
+            Intent intent = new Intent(ACTION_LOGOUT);
+            getActivity().sendBroadcast(intent);
+        });
+
+        ImageButton historyButton = root.findViewById(R.id.history_news_button);
+        historyButton.setOnClickListener(view -> {
+            startActivity(new Intent(getActivity(), HistoryActivity.class));
+        });
     }
 
 }

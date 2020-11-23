@@ -6,28 +6,26 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/news_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/news_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/news_text"
-            android:layout_centerVertical="true" />
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@id/news_text"/>
 
         <TextView
             android:id="@+id/publish_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/news_image"
+            android:layout_marginBottom="5dp"
             android:textSize="15sp" />
 
     </RelativeLayout>
