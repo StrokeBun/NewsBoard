@@ -12,7 +12,7 @@ import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
-import com.example.newsboard.ui.adapter.HistoryNewsAdapter;
+import com.example.newsboard.ui.adapter.NewsAdapter;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -53,7 +53,7 @@ public class HistoryActivity extends BaseActivity {
                 .map(news -> new NewsView(news))
                 .collect(Collectors.toList());
         Collections.reverse(newsViewList);
-        HistoryNewsAdapter adapter = new HistoryNewsAdapter(newsViewList);
+        NewsAdapter adapter = new NewsAdapter(newsViewList);
         recyclerView.setAdapter(adapter);
     }
 

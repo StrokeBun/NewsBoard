@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,8 +77,7 @@ public class HomeFragment extends Fragment {
          * @return: void
          * @Date: 2020/11/15
          */
-        try {
-            InputStream inputStream = getResources().getAssets().open("metadata.json");
+        try (InputStream inputStream = getResources().getAssets().open("metadata.json")) {
             int length = inputStream.available();
             byte[] buffer = new byte[length];
             inputStream.read(buffer);
@@ -116,20 +114,21 @@ public class HomeFragment extends Fragment {
                     String covers = jsonObject.getString("covers");
                 } else{
                     String cover = jsonObject.getString("cover");
+                    NewsView newsView = null;
                     switch (cover){
                         case "tancheng":
-                            NewsView newsView = new NewsView(news, type, R.drawable.tancheng);
-                            newsViewList.add(newsView);
+                            newsView = new NewsView(news, type, R.drawable.tancheng);
                             break;
                         case "event_02":
-                            NewsView newsView1 = new NewsView(news, type, R.drawable.event_02);
-                            newsViewList.add(newsView1);
+                            newsView = new NewsView(news, type, R.drawable.event_02);
                             break;
                         case "teambuilding_04":
-                            NewsView newsView2 = new NewsView(news, type, R.drawable.teambuilding);
-                            newsViewList.add(newsView2);
+                            newsView = new NewsView(news, type, R.drawable.teambuilding);
                             break;
                         default:
+                    }
+                    if (newsView != null) {
+                        newsViewList.add(newsView);
                     }
                 }
             }

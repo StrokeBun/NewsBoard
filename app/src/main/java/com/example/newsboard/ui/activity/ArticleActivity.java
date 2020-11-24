@@ -12,7 +12,6 @@ import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.StringUtils;
 import com.example.newsboard.util.TokenUtils;
 
-import com.zzhoujay.glideimagegetter.GlideImageGetter;
 import com.zzhoujay.richtext.RichText;
 
 
@@ -95,7 +94,6 @@ public class ArticleActivity extends BaseActivity {
     }
 
     private void loadArticle(String content, boolean isMarkdownFormat) {
-        // 在UI线程渲染文本
         if (isMarkdownFormat) {
             ArticleActivity.this.runOnUiThread(() -> RichText.fromMarkdown(content).into(contentTextView));
             Log.e("ok", "ok");

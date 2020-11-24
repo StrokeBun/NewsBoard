@@ -1,7 +1,5 @@
 package com.example.newsboard.model;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @Title: NewsView
  * @Package: model
@@ -28,7 +26,7 @@ public class NewsView {
     }
 
     public NewsView(News news) {
-        this(news, 0, 0);
+        this(news, 5, 0);
     }
 
     @Override

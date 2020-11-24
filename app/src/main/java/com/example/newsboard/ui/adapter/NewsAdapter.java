@@ -32,6 +32,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_TWO = 2;
     private static final int TYPE_THREE = 3;
     private static final int TYPE_FOUR = 4;
+    private static final int TYPE_HISTORY = 5;
     private static final Map<Integer, Integer> typeLayoutMap = new HashMap<Integer, Integer>(){
         {
             put(TYPE_ZERO, R.layout.type_zero);
@@ -39,6 +40,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             put(TYPE_TWO, R.layout.type_two);
             put(TYPE_THREE, R.layout.type_three);
             put(TYPE_FOUR, R.layout.type_four);
+            put(TYPE_HISTORY, R.layout.type_history);
         }
     };
 
@@ -48,47 +50,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mNewsViewList = newsViewList;
     }
 
-    private static class TypeBase extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        TextView newsText;
-        TextView publishText;
-
-        public TypeBase(@NonNull View itemView) {
-            super(itemView);
-            newsText = (TextView) itemView.findViewById(R.id.news_text);
-            publishText = (TextView) itemView.findViewById(R.id.publish_message);
-        }
-    }
-
-    private static class Type_Zero extends TypeBase {
-        public Type_Zero(@NonNull View itemView) {
-            super(itemView);
-        }
-    }
-
-    private static class Type_Com extends TypeBase {  // type 1 & 2 & 3
-        ImageView newImage;
-
-        public Type_Com(@NonNull View itemView) {
-            super(itemView);
-            newImage = (ImageView) itemView.findViewById(R.id.news_image);
-        }
-    }
-
-    private static class Type_Four extends TypeBase {
-        ImageView newsImage;
-        ImageView newsImage1;
-        ImageView newsImage2;
-        ImageView newsImage3;
-
-        public Type_Four(@NonNull View itemView) {
-            super(itemView);
-            newsImage = (ImageView) itemView.findViewById(R.id.news_image);
-            newsImage1 = (ImageView) itemView.findViewById(R.id.news_image1);
-            newsImage2 = (ImageView) itemView.findViewById(R.id.news_image2);
-            newsImage3 = (ImageView) itemView.findViewById(R.id.news_image3);
-        }
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -96,51 +57,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return ViewHolderFactory.getInstance(view, viewType);
     }
 
-    private static class ViewHolderFactory{
-        private static RecyclerView.ViewHolder getInstance(View view,int viewType) {
-            RecyclerView.ViewHolder holder = null;
-            switch (viewType) {
-                case TYPE_ZERO:
-                    holder = new Type_Zero(view);
-                    break;
-                case TYPE_ONE:
-                case TYPE_TWO:
-                case TYPE_THREE:
-                    holder = new Type_Com(view);
-                    break;
-                case TYPE_FOUR:
-                    holder = new Type_Four(view);
-                    break;
-                default:
-                    break;
-            }
-            return holder;
-        }
-
-        private ViewHolderFactory() {
-
-        }
-    }
-
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         NewsView newsView = mNewsViewList.get(position);
-        String title = newsView.getNews().getTitle();
-        if (holder instanceof Type_Zero) {
-            ((Type_Zero) holder).newsText.setText(title);
-            ((Type_Zero) holder).publishText.setText(newsView.getPublishMessage());
-        } else if (holder instanceof Type_Four) {
-            ((Type_Four) holder).newsText.setText(title);
-            ((Type_Four) holder).publishText.setText(newsView.getPublishMessage());
-            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122205843681.jpeg").into(((Type_Four) holder).newsImage);
-            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213841886.jpeg").into(((Type_Four) holder).newsImage1);
-            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/2020112221392235.jpeg").into(((Type_Four) holder).newsImage2);
-            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213943681.jpeg").into(((Type_Four) holder).newsImage3);
-        } else if (holder instanceof Type_Com) {
-            ((Type_Com) holder).newsText.setText(title);
-            ((Type_Com) holder).publishText.setText(newsView.getPublishMessage());
-            ((Type_Com) holder).newImage.setImageResource(newsView.getCover());
-        }
+        ((BaseType) holder).load(newsView);
     }
 
     @Override
@@ -161,10 +81,120 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return TYPE_THREE;
             case 4:
                 return TYPE_FOUR;
+            case 5:
+                return TYPE_HISTORY;
             default:
         }
         return super.getItemViewType(position);
     }
 
+    /**
+     * 各种新闻排版的基类
+     */
+    private static class BaseType extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
+        TextView newsText;
+        TextView publishText;
+
+        public BaseType(@NonNull View itemView) {
+            super(itemView);
+            newsText = itemView.findViewById(R.id.news_text);
+            publishText = itemView.findViewById(R.id.publish_message);
+        }
+
+        /**
+         * 加载资源，继承BaseType的类需要override此方法
+         * @param newsView 新闻排版数据
+         */
+        public void load(NewsView newsView) {
+            newsText.setText(newsView.getNews().getTitle());
+            publishText.setText(newsView.getPublishMessage());
+        }
+    }
+
+    private static class TypeZero extends BaseType {
+        public TypeZero(@NonNull View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        public void load(NewsView newsView) {
+            super.load(newsView);
+        }
+    }
+
+    private static class TypeCom extends BaseType {  // type 1 & 2 & 3
+        ImageView newImage;
+
+        public TypeCom(@NonNull View itemView) {
+            super(itemView);
+            newImage = itemView.findViewById(R.id.news_image);
+        }
+
+        @Override
+        public void load(NewsView newsView) {
+            super.load(newsView);
+            newImage.setImageResource(newsView.getCover());
+        }
+    }
+
+    private static class TypeFour extends BaseType {
+        ImageView newsImage;
+        ImageView newsImage1;
+        ImageView newsImage2;
+        ImageView newsImage3;
+
+        public TypeFour(@NonNull View itemView) {
+            super(itemView);
+            newsImage = itemView.findViewById(R.id.news_image);
+            newsImage1 = itemView.findViewById(R.id.news_image1);
+            newsImage2 = itemView.findViewById(R.id.news_image2);
+            newsImage3 = itemView.findViewById(R.id.news_image3);
+        }
+
+        @Override
+        public void load(NewsView newsView) {
+            super.load(newsView);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122205843681.jpeg").into(newsImage);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213841886.jpeg").into(newsImage1);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/2020112221392235.jpeg").into(newsImage2);
+            Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213943681.jpeg").into(newsImage3);
+        }
+    }
+
+    private static class TypeHistory extends BaseType {
+
+        public TypeHistory(@NonNull View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        public void load(NewsView newsView) {
+            super.load(newsView);
+        }
+    }
+
+    private static class ViewHolderFactory{
+        private static RecyclerView.ViewHolder getInstance(View view,int viewType) {
+            RecyclerView.ViewHolder holder = null;
+            switch (viewType) {
+                case TYPE_ZERO:
+                    holder = new TypeZero(view);
+                    break;
+                case TYPE_ONE:
+                case TYPE_TWO:
+                case TYPE_THREE:
+                    holder = new TypeCom(view);
+                    break;
+                case TYPE_FOUR:
+                    holder = new TypeFour(view);
+                    break;
+                case TYPE_HISTORY:
+                    holder = new TypeHistory(view);
+                default:
+                    break;
+            }
+            return holder;
+        }
+    }
 
 }

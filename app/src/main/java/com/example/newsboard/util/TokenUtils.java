@@ -2,9 +2,6 @@ package com.example.newsboard.util;
 
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
-import com.example.newsboard.ui.activity.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

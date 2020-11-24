@@ -15,7 +15,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/board"
         android:supportsRtl="true"
-        android:theme="@style/Theme.InfoBoard">
+        android:theme="@style/Theme.NewsBoard">
         <activity android:name=".ui.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

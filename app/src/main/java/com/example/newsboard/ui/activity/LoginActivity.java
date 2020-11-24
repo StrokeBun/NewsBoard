@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(view -> {
             String username = usernameEdit.getText().toString();
             String password = passwordEdit.getText().toString();
-
+            
             new Thread(() -> {
                 JSONObject params = new JSONObject();
                 try {
@@ -100,7 +100,7 @@ public class LoginActivity extends BaseActivity {
         rememberPassword.setChecked(true);
     }
 
-    // 存储账号、密码
+    // 存储用户名、密码
     private void handleRememberInfo(String username, String password) {
         if (rememberPassword.isChecked()) {
             editor.putString(PREF_USERNAME, username);

@@ -2,11 +2,9 @@ package com.example.newsboard.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -35,20 +33,20 @@ public class MineFragment extends Fragment {
             TextView usernameTextView = root.findViewById(R.id.username_text_view);
             Intent intent = getActivity().getIntent();
             String username = intent.getStringExtra(LoginActivity.EXTRA_USERNAME);
-            if (username != null) {
-                usernameTextView.setText(username);
-            }
+            usernameTextView.setText(username);
         }
         return root;
     }
 
     private void init(View root) {
+        // 退出按钮
         ImageButton logoutButton = root.findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(view -> {
             Intent intent = new Intent(ACTION_LOGOUT);
             getActivity().sendBroadcast(intent);
         });
 
+        // 浏览历史按钮
         ImageButton historyButton = root.findViewById(R.id.history_news_button);
         historyButton.setOnClickListener(view -> {
             startActivity(new Intent(getActivity(), HistoryActivity.class));

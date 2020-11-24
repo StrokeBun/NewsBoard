@@ -73,11 +73,11 @@ public class BaseActivity extends AppCompatActivity {
             });
             builder.show();
         }
-    }
 
-    private static void clear() {
-        ActivityController.finishAll();
-        TokenUtils.clearToken();
-        HistoryActivity.clearHistoryNews();
+        private void clear() {
+            ActivityController.finishAll();
+            TokenUtils.clearToken();
+            HistoryActivity.clearHistoryNews();
+        }
     }
 }
