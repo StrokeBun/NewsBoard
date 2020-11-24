@@ -69,6 +69,7 @@ public final class TokenUtils {
 
     public static void initTokenUtils(SharedPreferences aPref) {
         pref = aPref;
+        clearToken();
     }
 
     private static String getToken() {

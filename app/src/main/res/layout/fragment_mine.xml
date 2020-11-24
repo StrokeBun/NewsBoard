@@ -37,7 +37,6 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Stroke"
                 android:textColor="@color/black"
                 android:textSize="16.0sp" />
 
