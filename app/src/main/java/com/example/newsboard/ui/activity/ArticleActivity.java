@@ -45,7 +45,8 @@ public class ArticleActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        setContentView(R.layout.activity_article);
+        initComponents();
     }
 
     @Override
@@ -62,8 +63,10 @@ public class ArticleActivity extends BaseActivity {
         }
     }
 
-    private void init()  {
-        setContentView(R.layout.activity_article);
+    /**
+     * 初始化组件
+     */
+    private void initComponents()  {
         titleTextView = findViewById(R.id.article_title);
         authorTextView = findViewById(R.id.article_author);
         punishedTimeTextView = findViewById(R.id.publish_time);

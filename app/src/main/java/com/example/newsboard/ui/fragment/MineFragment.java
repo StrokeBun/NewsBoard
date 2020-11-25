@@ -40,7 +40,8 @@ public class MineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
-        init(root);
+        logoutButton = root.findViewById(R.id.logout_button);
+        initComponents(root);
 
         if (TokenUtils.isNotLogin()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
@@ -52,10 +53,9 @@ public class MineFragment extends Fragment {
 
     /**
      * 初始化组件
-     * @param root 视图
+     * @param root 根视图
      */
-    private void init(View root) {
-        logoutButton = root.findViewById(R.id.logout_button);
+    private void initComponents(View root) {
         logoutButton.setOnClickListener(view -> {
             Intent intent = new Intent(ACTION_LOGOUT);
             getActivity().sendBroadcast(intent);

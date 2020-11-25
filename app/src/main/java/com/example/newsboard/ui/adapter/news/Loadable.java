@@ -12,5 +12,7 @@ import com.example.newsboard.model.NewsView;
  * </pre>
  */
 interface Loadable {
-    void load(NewsView newsView);
+    default void load(NewsView newsView) {
+
+    }
 }

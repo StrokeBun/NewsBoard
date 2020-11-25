@@ -52,12 +52,12 @@ public class StartActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 设置主页逐渐出现
-                for (int i = 0; i <= 20; i++) {
-                    Float alpha = 0.05F * i;
-                    textView.setAlpha(alpha);
-                    imageView.setAlpha(alpha);
-                    Thread.sleep(100);
-                }
+//                for (int i = 0; i <= 20; i++) {
+//                    Float alpha = 0.05F * i;
+//                    textView.setAlpha(alpha);
+//                    imageView.setAlpha(alpha);
+//                    Thread.sleep(100);
+//                }
                 Thread.sleep(500);
                 startActivity(new Intent(this, MainActivity.class));
             } catch (InterruptedException e) {

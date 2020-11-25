@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.R;
@@ -29,15 +30,17 @@ public class LoginActivity extends BaseActivity {
 
     // 传递给MainActivity的Intent中用户名对应的key
     public static final String EXTRA_USERNAME = "username";
-
+    // 用户登录获取token的http url
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
 
-    // SharedPreferences存储用户名、密码、记住密码对应的key
+    // SharedPreferences存储用户名对应的key
     private static final String PREF_USERNAME = "username";
+    // SharedPreferences存储密码对应的key
     private static final String PREF_PASSWORD= "password";
+    // SharedPreferences存储记住密码对应的key
     private static final String PREF_REMEMBER_INFO = "rememberInfo";
 
-    // volatile保证多线程内存可见性
+    // 是否已经获取token，true则跳转到MainActivity，使用volatile保证多线程内存可见性
     private static volatile boolean receiveData = false;
 
     private SharedPreferences pref;
@@ -46,41 +49,45 @@ public class LoginActivity extends BaseActivity {
     private EditText passwordEdit;
     private CheckBox rememberPassword;
     private Button loginButton;
+    private TextView loadingText;
+
+    private String username;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        setContentView(R.layout.activity_login);
+        initComponents();
+
         boolean isRemember = pref.getBoolean(PREF_REMEMBER_INFO, false);
         // 勾选了记住密码则自动填写表单
         if (isRemember) {
             autoFillForm();
         }
 
-        loginButton.setOnClickListener(view -> {
-            String username = usernameEdit.getText().toString();
-            String password = passwordEdit.getText().toString();
-            AsyncGetToken(username, password);
+        username = usernameEdit.getText().toString();
+        password = passwordEdit.getText().toString();
 
-            // 采用自旋防止用户多次点击登录启动多个Activity
-            while (!receiveData);
-
-            saveRememberInfo(username, password);
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra(EXTRA_USERNAME, username);
-            startActivity(intent);
-        });
     }
 
-    private void init() {
-        setContentView(R.layout.activity_login);
+    /**
+     * 初始化组件
+     */
+    private void initComponents() {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
         usernameEdit = findViewById(R.id.username);
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
-        loginButton = findViewById(R.id.login_button);
+        loadingText = findViewById(R.id.loading_text);
         receiveData = false;
+
+        loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(view -> {
+            AsyncGetToken();
+            createLoadingAnimation();
+        });
     }
 
     /**
@@ -97,7 +104,7 @@ public class LoginActivity extends BaseActivity {
     /**
      * 异步获取token
      */
-    private void AsyncGetToken(String username, String password) {
+    private void AsyncGetToken() {
         new Thread(() -> {
             JSONObject params = new JSONObject();
             try {
@@ -115,6 +122,38 @@ public class LoginActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    /**
+     * 产生加载动画
+     */
+    private void createLoadingAnimation() {
+        new Thread(() -> {
+            loadingText.setAlpha(1.0F);
+            final String[] loadingStr = {"Loading.", "Loading..", "Loading..."};
+            int i = 0;
+            // 使用自旋防止用户点击多次登录在栈中压入多个Activity
+            while (!receiveData) {
+                int index= i++ % 3;
+                this.runOnUiThread(() -> loadingText.setText(loadingStr[index]));
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            jumpToMainActivity();
+        }).start();
+    }
+
+    /**
+     * 跳转到主页
+     */
+    private void jumpToMainActivity() {
+        saveRememberInfo(username, password);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(EXTRA_USERNAME, username);
+        startActivity(intent);
     }
 
     /**
