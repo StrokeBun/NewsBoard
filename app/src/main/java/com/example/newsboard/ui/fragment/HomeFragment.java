@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
         newsViewList.clear();
         try {
             JSONArray jsonArray = new JSONArray(content);
-            for(int i = 0; i < jsonArray.length(); i++){
+            for(int i = 0, len = jsonArray.length(); i < len; i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String id = jsonObject.getString("id");
                 String title = jsonObject.getString("title");

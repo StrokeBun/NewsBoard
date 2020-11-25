@@ -15,7 +15,7 @@
             android:layout_height="80dp"
             android:layout_toRightOf="@id/news_image"
             android:gravity="center_vertical"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/news_image"

@@ -12,13 +12,15 @@
             android:id="@+id/news_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/news_image"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_below="@id/news_text"/>
+            android:layout_height="250dp"
+            android:layout_below="@id/news_text"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/publish_message"

@@ -323,7 +323,7 @@
                     android:drawablePadding="5dp"
                     android:drawableTop="@mipmap/advertisement"
                     android:gravity="center"
-                    android:text="我的下载"
+                    android:text="@string/advertisement"
                     android:textColor="@color/margin_color"
                     android:textSize="12sp"
                     />
