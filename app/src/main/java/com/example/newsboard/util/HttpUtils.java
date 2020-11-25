@@ -14,11 +14,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * @Title: HttpUtils
- * @Package: util
- * @Description: http工具类，发送get、post请求并获取http响应
- * @author: Zhong Defeng
- * @date: 2020/11/17 20:57
+ * <pre>
+ *     author : Zhong DeFeng
+ *     e-mail : 1756809298@qq.com
+ *     time   : 2020/11/17 20:57
+ *     desc   : http工具类，支持get、set请求
+ *     version: 1.0
+ * </pre>
  */
 public final class HttpUtils {
 

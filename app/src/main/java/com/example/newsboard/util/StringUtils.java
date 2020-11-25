@@ -4,11 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Title: StringUtils
- * @Package: util
- * @Description: String工具类，用于处理markdown文本
- * @author: Zhong Defeng
- * @date: 2020/11/19 15:32
+ * <pre>
+ *     author : Zhong DeFeng
+ *     e-mail : 1756809298@qq.com
+ *     time   : 2020/11/19 15:32
+ *     desc   : 字符串工具类
+ *     version: 1.0
+ * </pre>
  */
 public final class StringUtils {
     // 本地图片存储路径
@@ -17,8 +19,8 @@ public final class StringUtils {
     private static final String IMG_PATTERN = "\n.*?(!\\[\\s*(.*?)\\s*]\\(\\s*(\\S*?)(\\s+(['\"])(.*?)\\5)?\\s*?\\))";
 
     /** 将markdown文本中的图片路径映射到本地
-     * @param str markdown文本
-     * @return 处理后的markdown文本
+     * @param str 未进行路径映射markdown文本字符串
+     * @return 路径映射后后的markdown文本字符串
      */
     public static String handleMarkdown(String str) {
         Matcher matcherImage = Pattern.compile(IMG_PATTERN).matcher(str);
@@ -31,7 +33,7 @@ public final class StringUtils {
             sb.append(imgUrl);
             sb.append(")");
             result.replace(matcherImage.start()+offset, matcherImage.end()+offset, sb.toString());
-            // 计算replace后两字符串的长度偏差
+            // 计算替换前后字符串的长度偏差
             String origin = matcherImage.group(0);
             offset = offset + sb.length() - origin.length();
         }
@@ -40,8 +42,8 @@ public final class StringUtils {
 
     /**
      * 去除字符串中的下划线
-     * @param str 待处理字符串
-     * @return 处理后的字符串
+     * @param str 待去除下划线的字符串
+     * @return 去除下划线后的字符串
      */
     private static String removeUnderline(String str) {
         String[] arr = str.split("_");

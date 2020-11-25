@@ -14,12 +14,15 @@ import com.example.newsboard.ui.activity.LoginActivity;
 import com.example.newsboard.ui.fragment.MineFragment;
 import com.example.newsboard.util.TokenUtils;
 
+
 /**
- * @Title: BaseActivity
- * @Package: base
- * @Description: base activity, provide LogoutReceiver to handle logout action
- * @author: Zhong Defeng
- * @date: 2020/11/16 14:21
+ * <pre>
+ *     author : Zhong DeFeng
+ *     e-mail : 1756809298@qq.com
+ *     time   : 2020/11/16 14:21
+ *     desc   : 活动的基类，统一处理退出登录广播
+ *     version: 1.0
+ * </pre>
  */
 public class BaseActivity extends AppCompatActivity {
 
@@ -56,6 +59,9 @@ public class BaseActivity extends AppCompatActivity {
         ActivityController.removeActivity(this);
     }
 
+    /**
+     * 退出登录广播接收器
+     */
     static class LogoutReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -74,6 +80,9 @@ public class BaseActivity extends AppCompatActivity {
             builder.show();
         }
 
+        /**
+         * 清除Activity、token、浏览历史等数据，确认退出时调用
+         */
         private void clear() {
             ActivityController.finishAll();
             TokenUtils.clearToken();

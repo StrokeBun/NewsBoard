@@ -16,7 +16,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-
+/**
+ * <pre>
+ *     author : Su Songfeng
+ *     e-mail : 1986553865@qq.com
+ *     time   : 2020/11/16 18:05
+ *     desc   : 主页
+ *     version: 1.0
+ * </pre>
+ */
 public class MainActivity extends BaseActivity {
 
     @Override
@@ -32,6 +40,10 @@ public class MainActivity extends BaseActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    /**
+     * 新闻主页用户点击的处理方法，跳转到相应文章页面
+     * @param view View
+     */
     public void myItemClick(View view){
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
         NewsView newsView = HomeFragment.getNewsViewList().get(position);

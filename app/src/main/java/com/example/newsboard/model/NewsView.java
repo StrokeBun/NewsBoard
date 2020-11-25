@@ -1,11 +1,13 @@
 package com.example.newsboard.model;
 
 /**
- * @Title: NewsView
- * @Package: model
- * @Description: NewsView Model
- * @author: Susongfeng
- * @date: 2020/11/16 18:51
+ * <pre>
+ *     author : Su Songfeng
+ *     e-mail : 1986553865@qq.com
+ *     time   : 2020/11/16 18:51
+ *     desc   : NewsView Model
+ *     version: 1.0
+ * </pre>
  */
 public class NewsView {
 

@@ -5,11 +5,13 @@ import androidx.annotation.Nullable;
 import java.io.Serializable;
 
 /**
- * @Title: News
- * @Package: model
- * @Description: 新闻信息类
- * @author: Zhong Defeng
- * @date: 2020/11/17 20:57
+ * <pre>
+ *     author : Su Songfeng
+ *     e-mail : 1986553865@qq.com
+ *     time   : 2020/11/15 20:57
+ *     desc   : News information
+ *     version: 1.0
+ * </pre>
  */
 public class News implements Serializable {
 
@@ -40,12 +42,10 @@ public class News implements Serializable {
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof News) {
-
-            boolean result = this.id.equals( ((News) obj).getId())
+            return this.id.equals( ((News) obj).getId())
                     && this.author.equals(((News) obj).getAuthor())
                     && this.title.equals(((News) obj).getTitle())
                     && this.publishTime.equals(((News) obj).publishTime);
-            return result;
         } else {
             return false;
         }

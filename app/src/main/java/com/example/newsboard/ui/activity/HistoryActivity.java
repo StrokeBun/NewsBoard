@@ -12,17 +12,26 @@ import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
-import com.example.newsboard.ui.adapter.NewsAdapter;
+import com.example.newsboard.ui.adapter.news.NewsAdapter;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * <pre>
+ *     author : Zhong DeFeng
+ *     e-mail : 1756809298@qq.com
+ *     time   : 2020/11/24 20:57
+ *     desc   : 浏览历史页面活动
+ *     version: 1.0
+ * </pre>
+ */
 public class HistoryActivity extends BaseActivity {
-
+    // 浏览历史存储最大数量
     private static final int HISTORY_NEWS_MAX_NUM = 5;
-    // 使用LinkedHashMap实现历史记录(类似LRU)
+    // 使用LinkedHashMap存储历史记录(类似LRU)
     private static LinkedHashMap<News, Integer> historyNews;
     private List<NewsView> newsViewList;
     static {
@@ -57,6 +66,10 @@ public class HistoryActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * 浏览历史的点击处理方法，跳转到相应文章页面
+     * @param view View
+     */
     public void historyNewsClick(View view){
         int position = recyclerView.getChildAdapterPosition(view);
         NewsView newsView = newsViewList.get(position);
@@ -66,10 +79,17 @@ public class HistoryActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    /**
+     * 在浏览历史上添加新闻
+     * @param news 新闻
+     */
     public static void addHistoryNews(News news) {
         historyNews.put(news, historyNews.size());
     }
 
+    /**
+     * 清除浏览历史
+     */
     public static void clearHistoryNews() {
         historyNews.clear();
     }

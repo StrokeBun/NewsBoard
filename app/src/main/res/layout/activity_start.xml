@@ -25,7 +25,7 @@
             android:layout_below="@+id/img"
             android:layout_marginTop="51dp"
             android:gravity="center"
-            android:text="加油，打工人"
+            android:text="@string/fighting"
             android:textColor="@color/black"
             android:textSize="40dp"
             android:alpha="0">

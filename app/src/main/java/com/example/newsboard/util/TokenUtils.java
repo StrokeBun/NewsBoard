@@ -10,11 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Title: TokenUtils
- * @Package: util
- * @Description: token工具类，存储和读取token
- * @author: Zhong Defeng
- * @date: 2020/11/17 20:57
+ * <pre>
+ *     author : Zhong DeFeng
+ *     e-mail : 1756809298@qq.com
+ *     time   : 2020/11/17 20:57
+ *     desc   : token工具类，存储和读取token
+ *     version: 1.0
+ * </pre>
  */
 public final class TokenUtils {
 
@@ -29,7 +31,7 @@ public final class TokenUtils {
     private static final String NO_TOKEN = "";
 
     /**
-     * 返回使用token进行权限识别的http header，返回类型为Map<String, String>
+     * @return 使用token进行权限识别的http header，类型为Map<String, String>
      */
     public static Map<String, String> getAuthorizationHeader() {
         return new HashMap<String, String>() {
@@ -41,9 +43,9 @@ public final class TokenUtils {
     }
 
     /**
-     * 返回是否已经缓存了token
+     * @return true如果已经缓存了token
      */
-    public static boolean isEmptyToken() {
+    public static boolean isNotLogin() {
         return getToken().equals(NO_TOKEN);
     }
 
@@ -58,21 +60,34 @@ public final class TokenUtils {
     }
 
     /**
-     * 清除已经缓存的token，用户退出登录后调用
+     * 清除已经缓存的token，用户退出登录时调用
      */
     public static void clearToken() {
         setToken(NO_TOKEN);
     }
 
+    /**
+     * 初始化token工具类
+     * @param aPref 储存token的SharedPreferences
+     */
     public static void initTokenUtils(SharedPreferences aPref) {
         pref = aPref;
         clearToken();
     }
 
+    /**
+     * 获得token字符串
+     * @return token字符串
+     */
     private static String getToken() {
         return pref.getString(TOKEN_KEY, NO_TOKEN);
     }
 
+
+    /**
+     * 设置token字符串
+     * @param token 待存储的token字符串
+     */
     private static void setToken(String token) {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString(TOKEN_KEY, token);

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.newsboard.R;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
-import com.example.newsboard.ui.adapter.NewsAdapter;
+import com.example.newsboard.ui.adapter.news.NewsAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +26,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <pre>
+ *     author : Su Songfeng
+ *     e-mail : 1986553865@qq.com
+ *     time   : 2020/11/16 18:05
+ *     desc   : 新闻主页Frament
+ *     version: 1.0
+ * </pre>
+ */
 public class HomeFragment extends Fragment {
 
     private static List<NewsView> newsViewList = new ArrayList<>();
@@ -61,6 +70,11 @@ public class HomeFragment extends Fragment {
         return recyclerView;
     }
 
+    /**
+     * @Description:Init news
+     * @author： Susongfeng
+     * @Date: 2020/11/15
+     */
     private void initNews(){
         doReadJson();
         doNews();
@@ -69,14 +83,14 @@ public class HomeFragment extends Fragment {
         newsViewList.add(newsView);
     }
 
+    /**
+     * @Description:Read Json File
+     * @author： Susongfeng
+     * @Param: []
+     * @return: void
+     * @Date: 2020/11/15
+     */
     public void doReadJson(){
-        /**
-         * @Description:Read Json File
-         * @author： Susongfeng
-         * @Param: []
-         * @return: void
-         * @Date: 2020/11/15
-         */
         try (InputStream inputStream = getResources().getAssets().open("metadata.json")) {
             int length = inputStream.available();
             byte[] buffer = new byte[length];
@@ -87,14 +101,14 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    /**
+     * @Description: Json to News
+     * @author： Susongfeng
+     * @Param: []
+     * @return: void
+     * @Date: 2020/11/15
+     */
     public void doNews(){
-        /**
-         * @Description: Json to News
-         * @author： Susongfeng
-         * @Param: []
-         * @return: void
-         * @Date: 2020/11/15
-         */
         newsViewList.clear();
         try {
             JSONArray jsonArray = new JSONArray(content);
