@@ -22,8 +22,8 @@ import java.util.Map;
 
 /**
  * <pre>
- *     author : Su Songfeng
- *     e-mail : 1986553865@qq.com
+ *     author : Zhong DeFeng
+ *     e-mail : 1756809298@qq.com
  *     time   : 2020/11/16 18:05
  *     desc   : 文章详情页面活动
  *     version: 1.0
