@@ -6,11 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.newsboard.R;
+import com.example.newsboard.ui.fragment.HomeFragment;
 import com.example.newsboard.util.TokenUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * <pre>
@@ -33,8 +38,8 @@ public class StartActivity extends AppCompatActivity {
         textView = findViewById(R.id.start_page_text);
         imageView = findViewById(R.id.img);
 
-        initApp();
         createAnimation();
+        initApp();
     }
 
     /**
@@ -43,6 +48,34 @@ public class StartActivity extends AppCompatActivity {
     private void initApp() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         TokenUtils.initTokenUtils(pref);
+        loadNewsLocal();
+    }
+
+    /**
+     * 加载本地的新闻数据
+     */
+    private void loadNewsLocal() {
+        String json = readJson("metadata.json");
+        HomeFragment.initNews(json);
+    }
+
+    /**
+     * Read json file
+     * @author： Susongfeng
+     * @param fileName 文件名
+     * @return Json字符串
+     */
+    private String readJson(String fileName){
+        try (InputStream inputStream = getResources().getAssets().open(fileName)) {
+            int length = inputStream.available();
+            byte[] buffer = new byte[length];
+            inputStream.read(buffer);
+            String content = new String(buffer, "UTF-8");
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -52,13 +85,12 @@ public class StartActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 // 设置主页逐渐出现
-//                for (int i = 0; i <= 20; i++) {
-//                    Float alpha = 0.05F * i;
-//                    textView.setAlpha(alpha);
-//                    imageView.setAlpha(alpha);
-//                    Thread.sleep(100);
-//                }
-                Thread.sleep(500);
+                for (int i = 0; i <= 20; i++) {
+                    Float alpha = 0.05F * i;
+                    textView.setAlpha(alpha);
+                    imageView.setAlpha(alpha);
+                    Thread.sleep(50);
+                }
                 startActivity(new Intent(this, MainActivity.class));
             } catch (InterruptedException e) {
                 e.printStackTrace();

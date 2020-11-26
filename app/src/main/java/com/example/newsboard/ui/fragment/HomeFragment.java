@@ -2,6 +2,7 @@ package com.example.newsboard.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,6 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private static List<NewsView> newsViewList = new ArrayList<>();
-    private String content;
     private static RecyclerView recyclerView;
     public static Context context;
 
@@ -62,56 +62,58 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public static List<NewsView> getNewsViewList() {
-        return newsViewList;
-    }
-
-    public static RecyclerView getRecyclerView() {
-        return recyclerView;
-    }
-
     /**
      * @Description:Init news
      * @author： Susongfeng
      * @Date: 2020/11/15
      */
     private void initNews(){
-        doReadJson();
-        doNews();
-        News news = new News("teamBuilding_09", "9月18日淀山湖户外团建", "vc mobile team", "2020年9月7日");
-        NewsView newsView = new NewsView(news, 4);
-        newsViewList.add(newsView);
+        String json = readJson("metadata.json");
+        initNews(json);
     }
 
     /**
-     * @Description:Read Json File
+     * Init news by json string
      * @author： Susongfeng
-     * @Param: []
-     * @return: void
-     * @Date: 2020/11/15
+     * @param json json 字符串
      */
-    public void doReadJson(){
-        try (InputStream inputStream = getResources().getAssets().open("metadata.json")) {
-            int length = inputStream.available();
-            byte[] buffer = new byte[length];
-            inputStream.read(buffer);
-            content = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void initNews(String json) {
+        if (newsViewList.isEmpty()) {
+            doNews(json);
+            News news = new News("teamBuilding_09", "9月18日淀山湖户外团建", "vc mobile team", "2020年9月7日");
+            NewsView newsView = new NewsView(news, 4);
+            newsViewList.add(newsView);
         }
     }
 
     /**
-     * @Description: Json to News
+     * Read json file
      * @author： Susongfeng
-     * @Param: []
-     * @return: void
-     * @Date: 2020/11/15
+     * @param fileName 文件名
+     * @return Json字符串
      */
-    public void doNews(){
+    private String readJson(String fileName){
+        try (InputStream inputStream = getResources().getAssets().open(fileName)) {
+            int length = inputStream.available();
+            byte[] buffer = new byte[length];
+            inputStream.read(buffer);
+            String content = new String(buffer, "UTF-8");
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 解析json字符串为NewsView对象并添加到列表中
+     * @author： Susongfeng
+     * @param json json字符串
+     */
+    private static void doNews(String json) {
         newsViewList.clear();
         try {
-            JSONArray jsonArray = new JSONArray(content);
+            JSONArray jsonArray = new JSONArray(json);
             for(int i = 0, len = jsonArray.length(); i < len; i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String id = jsonObject.getString("id");
@@ -150,5 +152,14 @@ public class HomeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static List<NewsView> getNewsViewList() {
+        return newsViewList;
+    }
+
+    public static RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 }

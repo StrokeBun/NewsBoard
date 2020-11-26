@@ -3,6 +3,7 @@ package com.example.newsboard.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
@@ -32,7 +33,6 @@ public class ArticleActivity extends BaseActivity {
 
     // 请求文章的http url
     private static final String ARTICLE_URL = "https://vcapi.lvdaqian.cn/article/";
-
     // 请求markdown格式文章的http url后缀
     private static final String MARKDOWN_ARTICLE_URL_SUFFIX = "?markdown=true";
 
@@ -96,6 +96,14 @@ public class ArticleActivity extends BaseActivity {
             url = isMarkdownFormat? url+MARKDOWN_ARTICLE_URL_SUFFIX:url;
             Map<String, String> header = TokenUtils.getAuthorizationHeader();
             String response = HttpUtils.get(url, header);
+            // Token已经过期则跳转到登录页面
+            if (response == HttpUtils.UNAUTHORIZED_RESPONSE) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "用户信息已过期", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, LoginActivity.class));
+                });
+                return;
+            }
             if (response == null) {
                 return;
             }

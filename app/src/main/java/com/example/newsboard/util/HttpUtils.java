@@ -24,6 +24,8 @@ import java.util.Map;
  */
 public final class HttpUtils {
 
+    // 无权限的http响应字符串
+    public static final String UNAUTHORIZED_RESPONSE = "Unauthorized";
     private static final String POST = "POST";
     private static final String GET = "GET";
 
@@ -139,6 +141,8 @@ public final class HttpUtils {
                     }
                     return response.toString();
                 }
+            } else if (connection.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                return UNAUTHORIZED_RESPONSE;
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
