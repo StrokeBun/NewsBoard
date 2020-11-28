@@ -18,7 +18,11 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            //不显示log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled true
+            //移除无用的resource文件
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
