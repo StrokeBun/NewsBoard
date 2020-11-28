@@ -16,12 +16,23 @@ import java.util.List;
  */
 public class ActivityController {
 
+    /**
+     * 活动列表
+     */
     private static final List<Activity> activityList = new ArrayList<>();
 
+    /**
+     * 添加活动，onCreate()时调用
+     * @param activity 活动
+     */
     public static void addActivity(Activity activity) {
         activityList.add(activity);
     }
 
+    /**
+     * 移除活动，onDestroy()时调用
+     * @param activity 活动
+     */
     public static void removeActivity(Activity activity) {
         activityList.remove(activity);
     }

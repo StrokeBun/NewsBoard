@@ -68,7 +68,6 @@ public class LoginActivity extends BaseActivity {
 
         username = usernameEdit.getText().toString();
         password = passwordEdit.getText().toString();
-
     }
 
     /**
@@ -91,7 +90,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     /**
-     * 用存储的信息填写登录页面的表单
+     * 用存储的用户名密码填写登录页面的表单
      */
     private void autoFillForm() {
         String username = pref.getString(PREF_USERNAME, "");
@@ -125,7 +124,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     /**
-     * 产生加载动画
+     * 加载动画
      */
     private void createLoadingAnimation() {
         new Thread(() -> {
@@ -147,7 +146,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     /**
-     * 跳转到主页
+     * 跳转到主页，并传递用户名
      */
     private void jumpToMainActivity() {
         saveRememberInfo(username, password);

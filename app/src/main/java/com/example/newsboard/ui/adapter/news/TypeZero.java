@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.example.newsboard.model.NewsView;
 
-
 /**
  * <pre>
  *     author : Su Songfeng

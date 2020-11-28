@@ -3,8 +3,6 @@ package com.example.newsboard.ui.adapter.news;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +31,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_THREE = 3;
     private static final int TYPE_FOUR = 4;
     private static final int TYPE_HISTORY = 5;
+    // 类型与布局映射
     private static final Map<Integer, Integer> viewTypeLayoutMap = new HashMap<Integer, Integer>(){
         {
             put(TYPE_ZERO, R.layout.type_zero);

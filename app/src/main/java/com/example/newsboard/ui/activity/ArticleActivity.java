@@ -9,7 +9,7 @@ import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
 import com.example.newsboard.util.HttpUtils;
-import com.example.newsboard.util.StringUtils;
+import com.example.newsboard.util.MarkdownUtils;
 import com.example.newsboard.util.TokenUtils;
 
 import com.zzhoujay.richtext.RichText;
@@ -110,7 +110,7 @@ public class ArticleActivity extends BaseActivity {
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String content = (String) jsonObject.get("data");
-                content = StringUtils.handleMarkdown(content);
+                content = MarkdownUtils.handleMarkdown(content);
                 showContent(content, isMarkdownFormat);
             } catch (JSONException e) {
                 e.printStackTrace();

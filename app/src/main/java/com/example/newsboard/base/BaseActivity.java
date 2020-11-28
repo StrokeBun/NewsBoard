@@ -20,7 +20,7 @@ import com.example.newsboard.util.TokenUtils;
  *     author : Zhong DeFeng
  *     e-mail : 1756809298@qq.com
  *     time   : 2020/11/16 14:21
- *     desc   : 活动的基类，统一处理退出登录广播
+ *     desc   : 活动的基类，提供处理退出登录广播机制
  *     version: 1.0
  * </pre>
  */

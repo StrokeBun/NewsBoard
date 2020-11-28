@@ -48,7 +48,7 @@ public class HistoryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        recyclerView = (RecyclerView) findViewById(R.id.history_view);
+        recyclerView = findViewById(R.id.history_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);

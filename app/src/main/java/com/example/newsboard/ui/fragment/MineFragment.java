@@ -27,13 +27,18 @@ import com.example.newsboard.util.TokenUtils;
  */
 public class MineFragment extends Fragment {
 
-    // 退出登录的信号，用于广播
+    /**
+     * 退出登录的信号，用于广播
+     */
     public static final String ACTION_LOGOUT = "com.example.newsboard.action_logout";
-    // 退出登录按键
+
     private ImageButton logoutButton;
-    // 浏览历史按键
+
+    /**
+     * 浏览历史按键
+     */
     private ImageButton historyButton;
-    // 用户名文本框
+
     private TextView usernameTextView;
 
     @Override

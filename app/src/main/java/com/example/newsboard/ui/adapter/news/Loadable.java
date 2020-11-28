@@ -12,6 +12,7 @@ import com.example.newsboard.model.NewsView;
  * </pre>
  */
 interface Loadable {
+    // 根据NewsView设置布局属性
     default void load(NewsView newsView) {
 
     }

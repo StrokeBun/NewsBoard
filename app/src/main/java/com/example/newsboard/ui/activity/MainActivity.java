@@ -47,9 +47,8 @@ public class MainActivity extends BaseActivity {
     public void myItemClick(View view){
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
         NewsView newsView = HomeFragment.getNewsViewList().get(position);
-        News news = newsView.getNews();
         Intent intent = new Intent(this, ArticleActivity.class);
-        intent.putExtra(News.EXTRA_NEWS, news);
+        intent.putExtra(News.EXTRA_NEWS, newsView.getNews());
         startActivity(intent);
     }
 

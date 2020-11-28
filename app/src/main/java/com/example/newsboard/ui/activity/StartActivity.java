@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.newsboard.R;
 import com.example.newsboard.ui.fragment.HomeFragment;
+import com.example.newsboard.util.FileUtils;
 import com.example.newsboard.util.TokenUtils;
 
 import java.io.IOException;
@@ -60,18 +61,14 @@ public class StartActivity extends AppCompatActivity {
     }
 
     /**
-     * Read json file
+     * Read json file in assets directory.
      * @author： Susongfeng
      * @param fileName 文件名
      * @return Json字符串
      */
     private String readJson(String fileName){
-        try (InputStream inputStream = getResources().getAssets().open(fileName)) {
-            int length = inputStream.available();
-            byte[] buffer = new byte[length];
-            inputStream.read(buffer);
-            String content = new String(buffer, "UTF-8");
-            return content;
+        try (InputStream inputStream = this.getResources().getAssets().open(fileName)) {
+            return FileUtils.readFile(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -8,11 +8,11 @@ import java.util.regex.Pattern;
  *     author : Zhong DeFeng
  *     e-mail : 1756809298@qq.com
  *     time   : 2020/11/19 15:32
- *     desc   : 字符串工具类
+ *     desc   : markdown文本工具类
  *     version: 1.0
  * </pre>
  */
-public final class StringUtils {
+public final class MarkdownUtils {
     // 本地图片存储路径
     private static final String LOCAL_IMG_URL_PREFIX = "\n![](file:///android_asset/img/";
     // 匹配markdown图片的正则表达式
@@ -54,7 +54,10 @@ public final class StringUtils {
         return sb.toString();
     }
 
-    private StringUtils() {
+    /**
+     * markdown工具类无法被实例化
+     */
+    private MarkdownUtils() {
         throw new UnsupportedOperationException("StringUtils cant be constructed");
     }
 }

@@ -13,7 +13,7 @@ import com.example.newsboard.model.NewsView;
  *     author : Su Songfeng
  *     e-mail : 1986553865@qq.com
  *     time   : 2020/11/21 11:26
- *     desc   : 新闻排版1、2、3对应的类型，包含标题、作者和一张图片
+ *     desc   : type为1、2、3对应的类型，包含标题、作者和一张图片
  *     version: 1.0
  * </pre>
  */

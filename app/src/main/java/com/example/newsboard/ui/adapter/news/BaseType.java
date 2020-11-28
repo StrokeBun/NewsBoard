@@ -18,12 +18,18 @@ import com.example.newsboard.model.NewsView;
  * </pre>
  */
 class BaseType extends androidx.recyclerview.widget.RecyclerView.ViewHolder implements Loadable {
-    TextView newsText;
+    /**
+     * 新闻标题
+     */
+    TextView titleText;
+    /**
+     * 发布信息
+     */
     TextView publishText;
 
     public BaseType(@NonNull View itemView) {
         super(itemView);
-        newsText = itemView.findViewById(R.id.news_text);
+        titleText = itemView.findViewById(R.id.news_text);
         publishText = itemView.findViewById(R.id.publish_message);
     }
 
@@ -33,7 +39,7 @@ class BaseType extends androidx.recyclerview.widget.RecyclerView.ViewHolder impl
      */
     @Override
     public void load(NewsView newsView) {
-        newsText.setText(newsView.getNews().getTitle());
+        titleText.setText(newsView.getNews().getTitle());
         publishText.setText(newsView.getPublishMessage());
     }
 }

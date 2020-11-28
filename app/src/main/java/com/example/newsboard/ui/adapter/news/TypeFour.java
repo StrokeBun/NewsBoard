@@ -20,25 +20,25 @@ import com.example.newsboard.ui.fragment.HomeFragment;
  * </pre>
  */
 class TypeFour extends BaseType {
-    ImageView newsImage;
     ImageView newsImage1;
     ImageView newsImage2;
     ImageView newsImage3;
+    ImageView newsImage4;
 
     public TypeFour(@NonNull View itemView) {
         super(itemView);
-        newsImage = itemView.findViewById(R.id.news_image);
-        newsImage1 = itemView.findViewById(R.id.news_image1);
-        newsImage2 = itemView.findViewById(R.id.news_image2);
-        newsImage3 = itemView.findViewById(R.id.news_image3);
+        newsImage1 = itemView.findViewById(R.id.news_image);
+        newsImage2 = itemView.findViewById(R.id.news_image1);
+        newsImage3 = itemView.findViewById(R.id.news_image2);
+        newsImage4 = itemView.findViewById(R.id.news_image3);
     }
 
     @Override
     public void load(NewsView newsView) {
         super.load(newsView);
-        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122205843681.jpeg").into(newsImage);
-        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213841886.jpeg").into(newsImage1);
-        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/2020112221392235.jpeg").into(newsImage2);
-        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213943681.jpeg").into(newsImage3);
+        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122205843681.jpeg").into(newsImage1);
+        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213841886.jpeg").into(newsImage2);
+        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/2020112221392235.jpeg").into(newsImage3);
+        Glide.with(HomeFragment.context).load("https://img-blog.csdnimg.cn/20201122213943681.jpeg").into(newsImage4);
     }
 }

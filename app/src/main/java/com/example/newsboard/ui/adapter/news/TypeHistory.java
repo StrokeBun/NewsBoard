@@ -11,7 +11,7 @@ import com.example.newsboard.model.NewsView;
  *     author : Zhong Defeng
  *     e-mail : 1756809298@qq.com
  *     time   : 2020/11/24 11:26
- *     desc   : 浏览历史中新闻排版类型，包含标题、作者
+ *     desc   : 浏览历史页面新闻排版类型，包含标题、作者
  *     version: 1.0
  * </pre>
  */

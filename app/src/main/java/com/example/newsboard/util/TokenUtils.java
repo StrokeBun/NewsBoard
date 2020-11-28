@@ -94,6 +94,9 @@ public final class TokenUtils {
         editor.apply();
     }
 
+    /**
+     * token工具类无法被实例化
+     */
     private TokenUtils() {
         throw new UnsupportedOperationException("TokenUtils cant be constructed");
     }

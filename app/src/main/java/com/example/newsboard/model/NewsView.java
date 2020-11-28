@@ -41,6 +41,14 @@ public class NewsView {
                 '}';
     }
 
+    public News getNews() {
+        return news;
+    }
+
+    public String getPublishMessage() {
+        return publishMessage;
+    }
+
     public int getType() {
         return type;
     }
@@ -49,11 +57,5 @@ public class NewsView {
         return cover;
     }
 
-    public String getPublishMessage() {
-        return publishMessage;
-    }
 
-    public News getNews() {
-        return news;
-    }
 }

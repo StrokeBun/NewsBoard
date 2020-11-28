@@ -199,6 +199,9 @@ public final class HttpUtils {
     }
 
 
+    /**
+     * http工具类无法被实例化
+     */
     private HttpUtils() {
         throw new UnsupportedOperationException("HttpUtils cant be constructed");
     }

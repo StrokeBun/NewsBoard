@@ -15,6 +15,9 @@ import java.io.Serializable;
  */
 public class News implements Serializable {
 
+    /**
+     * 在Activity间传递新闻Intent所使用的key
+     */
     public static final String EXTRA_NEWS = "news";
 
     private String id;
@@ -38,6 +41,7 @@ public class News implements Serializable {
                 ", publishTime='" + publishTime + '\'' +
                 '}';
     }
+
 
     @Override
     public boolean equals(@Nullable Object obj) {
