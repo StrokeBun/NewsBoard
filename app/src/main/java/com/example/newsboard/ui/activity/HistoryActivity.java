@@ -32,7 +32,7 @@ public class HistoryActivity extends BaseActivity {
     // 浏览历史存储最大数量
     private static final int HISTORY_NEWS_MAX_NUM = 5;
     // 使用LinkedHashMap存储历史记录(类似LRU)
-    private static LinkedHashMap<News, Integer> historyNews;
+    private static final LinkedHashMap<News, Integer> historyNews;
     private List<NewsView> newsViewList;
     static {
         historyNews = new LinkedHashMap<News, Integer>(HISTORY_NEWS_MAX_NUM, 0.75F, true) {
@@ -59,7 +59,7 @@ public class HistoryActivity extends BaseActivity {
         super.onStart();
         newsViewList = historyNews.keySet()
                 .parallelStream()
-                .map(news -> new NewsView(news))
+                .map(NewsView::new)
                 .collect(Collectors.toList());
         Collections.reverse(newsViewList);
         NewsAdapter adapter = new NewsAdapter(newsViewList);

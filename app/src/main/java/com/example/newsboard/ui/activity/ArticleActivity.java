@@ -97,7 +97,7 @@ public class ArticleActivity extends BaseActivity {
             Map<String, String> header = TokenUtils.getAuthorizationHeader();
             String response = HttpUtils.get(url, header);
             // Token已经过期则跳转到登录页面
-            if (response == HttpUtils.UNAUTHORIZED_RESPONSE) {
+            if (response.equals(HttpUtils.UNAUTHORIZED_RESPONSE)) {
                 runOnUiThread(() -> {
                     Toast.makeText(this, "用户信息已过期", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(this, LoginActivity.class));

@@ -67,9 +67,7 @@ public class MineFragment extends Fragment {
         });
 
         historyButton = root.findViewById(R.id.history_news_button);
-        historyButton.setOnClickListener(view -> {
-            startActivity(new Intent(getActivity(), HistoryActivity.class));
-        });
+        historyButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), HistoryActivity.class)));
 
         usernameTextView = root.findViewById(R.id.username_text_view);
     }

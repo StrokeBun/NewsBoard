@@ -41,7 +41,7 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
 
     // 新闻列表
-    private static List<NewsView> newsViewList = new ArrayList<>();
+    private static final List<NewsView> newsViewList = new ArrayList<>();
     private static RecyclerView recyclerView;
     public static Context context;
 
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         context = getActivity();
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         initNews();
-        recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
+        recyclerView = root.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);
@@ -60,15 +60,8 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
     /**
-     * @Description:Init news
-     * @author： Susongfeng
-     * @Date: 2020/11/15
+     * Init news
      */
     private void initNews(){
         String json = readJson("metadata.json");
@@ -77,7 +70,6 @@ public class HomeFragment extends Fragment {
 
     /**
      * Init news by json string
-     * @author： Susongfeng
      * @param json json 字符串
      */
     public static void initNews(String json) {
@@ -91,9 +83,8 @@ public class HomeFragment extends Fragment {
 
     /**
      * Read json file
-     * @author： Susongfeng
-     * @param fileName 文件名
-     * @return Json字符串
+     * @param fileName Json文件名
+     * @return json字符串
      */
     private String readJson(String fileName){
         try (InputStream inputStream = getResources().getAssets().open(fileName)) {
@@ -106,7 +97,6 @@ public class HomeFragment extends Fragment {
 
     /**
      * 解析json字符串为NewsView对象并添加到列表中
-     * @author： Susongfeng
      * @param json json字符串
      */
     private static void doNews(String json) {
@@ -124,7 +114,6 @@ public class HomeFragment extends Fragment {
                 if (type == 0) {
                     NewsView newsView = new NewsView(news, type);
                     newsViewList.add(newsView);
-                    continue;
                 } else {
                     String cover = jsonObject.getString("cover");
                     Map<String, Integer> map = new HashMap<String, Integer>(){

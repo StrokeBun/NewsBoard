@@ -14,18 +14,18 @@ import java.io.InputStream;
  */
 public class FileUtils {
 
+    private static final String DEFAULT_CHARTSET_NAME = "UTF-8";
     /**
      * 读取并以UTF-8的格式返回文件内容
      * @param inputStream 输入流
      * @return 文本内容字符串
-     * @throws IOException
+     * @throws IOException io错误将抛出IOException
      */
     public static String readFile(InputStream inputStream) throws IOException{
             int length = inputStream.available();
             byte[] buffer = new byte[length];
             inputStream.read(buffer);
-            String content = new String(buffer, "UTF-8");
-            return content;
+            return new String(buffer, DEFAULT_CHARTSET_NAME);
     }
 
     /**
