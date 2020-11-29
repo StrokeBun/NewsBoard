@@ -9,6 +9,7 @@ import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.ui.fragment.HomeFragment;
+import com.example.newsboard.util.TokenUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.navigation.NavController;
@@ -47,9 +48,13 @@ public class MainActivity extends BaseActivity {
     public void myItemClick(View view){
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
         NewsView newsView = HomeFragment.getNewsViewList().get(position);
-        Intent intent = new Intent(this, ArticleActivity.class);
-        intent.putExtra(News.EXTRA_NEWS, newsView.getNews());
-        startActivity(intent);
+        if (TokenUtils.isNotLogin()) {
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            Intent intent = new Intent(this, ArticleActivity.class);
+            intent.putExtra(News.EXTRA_NEWS, newsView.getNews());
+            startActivity(intent);
+        }
     }
 
 }

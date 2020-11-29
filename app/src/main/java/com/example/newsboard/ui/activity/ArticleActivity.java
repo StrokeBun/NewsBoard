@@ -52,15 +52,11 @@ public class ArticleActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (TokenUtils.isNotLogin()) {
-            startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            Intent intent = getIntent();
-            News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
-            loadArticle(news);
-            // 在浏览历史中添加文章
-            HistoryActivity.addHistoryNews(news);
-        }
+        Intent intent = getIntent();
+        News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
+        loadArticle(news);
+        // 在浏览历史中添加文章
+        HistoryActivity.addHistoryNews(news);
     }
 
     /**
