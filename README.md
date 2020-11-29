@@ -32,7 +32,7 @@ NewsBoard 是一个信息公告板app，没有广告，给予用户最纯粹的�
 
 ## Libraries
 
-- [Android Support Libraries](https://developer.android.com/topic/libraries/support-library/index.html)
+- [Android Support Libraries](https://developer.android.google.cn/index.html)
 - [RichText](https://github.com/zzhoujay/RichText)
 - [Glide](https://github.com/bumptech/glide)
 - [矢量图标](https://www.iconfont.cn/)
