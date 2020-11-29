@@ -66,8 +66,6 @@ public class LoginActivity extends BaseActivity {
             autoFillForm();
         }
 
-        username = usernameEdit.getText().toString();
-        password = passwordEdit.getText().toString();
     }
 
     /**
@@ -84,6 +82,8 @@ public class LoginActivity extends BaseActivity {
 
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> {
+            username = usernameEdit.getText().toString();
+            password = passwordEdit.getText().toString();
             AsyncGetToken();
             createLoadingAnimation();
         });
