@@ -31,7 +31,7 @@ public final class MarkdownUtils {
             imgUrl = removeUnderline(imgUrl);
             StringBuilder sb = new StringBuilder(LOCAL_IMG_URL_PREFIX);
             sb.append(imgUrl);
-            sb.append(")");
+            sb.append(")\n");
             result.replace(matcherImage.start()+offset, matcherImage.end()+offset, sb.toString());
             // 计算替换前后字符串的长度偏差
             String origin = matcherImage.group(0);
