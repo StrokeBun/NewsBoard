@@ -61,6 +61,7 @@ public class HistoryActivity extends BaseActivity {
                 .parallelStream()
                 .map(NewsView::new)
                 .collect(Collectors.toList());
+        // 倒序符合浏览历史的顺序
         Collections.reverse(newsViewList);
         NewsAdapter adapter = new NewsAdapter(newsViewList);
         recyclerView.setAdapter(adapter);

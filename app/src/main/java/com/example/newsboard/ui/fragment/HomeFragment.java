@@ -42,6 +42,23 @@ public class HomeFragment extends Fragment {
 
     // 新闻列表
     private static final List<NewsView> newsViewList = new ArrayList<>();
+    // 图片名所对应的布局
+    private static final Map<String, Integer> coverLayoutMap = new HashMap<String, Integer>(){
+        {
+            put("tancheng", R.drawable.tancheng);
+            put("event_02", R.drawable.event_02);
+            put("teambuilding_04", R.drawable.teambuilding);
+        }
+    };
+
+    // json配置文件中的key字符串
+    private static final String JSON_ID_KEY = "id";
+    private static final String JSON_TITLE_KEY = "title";
+    private static final String JSON_AUTHOR_KEY = "author";
+    private static final String JSON_PUBLISH_TIME_KEY = "publishTime";
+    private static final String JSON_TYPE_KEY = "type";
+    private static final String JSON_COVER_KEY = "cover";
+
     private static RecyclerView recyclerView;
     public static Context context;
 
@@ -105,35 +122,26 @@ public class HomeFragment extends Fragment {
             JSONArray jsonArray = new JSONArray(json);
             for(int i = 0, len = jsonArray.length(); i < len; i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String id = jsonObject.getString("id");
-                String title = jsonObject.getString("title");
-                String author = jsonObject.getString("author");
-                String publishTime = jsonObject.getString("publishTime");
+                String id = jsonObject.getString(JSON_ID_KEY);
+                String title = jsonObject.getString(JSON_TITLE_KEY);
+                String author = jsonObject.getString(JSON_AUTHOR_KEY);
+                String publishTime = jsonObject.getString(JSON_PUBLISH_TIME_KEY);
                 News news = new News(id, title, author, publishTime);
-                int type = jsonObject.getInt("type");
+                int type = jsonObject.getInt(JSON_TYPE_KEY);
                 if (type == 0) {
                     NewsView newsView = new NewsView(news, type);
                     newsViewList.add(newsView);
                 } else {
-                    String cover = jsonObject.getString("cover");
-                    Map<String, Integer> map = new HashMap<String, Integer>(){
-                        {
-                            put("tancheng", R.drawable.tancheng);
-                            put("event_02", R.drawable.event_02);
-                            put("teambuilding_04", R.drawable.teambuilding);
-                        }
-                    };
-                    if (map.get(cover) != null) {
-                        NewsView newsView = new NewsView(news, type, map.get(cover));
+                    String cover = jsonObject.getString(JSON_COVER_KEY);
+                    if (coverLayoutMap.get(cover) != null) {
+                        NewsView newsView = new NewsView(news, type, coverLayoutMap.get(cover));
                         newsViewList.add(newsView);
                     }
                 }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     public static List<NewsView> getNewsViewList() {

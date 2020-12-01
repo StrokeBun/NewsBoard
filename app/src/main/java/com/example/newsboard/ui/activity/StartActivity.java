@@ -28,6 +28,8 @@ import java.io.InputStream;
  */
 public class StartActivity extends AppCompatActivity {
 
+    // 本地待加载文件名
+    private static final String LOCAL_FILENAME = "metadata.json";
     private TextView textView;
     private ImageView imageView;
 
@@ -48,14 +50,16 @@ public class StartActivity extends AppCompatActivity {
     private void initApp() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         TokenUtils.initTokenUtils(pref);
-        loadNewsLocal();
+        loadNewsLocal(LOCAL_FILENAME);
     }
 
+
     /**
-     * 加载本地的新闻数据
+     * 根据本地配置文件加载新闻数据
+     * @param fileName 本地配置文件名
      */
-    private void loadNewsLocal() {
-        String json = readJson("metadata.json");
+    private void loadNewsLocal(String fileName) {
+        String json = readJson(fileName);
         HomeFragment.initNews(json);
     }
 

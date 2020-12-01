@@ -26,7 +26,9 @@ public final class HttpUtils {
 
     // 无权限的http响应字符串
     public static final String UNAUTHORIZED_RESPONSE = "Unauthorized";
+    // POST请求字符串
     private static final String POST = "POST";
+    // GET请求字符串
     private static final String GET = "GET";
 
     /**

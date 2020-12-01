@@ -10,7 +10,7 @@ import java.util.List;
  *     author : Zhong DeFeng
  *     e-mail : 1756809298@qq.com
  *     time   : 2020/11/16 14:21
- *     desc   : 活动控制器
+ *     desc   : 活动控制器，负责增、删、停止所有活动
  *     version: 1.0
  * </pre>
  */

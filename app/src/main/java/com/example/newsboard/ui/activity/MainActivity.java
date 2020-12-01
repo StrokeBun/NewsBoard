@@ -48,9 +48,9 @@ public class MainActivity extends BaseActivity {
     public void myItemClick(View view){
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
         NewsView newsView = HomeFragment.getNewsViewList().get(position);
-        if (TokenUtils.isNotLogin()) {
+        if (TokenUtils.isNotLogin()) { // 用户未登录跳转到登录页面
             startActivity(new Intent(this, LoginActivity.class));
-        } else {
+        } else { // 传递文章数据
             Intent intent = new Intent(this, ArticleActivity.class);
             intent.putExtra(News.EXTRA_NEWS, newsView.getNews());
             startActivity(intent);

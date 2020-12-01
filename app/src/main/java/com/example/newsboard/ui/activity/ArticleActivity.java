@@ -54,6 +54,7 @@ public class ArticleActivity extends BaseActivity {
         super.onStart();
         Intent intent = getIntent();
         News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
+        // 加载文章
         loadArticle(news);
         // 在浏览历史中添加文章
         HistoryActivity.addHistoryNews(news);

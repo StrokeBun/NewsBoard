@@ -48,9 +48,9 @@ public class MineFragment extends Fragment {
         logoutButton = root.findViewById(R.id.logout_button);
         initComponents(root);
 
-        if (TokenUtils.isNotLogin()) {
+        if (TokenUtils.isNotLogin()) { // 未登录跳转到登录页面
             startActivity(new Intent(getContext(), LoginActivity.class));
-        } else {
+        } else { // 设置主页的用户名
             setLoginUsername();
         }
         return root;

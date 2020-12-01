@@ -40,8 +40,8 @@ public class LoginActivity extends BaseActivity {
     // SharedPreferences存储记住密码对应的key
     private static final String PREF_REMEMBER_INFO = "rememberInfo";
 
-    // 是否已经获取token，true则跳转到MainActivity，使用volatile保证多线程内存可见性
-    private static volatile boolean receiveData = false;
+    // 是否已经登录，true则跳转到MainActivity，使用volatile保证多线程内存可见性
+    private static volatile boolean hasLogin = false;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -65,7 +65,6 @@ public class LoginActivity extends BaseActivity {
         if (isRemember) {
             autoFillForm();
         }
-
     }
 
     /**
@@ -78,7 +77,7 @@ public class LoginActivity extends BaseActivity {
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
         loadingText = findViewById(R.id.loading_text);
-        receiveData = false;
+        hasLogin = false;
 
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> {
@@ -116,7 +115,7 @@ public class LoginActivity extends BaseActivity {
             String result = HttpUtils.post(LOGIN_URL, params);
             try {
                 TokenUtils.setTokenFromResponse(result);
-                receiveData = true;
+                hasLogin = true;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -132,7 +131,7 @@ public class LoginActivity extends BaseActivity {
             final String[] loadingStr = {"Loading.", "Loading..", "Loading..."};
             int i = 0;
             // 使用自旋防止用户点击多次登录在栈中压入多个Activity
-            while (!receiveData) {
+            while (!hasLogin) {
                 int index= i++ % 3;
                 this.runOnUiThread(() -> loadingText.setText(loadingStr[index]));
                 try {
@@ -161,7 +160,8 @@ public class LoginActivity extends BaseActivity {
      * @param password 密码
      */
     private void saveRememberInfo(String username, String password) {
-        if (rememberPassword.isChecked()) {
+
+        if (rememberPassword.isChecked()) { // 勾选了记住密码
             editor.putString(PREF_USERNAME, username);
             editor.putString(PREF_PASSWORD, password);
             editor.putBoolean(PREF_REMEMBER_INFO, true);

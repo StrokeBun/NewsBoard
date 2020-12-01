@@ -9,7 +9,7 @@ import java.io.Serializable;
  *     author : Su Songfeng
  *     e-mail : 1986553865@qq.com
  *     time   : 2020/11/15 20:57
- *     desc   : News information
+ *     desc   : News information，实现Serializable接口便于在Intent中传递
  *     version: 1.0
  * </pre>
  */
