@@ -9,9 +9,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.newsboard.ui.activity.HistoryActivity;
-import com.example.newsboard.ui.activity.LoginActivity;
-import com.example.newsboard.ui.fragment.MineFragment;
+import com.example.newsboard.ui.mine.HistoryActivity;
+import com.example.newsboard.ui.login.LoginActivity;
+import com.example.newsboard.ui.mine.MineFragment;
 import com.example.newsboard.util.TokenUtils;
 
 

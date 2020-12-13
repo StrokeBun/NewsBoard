@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.activity;
+package com.example.newsboard.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import com.example.newsboard.R;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
 import com.example.newsboard.base.BaseActivity;
-import com.example.newsboard.ui.fragment.HomeFragment;
+import com.example.newsboard.ui.article.activity.ArticleActivity;
+import com.example.newsboard.ui.login.LoginActivity;
 import com.example.newsboard.util.TokenUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

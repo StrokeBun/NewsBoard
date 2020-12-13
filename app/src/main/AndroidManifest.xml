@@ -16,17 +16,17 @@
         android:roundIcon="@mipmap/board"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsBoard">
-        <activity android:name=".ui.activity.StartActivity">
+        <activity android:name=".ui.start.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.HistoryActivity" />
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.mine.HistoryActivity" />
+        <activity android:name=".ui.MainActivity">
         </activity>
-        <activity android:name=".ui.activity.ArticleActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.article.activity.ArticleActivity" />
+        <activity android:name=".ui.login.LoginActivity" />
     </application>
 
 </manifest>

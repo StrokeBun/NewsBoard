@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.adapter.news;
+package com.example.newsboard.ui.article.adapter.news;
 
 import com.example.newsboard.model.NewsView;
 

@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.fragment;
+package com.example.newsboard.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.newsboard.R;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
-import com.example.newsboard.ui.adapter.news.NewsAdapter;
+import com.example.newsboard.ui.article.adapter.news.NewsAdapter;
 import com.example.newsboard.util.FileUtils;
 
 import org.json.JSONArray;

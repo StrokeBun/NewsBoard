@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.activity;
+package com.example.newsboard.ui.mine;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +12,8 @@ import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
 import com.example.newsboard.model.NewsView;
-import com.example.newsboard.ui.adapter.news.NewsAdapter;
+import com.example.newsboard.ui.article.activity.ArticleActivity;
+import com.example.newsboard.ui.article.adapter.news.NewsAdapter;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

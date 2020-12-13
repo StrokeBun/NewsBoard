@@ -7,14 +7,14 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.newsboard.ui.fragment.HomeFragment"
+        android:name="com.example.newsboard.ui.HomeFragment"
         android:label="主页"
         tools:layout="@layout/fragment_home" />
 
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.example.newsboard.ui.fragment.MineFragment"
+        android:name="com.example.newsboard.ui.mine.MineFragment"
         android:label="个人信息"
         tools:layout="@layout/fragment_mine" />
 </navigation>

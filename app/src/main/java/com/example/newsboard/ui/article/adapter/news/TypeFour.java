@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.adapter.news;
+package com.example.newsboard.ui.article.adapter.news;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.newsboard.R;
 import com.example.newsboard.model.NewsView;
-import com.example.newsboard.ui.fragment.HomeFragment;
+import com.example.newsboard.ui.HomeFragment;
 
 /**
  * <pre>

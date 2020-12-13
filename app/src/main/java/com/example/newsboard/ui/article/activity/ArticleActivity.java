@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.activity;
+package com.example.newsboard.ui.article.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
+import com.example.newsboard.ui.login.LoginActivity;
+import com.example.newsboard.ui.mine.HistoryActivity;
 import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.MarkdownUtils;
 import com.example.newsboard.util.TokenUtils;

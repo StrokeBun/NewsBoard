@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.activity;
+package com.example.newsboard.ui.start;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.newsboard.R;
-import com.example.newsboard.ui.fragment.HomeFragment;
+import com.example.newsboard.ui.MainActivity;
+import com.example.newsboard.ui.HomeFragment;
 import com.example.newsboard.util.FileUtils;
 import com.example.newsboard.util.TokenUtils;
 

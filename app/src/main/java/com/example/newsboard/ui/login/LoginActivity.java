@@ -1,16 +1,19 @@
-package com.example.newsboard.ui.activity;
+package com.example.newsboard.ui.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.R;
+import com.example.newsboard.ui.MainActivity;
 import com.example.newsboard.util.HttpUtils;
 import com.example.newsboard.util.TokenUtils;
 
@@ -32,6 +35,7 @@ public class LoginActivity extends BaseActivity {
     public static final String EXTRA_USERNAME = "username";
     // 用户登录获取token的http url
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
+    private static final String RIGHT_PASSWORD = "123456";
 
     // SharedPreferences存储用户名对应的key
     private static final String PREF_USERNAME = "username";
@@ -83,6 +87,13 @@ public class LoginActivity extends BaseActivity {
         loginButton.setOnClickListener(view -> {
             username = usernameEdit.getText().toString();
             password = passwordEdit.getText().toString();
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "账号/密码为空", Toast.LENGTH_SHORT).show();
+                return;
+            } else if (!RIGHT_PASSWORD.equals(password)) {
+                Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                return;
+            }
             AsyncGetToken();
             createLoadingAnimation();
         });
@@ -160,13 +171,14 @@ public class LoginActivity extends BaseActivity {
      * @param password 密码
      */
     private void saveRememberInfo(String username, String password) {
-
         if (rememberPassword.isChecked()) { // 勾选了记住密码
             editor.putString(PREF_USERNAME, username);
             editor.putString(PREF_PASSWORD, password);
             editor.putBoolean(PREF_REMEMBER_INFO, true);
         } else {
-            editor.clear();
+            editor.remove(PREF_USERNAME);
+            editor.remove(PREF_PASSWORD);
+            editor.remove(PREF_REMEMBER_INFO);
         }
         editor.apply();
     }

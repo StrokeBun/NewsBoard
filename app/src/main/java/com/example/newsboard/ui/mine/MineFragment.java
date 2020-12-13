@@ -1,4 +1,4 @@
-package com.example.newsboard.ui.fragment;
+package com.example.newsboard.ui.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.newsboard.R;
-import com.example.newsboard.ui.activity.HistoryActivity;
-import com.example.newsboard.ui.activity.LoginActivity;
+import com.example.newsboard.ui.login.LoginActivity;
 import com.example.newsboard.util.TokenUtils;
 
 /**
