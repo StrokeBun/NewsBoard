@@ -98,13 +98,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="250dp"
             android:gravity="center">
-            <TextView
-                android:id="@+id/loading_text"
+            <ProgressBar
+                android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:alpha="0"
-                android:textSize="21sp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </RelativeLayout>

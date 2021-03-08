@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +55,7 @@ public class LoginActivity extends BaseActivity {
     private EditText passwordEdit;
     private CheckBox rememberPassword;
     private Button loginButton;
-    private TextView loadingText;
+    private ProgressBar progressBar;
 
     private String username;
     private String password;
@@ -80,7 +82,6 @@ public class LoginActivity extends BaseActivity {
         usernameEdit = findViewById(R.id.username);
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
-        loadingText = findViewById(R.id.loading_text);
         hasLogin = false;
 
         loginButton = findViewById(R.id.login_button);
@@ -97,6 +98,9 @@ public class LoginActivity extends BaseActivity {
             AsyncGetToken();
             createLoadingAnimation();
         });
+
+        progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
     }
 
     /**
@@ -137,20 +141,10 @@ public class LoginActivity extends BaseActivity {
      * 加载动画
      */
     private void createLoadingAnimation() {
+        progressBar.setVisibility(View.VISIBLE);
         new Thread(() -> {
-            loadingText.setAlpha(1.0F);
-            final String[] loadingStr = {"Loading.", "Loading..", "Loading..."};
-            int i = 0;
-            // 使用自旋防止用户点击多次登录在栈中压入多个Activity
-            while (!hasLogin) {
-                int index= i++ % 3;
-                this.runOnUiThread(() -> loadingText.setText(loadingStr[index]));
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            while (!hasLogin);
+            this.runOnUiThread(()-> {progressBar.setVisibility(View.GONE);});
             jumpToMainActivity();
         }).start();
     }

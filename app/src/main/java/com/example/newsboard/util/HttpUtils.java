@@ -120,7 +120,7 @@ public final class HttpUtils {
      * @param params 携带的参数
      * @return http response body 字符串
      */
-    private static String HttpRequestInternal(String urlPath, String method, Map<String, String> header,JSONObject params) {
+    private static String HttpRequestInternal(String urlPath, String method, Map<String, String> header, JSONObject params) {
         HttpURLConnection connection = null;
         try {
             connection = getHttpURLConnection(urlPath, method, header, params);
