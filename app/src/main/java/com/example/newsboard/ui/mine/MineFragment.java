@@ -46,7 +46,7 @@ public class MineFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
         logoutButton = root.findViewById(R.id.logout_button);
         initComponents(root);
-
+        //TODO: 使用startActivityForResult进行修改
         if (TokenUtils.isNotLogin()) { // 未登录跳转到登录页面
             startActivity(new Intent(getContext(), LoginActivity.class));
         } else { // 设置主页的用户名

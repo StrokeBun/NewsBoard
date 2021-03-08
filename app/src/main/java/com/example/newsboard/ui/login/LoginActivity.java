@@ -3,6 +3,8 @@ package com.example.newsboard.ui.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.R;
@@ -46,8 +50,8 @@ public class LoginActivity extends BaseActivity {
     // SharedPreferences存储记住密码对应的key
     private static final String PREF_REMEMBER_INFO = "rememberInfo";
 
-    // 是否已经登录，true则跳转到MainActivity，使用volatile保证多线程内存可见性
-    private static volatile boolean hasLogin = false;
+    // 登录成功的 Message.what
+    private static final int MSG_LOGIN = 1;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -56,6 +60,7 @@ public class LoginActivity extends BaseActivity {
     private CheckBox rememberPassword;
     private Button loginButton;
     private ProgressBar progressBar;
+    private Handler mHandler;
 
     private String username;
     private String password;
@@ -73,6 +78,12 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loginButton.setEnabled(true);
+    }
+
     /**
      * 初始化组件
      */
@@ -82,7 +93,19 @@ public class LoginActivity extends BaseActivity {
         usernameEdit = findViewById(R.id.username);
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
-        hasLogin = false;
+
+        mHandler = new Handler(this.getMainLooper(), null) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case MSG_LOGIN: {
+                        jumpToMainActivity();
+                        runOnUiThread(()-> {progressBar.setVisibility(View.GONE);});
+                    }
+                }
+            }
+        };
 
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> {
@@ -96,7 +119,10 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
             AsyncGetToken();
-            createLoadingAnimation();
+            // 登录按键不可重复
+            loginButton.setEnabled(false);
+            // 开启加载动画
+            progressBar.setVisibility(View.VISIBLE);
         });
 
         progressBar = findViewById(R.id.progress_bar);
@@ -130,24 +156,15 @@ public class LoginActivity extends BaseActivity {
             String result = HttpUtils.post(LOGIN_URL, params);
             try {
                 TokenUtils.setTokenFromResponse(result);
-                hasLogin = true;
+                Message message = new Message();
+                message.what = MSG_LOGIN;
+                mHandler.sendMessage(message);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }).start();
     }
 
-    /**
-     * 加载动画
-     */
-    private void createLoadingAnimation() {
-        progressBar.setVisibility(View.VISIBLE);
-        new Thread(() -> {
-            while (!hasLogin);
-            this.runOnUiThread(()-> {progressBar.setVisibility(View.GONE);});
-            jumpToMainActivity();
-        }).start();
-    }
 
     /**
      * 跳转到主页，并传递用户名
