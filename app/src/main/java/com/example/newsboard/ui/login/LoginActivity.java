@@ -37,6 +37,8 @@ import org.json.JSONObject;
  */
 public class LoginActivity extends BaseActivity {
 
+    public static final int LOGIN_REQUEST_CODE = 1;
+
     // 传递给MainActivity的Intent中用户名对应的key
     public static final String EXTRA_USERNAME = "username";
     // 用户登录获取token的http url
@@ -100,8 +102,8 @@ public class LoginActivity extends BaseActivity {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case MSG_LOGIN: {
-                        jumpToMainActivity();
-                        runOnUiThread(()-> {progressBar.setVisibility(View.GONE);});
+                        returnResult();
+                        runOnUiThread(()-> progressBar.setVisibility(View.GONE));
                     }
                 }
             }
@@ -167,13 +169,14 @@ public class LoginActivity extends BaseActivity {
 
 
     /**
-     * 跳转到主页，并传递用户名
+     * 返回result给需要的Activity, 并传递用户名
      */
-    private void jumpToMainActivity() {
+    private void returnResult() {
         saveRememberInfo(username, password);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(EXTRA_USERNAME, username);
-        startActivity(intent);
+        this.setResult(LOGIN_REQUEST_CODE, intent);
+        this.finish();
     }
 
     /**

@@ -13,6 +13,7 @@ import com.example.newsboard.ui.login.LoginActivity;
 import com.example.newsboard.util.TokenUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -50,12 +51,17 @@ public class MainActivity extends BaseActivity {
         int position = HomeFragment.getRecyclerView().getChildAdapterPosition(view);
         NewsView newsView = HomeFragment.getNewsViewList().get(position);
         if (TokenUtils.isNotLogin()) { // 用户未登录跳转到登录页面
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivityForResult(new Intent(this, LoginActivity.class), LoginActivity.LOGIN_REQUEST_CODE);
         } else { // 传递文章数据
             Intent intent = new Intent(this, ArticleActivity.class);
             intent.putExtra(News.EXTRA_NEWS, newsView.getNews());
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

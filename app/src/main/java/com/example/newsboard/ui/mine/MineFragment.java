@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.newsboard.R;
@@ -41,14 +42,19 @@ public class MineFragment extends Fragment {
     private TextView usernameTextView;
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        String username = data.getStringExtra(LoginActivity.EXTRA_USERNAME);
+        usernameTextView.setText(username);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
         logoutButton = root.findViewById(R.id.logout_button);
         initComponents(root);
-        //TODO: 使用startActivityForResult进行修改
         if (TokenUtils.isNotLogin()) { // 未登录跳转到登录页面
-            startActivity(new Intent(getContext(), LoginActivity.class));
+            startActivityForResult(new Intent(getContext(), LoginActivity.class), LoginActivity.LOGIN_REQUEST_CODE);
         } else { // 设置主页的用户名
             setLoginUsername();
         }
