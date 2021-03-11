@@ -41,8 +41,6 @@ public class LoginActivity extends BaseActivity {
     // 登录成功的 Message.what
     private static final int MSG_LOGIN = 1;
 
-    // 传递给MainActivity的Intent中用户名对应的key
-    public static final String EXTRA_USERNAME = "username";
     // 用户登录获取token的http url
     private static final String LOGIN_URL = "https://vcapi.lvdaqian.cn/login";
     private static final String RIGHT_PASSWORD = "123456";
@@ -96,18 +94,6 @@ public class LoginActivity extends BaseActivity {
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
 
-        mHandler = new Handler(this.getMainLooper(), null) {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case MSG_LOGIN: {
-                        returnResult();
-                        runOnUiThread(()-> progressBar.setVisibility(View.GONE));
-                    }
-                }
-            }
-        };
 
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> {
@@ -129,6 +115,20 @@ public class LoginActivity extends BaseActivity {
 
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.GONE);
+
+        mHandler = new Handler(this.getMainLooper(), null) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case MSG_LOGIN: {
+                        saveRememberInfo();
+                        runOnUiThread(()-> progressBar.setVisibility(View.GONE));
+                        returnResult();
+                    }
+                }
+            }
+        };
     }
 
     /**
@@ -170,22 +170,15 @@ public class LoginActivity extends BaseActivity {
 
 
     /**
-     * 返回result给需要的Activity, 并传递用户名
+     * 返回运行startActivityForResult的Activity
      */
     private void returnResult() {
-        saveRememberInfo(username, password);
         Intent intent = new Intent(this, MainActivity.class);
         this.setResult(LOGIN_REQUEST_CODE, intent);
-        // TODO:如何区分未登录和登录退出的情况
         this.finish();
     }
 
-    /**
-     * 存储用户名和密码
-     * @param username 用户名
-     * @param password 密码
-     */
-    private void saveRememberInfo(String username, String password) {
+    private void saveRememberInfo() {
         if (rememberPassword.isChecked()) { // 勾选了记住密码
             editor.putString(PREF_USERNAME, username);
             editor.putString(PREF_PASSWORD, password);

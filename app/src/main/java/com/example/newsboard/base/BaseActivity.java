@@ -71,7 +71,9 @@ public class BaseActivity extends AppCompatActivity {
             builder.setCancelable(true);
             builder.setPositiveButton("确认退出", (dialog, which) -> {
                 clear();
-                context.startActivity(new Intent(context, LoginActivity.class));
+//                Intent loginIntent = new Intent(context, LoginActivity.class);
+//                loginIntent.putExtra(LoginActivity.IS_EXIT, true);
+//                context.startActivity(loginIntent);
             });
 
             builder.setNegativeButton("取消", (dialog, which) -> {

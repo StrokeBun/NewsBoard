@@ -2,6 +2,7 @@ package com.example.newsboard.ui.article.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,8 @@ public class ArticleActivity extends BaseActivity {
 
         if (TokenUtils.isNotLogin()) {
             // 用户未登录跳转到登录页面
-            startActivityForResult(new Intent(this, LoginActivity.class), LoginActivity.LOGIN_REQUEST_CODE);
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivityForResult(loginIntent, LoginActivity.LOGIN_REQUEST_CODE);
         } else {
             // 加载文章
             loadArticle(news);

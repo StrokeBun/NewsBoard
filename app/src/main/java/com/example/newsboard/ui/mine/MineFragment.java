@@ -59,7 +59,7 @@ public class MineFragment extends Fragment {
         logoutButton = root.findViewById(R.id.logout_button);
         initComponents(root);
         if (TokenUtils.isNotLogin()) { // 未登录跳转到登录页面
-            startActivityForResult(new Intent(getContext(), LoginActivity.class), LoginActivity.LOGIN_REQUEST_CODE);
+            waitForLogin();
         } else {
             setLoginUsername();
         }
@@ -71,15 +71,19 @@ public class MineFragment extends Fragment {
      * @param root 根视图
      */
     private void initComponents(View root) {
-//        logoutButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(ACTION_LOGOUT);
-//            getActivity().sendBroadcast(intent);
-//        });
+        logoutButton.setOnClickListener(view -> {
+            waitForLogin();
+        });
 
         historyButton = root.findViewById(R.id.history_news_button);
         historyButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), HistoryActivity.class)));
 
         usernameTextView = root.findViewById(R.id.username_text_view);
+    }
+
+    private void waitForLogin() {
+        Intent loginIntent = new Intent(getContext(), LoginActivity.class);
+        startActivityForResult(loginIntent, LoginActivity.LOGIN_REQUEST_CODE);
     }
 
     /**
