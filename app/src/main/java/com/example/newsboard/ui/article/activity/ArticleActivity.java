@@ -95,14 +95,15 @@ public class ArticleActivity extends BaseActivity {
             url = isMarkdownFormat? url+MARKDOWN_ARTICLE_URL_SUFFIX:url;
             Map<String, String> header = TokenUtils.getAuthorizationHeader();
             String response = HttpUtils.get(url, header);
+            // TODO: 处理过期token
             // Token已经过期则跳转到登录页面
-            if (response.equals(HttpUtils.UNAUTHORIZED_RESPONSE)) {
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "用户信息已过期", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(this, LoginActivity.class));
-                });
-                return;
-            }
+//            if (response.equals(HttpUtils.UNAUTHORIZED_RESPONSE)) {
+//                runOnUiThread(() -> {
+//                    Toast.makeText(this, "用户信息已过期", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(this, LoginActivity.class));
+//                });
+//                return;
+//            }
             if (response == null) {
                 return;
             }

@@ -38,6 +38,8 @@ import org.json.JSONObject;
 public class LoginActivity extends BaseActivity {
 
     public static final int LOGIN_REQUEST_CODE = 1;
+    // 登录成功的 Message.what
+    private static final int MSG_LOGIN = 1;
 
     // 传递给MainActivity的Intent中用户名对应的key
     public static final String EXTRA_USERNAME = "username";
@@ -51,9 +53,6 @@ public class LoginActivity extends BaseActivity {
     private static final String PREF_PASSWORD= "password";
     // SharedPreferences存储记住密码对应的key
     private static final String PREF_REMEMBER_INFO = "rememberInfo";
-
-    // 登录成功的 Message.what
-    private static final int MSG_LOGIN = 1;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -158,6 +157,7 @@ public class LoginActivity extends BaseActivity {
             String result = HttpUtils.post(LOGIN_URL, params);
             try {
                 TokenUtils.setTokenFromResponse(result);
+                TokenUtils.setUsername(username);
                 Message message = new Message();
                 message.what = MSG_LOGIN;
                 mHandler.sendMessage(message);
@@ -174,7 +174,6 @@ public class LoginActivity extends BaseActivity {
     private void returnResult() {
         saveRememberInfo(username, password);
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(EXTRA_USERNAME, username);
         this.setResult(LOGIN_REQUEST_CODE, intent);
         this.finish();
     }

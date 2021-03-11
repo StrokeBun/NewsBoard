@@ -49,8 +49,6 @@ public class StartActivity extends AppCompatActivity {
      * 初始化应用
      */
     private void initApp() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        TokenUtils.initTokenUtils(pref);
         loadNewsLocal(LOCAL_FILENAME);
     }
 
@@ -93,6 +91,7 @@ public class StartActivity extends AppCompatActivity {
                     Thread.sleep(50);
                 }
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

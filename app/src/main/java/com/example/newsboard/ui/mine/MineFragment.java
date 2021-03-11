@@ -1,7 +1,10 @@
 package com.example.newsboard.ui.mine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +44,10 @@ public class MineFragment extends Fragment {
 
     private TextView usernameTextView;
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        String username = data.getStringExtra(LoginActivity.EXTRA_USERNAME);
-        usernameTextView.setText(username);
+        setLoginUsername();
     }
 
     @Override
@@ -55,7 +58,7 @@ public class MineFragment extends Fragment {
         initComponents(root);
         if (TokenUtils.isNotLogin()) { // 未登录跳转到登录页面
             startActivityForResult(new Intent(getContext(), LoginActivity.class), LoginActivity.LOGIN_REQUEST_CODE);
-        } else { // 设置主页的用户名
+        } else {
             setLoginUsername();
         }
         return root;
@@ -81,8 +84,7 @@ public class MineFragment extends Fragment {
      * 设置个人主页的已登录用户名
      */
     private void setLoginUsername() {
-        Intent intent = getActivity().getIntent();
-        String username = intent.getStringExtra(LoginActivity.EXTRA_USERNAME);
+        String username = TokenUtils.getUsername();
         usernameTextView.setText(username);
     }
 

@@ -2,6 +2,7 @@ package com.example.newsboard.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.newsboard.R;
 import com.example.newsboard.model.News;
@@ -60,6 +62,7 @@ public class HomeFragment extends Fragment {
     private static final String JSON_COVER_KEY = "cover";
 
     private static RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     public static Context context;
 
     @Override
@@ -67,6 +70,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         context = getActivity();
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
         initNews();
         recyclerView = root.findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);

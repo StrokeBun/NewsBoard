@@ -1,7 +1,10 @@
 package com.example.newsboard.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 
 import com.example.newsboard.R;
@@ -30,6 +33,8 @@ import androidx.navigation.ui.NavigationUI;
  */
 public class MainActivity extends BaseActivity {
 
+    private SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,9 @@ public class MainActivity extends BaseActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        TokenUtils.initTokenUtils(pref);
     }
 
     /**

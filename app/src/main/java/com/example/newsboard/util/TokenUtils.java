@@ -21,6 +21,7 @@ import java.util.Map;
 public final class TokenUtils {
 
     private static SharedPreferences pref;
+    private static String username;
     // token对应的key
     private static final String TOKEN_KEY = "token";
     // http请求头中权限对应的key
@@ -59,11 +60,20 @@ public final class TokenUtils {
         setToken(token);
     }
 
+    public static String getUsername() {
+        return username == null? " ":username;
+    }
+
+    public static void setUsername(String loginUsername) {
+        username = loginUsername;
+    }
+
     /**
      * 清除已经缓存的token，用户退出登录时调用
      */
     public static void clearToken() {
         setToken(NO_TOKEN);
+        username = null;
     }
 
     /**
