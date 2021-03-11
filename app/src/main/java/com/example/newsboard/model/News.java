@@ -1,5 +1,8 @@
 package com.example.newsboard.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 
 import java.io.Serializable;
@@ -13,7 +16,17 @@ import java.io.Serializable;
  *     version: 1.0
  * </pre>
  */
-public class News implements Serializable {
+
+/**
+ * <pre>
+ *     author : Zhong Defeng
+ *     e-mail : 1756809298@qq.com
+ *     time   : 2021/3/11 15:58
+ *     desc   : 使用 Parcelable 接口代替
+ *     version: 2.0
+ * </pre>
+ */
+public class News implements Parcelable {
 
     /**
      * 在Activity间传递新闻Intent所使用的key
@@ -31,6 +44,38 @@ public class News implements Serializable {
         this.author = author;
         this.publishTime = publishTime;
     }
+
+    public News(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        author = in.readString();
+        publishTime = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeString(author);
+        dest.writeString(publishTime);
+    }
+
+    public static final Creator<News> CREATOR = new Creator<News>() {
+        @Override
+        public News createFromParcel(Parcel source) {
+            return new News(source);
+        }
+
+        @Override
+        public News[] newArray(int size) {
+            return new News[size];
+        }
+    };
 
     @Override
     public String toString() {

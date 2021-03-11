@@ -19,6 +19,8 @@ import com.example.newsboard.R;
 import com.example.newsboard.ui.login.LoginActivity;
 import com.example.newsboard.util.TokenUtils;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * <pre>
  *     author : Zhong DeFeng
@@ -69,10 +71,10 @@ public class MineFragment extends Fragment {
      * @param root 根视图
      */
     private void initComponents(View root) {
-        logoutButton.setOnClickListener(view -> {
-            Intent intent = new Intent(ACTION_LOGOUT);
-            getActivity().sendBroadcast(intent);
-        });
+//        logoutButton.setOnClickListener(view -> {
+//            Intent intent = new Intent(ACTION_LOGOUT);
+//            getActivity().sendBroadcast(intent);
+//        });
 
         historyButton = root.findViewById(R.id.history_news_button);
         historyButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), HistoryActivity.class)));

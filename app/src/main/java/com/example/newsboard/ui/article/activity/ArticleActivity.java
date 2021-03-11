@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.example.newsboard.R;
 import com.example.newsboard.base.BaseActivity;
 import com.example.newsboard.model.News;
@@ -44,6 +46,7 @@ public class ArticleActivity extends BaseActivity {
     private TextView contentTextView = null;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +58,22 @@ public class ArticleActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
-        News news = (News) intent.getSerializableExtra(News.EXTRA_NEWS);
-        // 加载文章
-        loadArticle(news);
-        // 在浏览历史中添加文章
-        HistoryActivity.addHistoryNews(news);
+        News news = intent.getParcelableExtra(News.EXTRA_NEWS);
+
+        if (TokenUtils.isNotLogin()) {
+            // 用户未登录跳转到登录页面
+            startActivityForResult(new Intent(this, LoginActivity.class), LoginActivity.LOGIN_REQUEST_CODE);
+        } else {
+            // 加载文章
+            loadArticle(news);
+            // 在浏览历史中添加文章
+            HistoryActivity.addHistoryNews(news);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**

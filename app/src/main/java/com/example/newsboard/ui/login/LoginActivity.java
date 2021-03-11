@@ -85,6 +85,7 @@ public class LoginActivity extends BaseActivity {
         loginButton.setEnabled(true);
     }
 
+
     /**
      * 初始化组件
      */
@@ -175,6 +176,7 @@ public class LoginActivity extends BaseActivity {
         saveRememberInfo(username, password);
         Intent intent = new Intent(this, MainActivity.class);
         this.setResult(LOGIN_REQUEST_CODE, intent);
+        // TODO:如何区分未登录和登录退出的情况
         this.finish();
     }
 
