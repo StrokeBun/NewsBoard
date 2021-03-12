@@ -73,10 +73,6 @@ public class ArticleActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     /**
      * 初始化组件

@@ -72,7 +72,8 @@ public class MineFragment extends Fragment {
      */
     private void initComponents(View root) {
         logoutButton.setOnClickListener(view -> {
-            waitForLogin();
+            Intent intent = new Intent(ACTION_LOGOUT);
+            getActivity().sendBroadcast(intent);
         });
 
         historyButton = root.findViewById(R.id.history_news_button);

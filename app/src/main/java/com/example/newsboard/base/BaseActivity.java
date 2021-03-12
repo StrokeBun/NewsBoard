@@ -1,5 +1,6 @@
 package com.example.newsboard.base;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newsboard.ui.mine.HistoryActivity;
@@ -59,6 +61,11 @@ public class BaseActivity extends AppCompatActivity {
         ActivityController.removeActivity(this);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     /**
      * 退出登录广播接收器
      */
@@ -71,9 +78,8 @@ public class BaseActivity extends AppCompatActivity {
             builder.setCancelable(true);
             builder.setPositiveButton("确认退出", (dialog, which) -> {
                 clear();
-//                Intent loginIntent = new Intent(context, LoginActivity.class);
-//                loginIntent.putExtra(LoginActivity.IS_EXIT, true);
-//                context.startActivity(loginIntent);
+                Intent loginIntent = new Intent(context, LoginActivity.class);
+                ((Activity)context).startActivityForResult(loginIntent, LoginActivity.LOGIN_REQUEST_CODE);
             });
 
             builder.setNegativeButton("取消", (dialog, which) -> {
@@ -86,7 +92,7 @@ public class BaseActivity extends AppCompatActivity {
          * 清除Activity、token、浏览历史等数据，确认退出时调用
          */
         private void clear() {
-            ActivityController.finishAll();
+//            ActivityController.finishAll();
             TokenUtils.clearToken();
             HistoryActivity.clearHistoryNews();
         }
