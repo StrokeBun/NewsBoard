@@ -30,11 +30,12 @@ import java.util.stream.Collectors;
  * </pre>
  */
 public class HistoryActivity extends BaseActivity {
+
     // 浏览历史存储最大数量
     private static final int HISTORY_NEWS_MAX_NUM = 5;
-    // 使用LinkedHashMap存储历史记录(类似LRU)
-    private static final LinkedHashMap<News, Integer> historyNews;
+    // 使用LinkedHashMap存储历史记录(LRU)
     private List<NewsView> newsViewList;
+    private static final LinkedHashMap<News, Integer> historyNews;
     static {
         historyNews = new LinkedHashMap<News, Integer>(HISTORY_NEWS_MAX_NUM, 0.75F, true) {
             @Override

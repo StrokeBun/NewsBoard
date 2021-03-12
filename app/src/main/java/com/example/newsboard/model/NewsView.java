@@ -16,6 +16,8 @@ public class NewsView {
     private int type;
     private int cover;
 
+    private static final int DEFAULT_TYPE = 5;
+
     public NewsView(News news, int type, int cover) {
         this.news = news;
         this.type = type;
@@ -28,7 +30,7 @@ public class NewsView {
     }
 
     public NewsView(News news) {
-        this(news, 5, 0);
+        this(news, DEFAULT_TYPE, 0);
     }
 
     @Override
@@ -56,6 +58,5 @@ public class NewsView {
     public int getCover() {
         return cover;
     }
-
 
 }

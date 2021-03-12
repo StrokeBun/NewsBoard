@@ -46,19 +46,14 @@ public class MineFragment extends Fragment {
 
     private TextView usernameTextView;
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        setLoginUsername();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mine, container, false);
         logoutButton = root.findViewById(R.id.logout_button);
         initComponents(root);
-        if (TokenUtils.isNotLogin()) { // 未登录跳转到登录页面
+        if (TokenUtils.isNotLogin()) {
+            // 未登录跳转到登录页面
             waitForLogin();
         } else {
             setLoginUsername();
@@ -80,6 +75,11 @@ public class MineFragment extends Fragment {
         historyButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), HistoryActivity.class)));
 
         usernameTextView = root.findViewById(R.id.username_text_view);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        setLoginUsername();
     }
 
     private void waitForLogin() {

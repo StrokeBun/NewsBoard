@@ -69,12 +69,6 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponents();
-
-        boolean isRemember = pref.getBoolean(PREF_REMEMBER_INFO, false);
-        // 勾选了记住密码则自动填写表单
-        if (isRemember) {
-            autoFillForm();
-        }
     }
 
     @Override
@@ -93,7 +87,14 @@ public class LoginActivity extends BaseActivity {
         usernameEdit = findViewById(R.id.username);
         passwordEdit = findViewById(R.id.password);
         rememberPassword = findViewById(R.id.remember_info);
-
+        boolean isRemember = pref.getBoolean(PREF_REMEMBER_INFO, false);
+        // 勾选了记住密码则自动填写表单
+        if (isRemember) {
+            autoFillForm();
+        }
+        // 登录加载进度默认隐藏
+        progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
 
         loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> {
@@ -107,14 +108,11 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
             AsyncGetToken();
-            // 登录按键不可重复
+            // 登录按键不可重复点击
             loginButton.setEnabled(false);
             // 开启加载动画
             progressBar.setVisibility(View.VISIBLE);
         });
-
-        progressBar = findViewById(R.id.progress_bar);
-        progressBar.setVisibility(View.GONE);
 
         mHandler = new Handler(this.getMainLooper(), null) {
             @Override
@@ -179,7 +177,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void saveRememberInfo() {
-        if (rememberPassword.isChecked()) { // 勾选了记住密码
+        if (rememberPassword.isChecked()) {
+            // 存储信息
             editor.putString(PREF_USERNAME, username);
             editor.putString(PREF_PASSWORD, password);
             editor.putBoolean(PREF_REMEMBER_INFO, true);

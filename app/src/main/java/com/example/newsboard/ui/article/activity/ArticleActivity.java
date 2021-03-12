@@ -46,8 +46,6 @@ public class ArticleActivity extends BaseActivity {
     private TextView punishedTimeTextView = null;
     private TextView contentTextView = null;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +71,6 @@ public class ArticleActivity extends BaseActivity {
         }
     }
 
-
     /**
      * 初始化组件
      */
@@ -89,9 +86,9 @@ public class ArticleActivity extends BaseActivity {
      * @param news 新闻
      */
     private void loadArticle(News news) {
-        setTitle(news.getTitle());
-        setAuthor(news.getAuthor());
-        setPunishedTime(news.getPublishTime());
+        titleTextView.setText(news.getTitle());
+        authorTextView.setText(news.getAuthor());
+        punishedTimeTextView.setText(news.getPublishTime());
         setContent(news.getId(), true);
     }
 
@@ -107,15 +104,15 @@ public class ArticleActivity extends BaseActivity {
             url = isMarkdownFormat? url+MARKDOWN_ARTICLE_URL_SUFFIX:url;
             Map<String, String> header = TokenUtils.getAuthorizationHeader();
             String response = HttpUtils.get(url, header);
-            // TODO: 处理过期token
             // Token已经过期则跳转到登录页面
-//            if (response.equals(HttpUtils.UNAUTHORIZED_RESPONSE)) {
-//                runOnUiThread(() -> {
-//                    Toast.makeText(this, "用户信息已过期", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(this, LoginActivity.class));
-//                });
-//                return;
-//            }
+            if (response.equals(HttpUtils.UNAUTHORIZED_RESPONSE)) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "用户信息已过期", Toast.LENGTH_SHORT).show();
+                    Intent loginIntent = new Intent(this, LoginActivity.class);
+                    startActivityForResult(loginIntent, LoginActivity.LOGIN_REQUEST_CODE);
+                });
+                return;
+            }
             if (response == null) {
                 return;
             }
@@ -139,19 +136,8 @@ public class ArticleActivity extends BaseActivity {
         if (isMarkdownFormat) {
             ArticleActivity.this.runOnUiThread(() -> RichText.fromMarkdown(content).into(contentTextView));
         } else {
-            ArticleActivity.this.runOnUiThread(() -> setContent(content));
+            ArticleActivity.this.runOnUiThread(() -> contentTextView.setText(content));
         }
     }
 
-    private void setTitle(String title) {
-        titleTextView.setText(title);
-    }
-
-    private void setAuthor(String author) {
-        authorTextView.setText(author);
-    }
-
-    private void setPunishedTime(String punishedTime) { punishedTimeTextView.setText(punishedTime); }
-
-    private void setContent(String content) { contentTextView.setText(content); }
 }

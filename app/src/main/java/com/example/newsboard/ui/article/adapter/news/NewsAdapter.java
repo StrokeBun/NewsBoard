@@ -25,12 +25,15 @@ import java.util.Map;
  */
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    // 类型种类数量
+    private static final int TYPE_NUM = 5;
     private static final int TYPE_ZERO = 0;
     private static final int TYPE_ONE = 1;
     private static final int TYPE_TWO = 2;
     private static final int TYPE_THREE = 3;
     private static final int TYPE_FOUR = 4;
     private static final int TYPE_HISTORY = 5;
+
     // 类型与布局映射
     private static final Map<Integer, Integer> viewTypeLayoutMap = new HashMap<Integer, Integer>(){
         {
@@ -69,22 +72,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        switch (mNewsViewList.get(position).getType()) {
-            case 0:
-                return TYPE_ZERO;
-            case 1:
-                return TYPE_ONE;
-            case 2:
-                return TYPE_TWO;
-            case 3:
-                return TYPE_THREE;
-            case 4:
-                return TYPE_FOUR;
-            case 5:
-                return TYPE_HISTORY;
-            default:
-        }
-        return super.getItemViewType(position);
+        int type = mNewsViewList.get(position).getType();
+        return type <= TYPE_NUM ? type:super.getItemViewType(position);
     }
 
     /**

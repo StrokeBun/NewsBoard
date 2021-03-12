@@ -61,6 +61,12 @@ public class BaseActivity extends AppCompatActivity {
         ActivityController.removeActivity(this);
     }
 
+    /**
+     * 用于处理登录返回
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

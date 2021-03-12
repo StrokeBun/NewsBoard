@@ -18,6 +18,7 @@ import com.example.newsboard.model.NewsView;
  * </pre>
  */
 class BaseType extends androidx.recyclerview.widget.RecyclerView.ViewHolder implements Loadable {
+
     /**
      * 新闻标题
      */

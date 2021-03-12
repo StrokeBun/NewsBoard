@@ -46,6 +46,27 @@ public class StartActivity extends AppCompatActivity {
     }
 
     /**
+     * 设置启动页面动画
+     */
+    private void createAnimation() {
+        new Thread(() -> {
+            try {
+                // 设置主页逐渐出现
+                for (int i = 0; i <= 20; i++) {
+                    Float alpha = 0.05F * i;
+                    textView.setAlpha(alpha);
+                    imageView.setAlpha(alpha);
+                    Thread.sleep(50);
+                }
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
      * 初始化应用
      */
     private void initApp() {
@@ -75,27 +96,6 @@ public class StartActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * 设置启动页面动画
-     */
-    private void createAnimation() {
-        new Thread(() -> {
-            try {
-                // 设置主页逐渐出现
-                for (int i = 0; i <= 20; i++) {
-                    Float alpha = 0.05F * i;
-                    textView.setAlpha(alpha);
-                    imageView.setAlpha(alpha);
-                    Thread.sleep(50);
-                }
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
     }
 
 }
